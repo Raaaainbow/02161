@@ -7,11 +7,13 @@ import static io.cucumber.junit.platform.engine.Constants.SNIPPET_TYPE_PROPERTY_
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
 import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 
 @Suite
 @IncludeEngines("cucumber")
+@SelectClasspathResource("features")
 @SelectPackages("hellocucumber")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "summary")
 @ConfigurationParameter(key = FEATURES_PROPERTY_NAME, value = "features")
