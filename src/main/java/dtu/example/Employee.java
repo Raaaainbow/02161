@@ -1,4 +1,4 @@
-package dtu.example.backend;
+package dtu.example;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ public class Employee {
     private ArrayList<Project> project;
     private String name;
     private String ID;
-
+/*
     public Employee(String name, String ID){
 
     }
@@ -22,4 +22,5 @@ public class Employee {
     public void assignProjectLeader(Employee employee){
 
     }
+    */
 }
