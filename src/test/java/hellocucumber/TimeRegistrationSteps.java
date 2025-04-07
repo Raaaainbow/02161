@@ -61,8 +61,8 @@ public class TimeRegistrationSteps {
         timeRegistration = new TimeRegistration(null, end, date);
     }
 
-    @When("the shift end is updated to {string}")
-    public void the_shift_end_is_updated_to(String newShiftEnd) {
+    @When("the shift end is changed to {string}")
+    public void the_shift_end_is_changed_to(String newShiftEnd) {
         timeRegistration.setShiftEnd(LocalDateTime.parse(newShiftEnd));
     }
 
@@ -89,4 +89,6 @@ public class TimeRegistrationSteps {
     public void the_time_registration_should_be_marked_as_deleted() {
         assertTrue(timeRegistration.isDeleted());
     }
+
+   
 }

@@ -16,7 +16,7 @@ Feature: Register time
 
     Scenario: Update shift end time
         Given there exists a time registration with shift end "2024-04-05T15:00"
-        When the shift end is updated to "2024-04-05T16:00"
+        When the shift end is changed to "2024-04-05T16:00"
         Then the shift end is updated to "2024-04-05T16:00"
 
     Scenario: Mark time registrations as deleted

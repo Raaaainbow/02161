@@ -7,7 +7,7 @@ public class task {
     private Employee assignedEmployee; 
     private int budgetedHours; 
     private int spentHours;
-    private ArrayList<Task> ListAllTasks = new ArrayList<Task>(); 
+    //private ArrayList<Task> ListAllTasks = new ArrayList<Task>(); 
     public void changebudgettedHours(int NewBudget) {
 
     }

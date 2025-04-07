@@ -12,7 +12,7 @@ public class Employee {
     }
 
     public String createTask(){
-        return task;
+        return null;
     }
 
     public void assignTask(){
