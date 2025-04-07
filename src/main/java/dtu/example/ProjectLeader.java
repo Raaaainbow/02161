@@ -1,4 +1,4 @@
-package dtu.example.backend;
+package dtu.example;
 
 public class ProjectLeader {
 

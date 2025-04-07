@@ -1,4 +1,4 @@
-package dtu.example.backend;
+package dtu.example;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
