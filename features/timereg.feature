@@ -1,7 +1,6 @@
 Feature: Register time
-    As an employee
-    I want 
-    So that
+    Description: Employee registers their spent time
+    Actor: Employee
 
     Scenario: Create a new time registration
         Given there exists a time registration on "2024-04-05T14:00" and shift ends "2024-04-05T15:00"
