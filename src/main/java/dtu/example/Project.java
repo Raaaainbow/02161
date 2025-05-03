@@ -6,10 +6,15 @@ public class Project {
     private int startWeek;
     private int endWeek;
 	private String projectLead;
+    public String projectNumber;
 
     // setters & getters
 
-    public String getTitle() {
+    public Project(String title) {
+		this.title = title;
+	}
+
+	public String getTitle() {
 		return title;
 	}
 
