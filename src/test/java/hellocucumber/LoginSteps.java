@@ -13,51 +13,43 @@ import io.cucumber.java.en.When;
 import dtu.example.LogIn;
 
 public class LoginSteps {
-    private String correctInitials = "abcd";
-    private String enteredInitials;
-    private boolean loggedIn = false;
+    private LogIn logIn = new LogIn();
     private String errorMessage = null;
 
     @Given("that the employee is not logged in")
     public void thatTheEmployeeIsNotLoggedIn() {
-        assertEquals(false, loggedIn);
+        assertFalse(logIn.isLoggedIn());
     }
 
-    @Given("the right initials is {string}")
+    @And("the right initials is {string}")
     public void theRightInitialsIs(String initials) {
-        this.correctInitials = initials;
+        logIn.setCorrectInitials(initials);
     }
 
     @When("the employee enters {string}")
     public void theEmployeeEnters(String initials) {
-        this.enteredInitials = initials;
-        if (enteredInitials.equals(correctInitials)) {
-            loggedIn = true;
-        } else {
-            loggedIn = false;
-            errorMessage = "Incorrect initials";
-        }
+        logIn.loggingIn(initials);
     }
 
     @Then("the employee is logged in")
     public void theEmployeeIsLoggedIn() {
-        assertTrue(loggedIn, "Employee should be logged in");
+        assertTrue(logIn.isLoggedIn());
     }
 
     @Then("the employee is redirected to the application")
     public void theEmployeeIsRedirectedToTheApplication() {
-        assertTrue(loggedIn, "Employee must be logged in to be redirected");
+        assertTrue(logIn.isLoggedIn());
         System.out.println("Redirecting to application...");
     }
 
     @Then("the employee is not logged in")
     public void theEmployeeIsNotLoggedIn() {
-        assertFalse(loggedIn, "Employee should not be logged in");
+        assertFalse(logIn.isLoggedIn());
     }
 
-    @Then("the employee is shown an error message")
+    @And("the employee is shown an error message")
     public void theEmployeeIsShownAnErrorMessage() {
-        assertNotNull(errorMessage, "An error message should be shown");
+        assertNotNull(errorMessage);
         assertEquals("Incorrect initials", errorMessage);
     }
 }

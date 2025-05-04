@@ -3,7 +3,6 @@ package hellocucumber;
 import static org.junit.jupiter.api.Assertions.*;
 
 import io.cucumber.java.en.*;
-import java.util.UUID;
 
 import dtu.example.Project;
 
@@ -15,7 +14,7 @@ public class CreateProjectSteps {
 
     @Given("there is a task")
     public void thereIsATask() {
-        taskExists = true;
+        assertTrue(taskExists);
     }
 
     @When("the employee creates a project")
@@ -37,7 +36,7 @@ public class CreateProjectSteps {
 
     @When("the employee creates a project with a name")
     public void theEmployeeCreatesAProjectWithAName() {
-        givenProjectName = "Green Energy";
+        givenProjectName = "Byggeprojekt";
         createdProject = new Project(givenProjectName);
     }
 
