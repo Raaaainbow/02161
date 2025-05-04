@@ -5,22 +5,22 @@ import static org.junit.jupiter.api.Assertions.*;
 import io.cucumber.java.en.*;
 
 import dtu.example.Project;
+import dtu.example.Task;
 
 public class CreateProjectSteps {
-
-    private boolean taskExists;
+    public Project project;
+    private Task task;
     private Project createdProject;
     private String givenProjectName;
 
     @Given("there is a task")
     public void thereIsATask() {
-        assertTrue(taskExists);
+        assertNotNull(project.taskExists());
     }
 
     @When("the employee creates a project")
     public void theEmployeeCreatesAProject() {
-        assertTrue(taskExists);
-        createdProject = new Project(null);
+        createdProject = new Project(task);
     }
 
     @And("the employee does not provide a project name")
@@ -30,7 +30,7 @@ public class CreateProjectSteps {
 
     @Then("the system assigns a project number to the new project")
     public void theSystemAssignsAProjectNumberToTheNewProject() {
-        assertNotNull(createdProject.projectNumber);
+        assertNotNull(createdProject.getProjectNumber());
         System.out.println("Assigned project number: " + createdProject.projectNumber);
     }
 
@@ -42,7 +42,7 @@ public class CreateProjectSteps {
 
     @Then("the system assigns a project number to the project")
     public void theSystemAssignsAProjectNumberToTheProject() {
-        assertNotNull(createdProject.projectNumber);
+        assertNotNull(createdProject.getProjectNumber());
     }
 
     @And("the project is saved with the given name")

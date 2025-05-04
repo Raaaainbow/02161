@@ -10,12 +10,20 @@ public class Project {
 	private boolean taskExists;
     private Project createdProject;
     private String givenProjectName;
+	private int counter = 1;
 
-    // setters & getters
+	public Project(Task task) {
+		this.projectNumber = "P-" + counter++;
+	}
 
     public Project(String title) {
 		this.title = title;
+		this.projectNumber = "P-" + counter++;
 	}
+
+	public boolean taskExists() {
+        return taskExists;
+    }
 
 	public String getTitle() {
 		return title;
@@ -59,5 +67,9 @@ public class Project {
     
 	public void setProjectLead(String projectLead) {
 		this.projectLead = projectLead;
+	}
+
+	public String getProjectNumber() {
+		return projectNumber;
 	}
 }
