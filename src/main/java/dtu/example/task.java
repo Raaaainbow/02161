@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Task {
   private String description;
   private Employee assignedEmployee;
+  private boolean projectLeaderAssigned;
+  private boolean isProjectLeader;
   private int budgetedHours;
   private int spentHours;
   private String title;
@@ -12,10 +14,8 @@ public class Task {
   private int startWeek;
   private int endWeek;
 
-  public Task(String title, int startWeek, int endWeek) {
+  public Task(String title) {
     this.title = title;
-    this.startWeek = startWeek;
-    this.endWeek = endWeek;
   }
 
   public void setStartWeek(int startWeek) {
@@ -38,8 +38,8 @@ public class Task {
     return (endWeek > 0 && endWeek < 52) ? endWeek : 0;
   }
 
-  public void setEstimatedTime(int hours2) {
-    
+  public void setEstimatedTime(int hours) {
+    this.hours = hours;
   }
-
+  
 }

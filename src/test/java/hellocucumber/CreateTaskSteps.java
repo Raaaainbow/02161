@@ -15,8 +15,8 @@ public class CreateTaskSteps {
     }
 
     private Project project;
-    private boolean isProjectLeader = false;
-    private boolean isEmployeeTrying = false;
+    private boolean isProjectLeaderAssigned;
+    private boolean isProjectLeader;
     private String errorMessage = null;
     private Task createdActivity;
 
@@ -28,13 +28,13 @@ public class CreateTaskSteps {
     @When("the project leader creates an activity")
     public void theProjectLeaderCreatesAnActivity() {
         isProjectLeader = true;
-        createdActivity = new Task(null, 0, 0); // assuming Task constructor accepts null title
+        createdActivity = new Task(null);
         project.activities.add(createdActivity);
     }
 
     @And("assigns {int} hours over {int} weeks")
     public void assignsEstimatedTime(int hours, int durationWeeks) {
-        int startWeek = 20;
+        int startWeek = 4;
         int endWeek = startWeek + durationWeeks - 1;
         createdActivity.setEstimatedTime(hours);
         createdActivity.setStartWeek(startWeek);
@@ -52,25 +52,27 @@ public class CreateTaskSteps {
         assertNotNull(createdActivity.getEndWeek(), "End week should be set");
     }
 
-    @Then("the activity has no starting week and ending week")
+    @And("the activity has no starting week and ending week")
     public void theActivityHasNoStartOrEnd() {
-        assertNull(createdActivity.getStartWeek(), "Start week should be null");
-        assertNull(createdActivity.getEndWeek(), "End week should be null");
+        assertEquals(0, createdActivity.getStartWeek());
+        assertEquals(0, createdActivity.getEndWeek());
     }
 
     @When("the employee creates an activity")
     public void theEmployeeCreatesAnActivity() {
-        isEmployeeTrying = true;
+        isProjectLeader = false;
+        createdActivity = new Task(null);
+        project.activities.add(createdActivity);
     }
 
     @And("there is a project leader")
     public void thereIsAProjectLeader() {
-        isProjectLeader = true;
+        isProjectLeaderAssigned = true;
     }
 
     @Then("an error message occurs")
     public void anErrorMessageOccurs() {
-        if (isEmployeeTrying && isProjectLeader) {
+        if (!isProjectLeader && isProjectLeaderAssigned) {
             errorMessage = "Only the project leader can create activities";
         }
         assertNotNull(errorMessage, "Expected an error message, but none occurred");

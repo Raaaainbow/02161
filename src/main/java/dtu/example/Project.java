@@ -7,6 +7,9 @@ public class Project {
     private int endWeek;
 	private String projectLead;
     public String projectNumber;
+	private boolean taskExists;
+    private Project createdProject;
+    private String givenProjectName;
 
     // setters & getters
 

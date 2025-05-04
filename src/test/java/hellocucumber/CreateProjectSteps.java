@@ -20,7 +20,7 @@ public class CreateProjectSteps {
 
     @When("the employee creates a project")
     public void theEmployeeCreatesAProject() {
-        assertTrue(taskExists, "Task must exist to create a project");
+        assertTrue(taskExists);
         createdProject = new Project(null);
     }
 

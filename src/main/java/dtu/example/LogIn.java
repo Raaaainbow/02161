@@ -1,8 +1,8 @@
 package dtu.example;
 
 public class LogIn {
-    private boolean loggedIn = true;
-    private String correctInitials = "s";
+    private boolean loggedIn = false;
+    private String correctInitials = "abcd";
     private String enteredInitials;
 
 }
