@@ -1,4 +1,11 @@
+/*
+ * Contributors:
+ * Sebastian Francis Taylor
+ *
+ */
 package dtu.example;
+
+import java.util.ArrayList;
 
 public class Project {
     private String title;
@@ -7,13 +14,14 @@ public class Project {
     private int endWeek;
 	private String projectLead;
     public String projectNumber;
-	private boolean taskExists;
+    private ArrayList<Task> tasks = new ArrayList<Task>();
     private Project createdProject;
     private String givenProjectName;
 	private int counter = 1;
 
 	public Project(Task task) {
 		this.projectNumber = "P-" + counter++;
+        tasks.add(task);
 	}
 
     public Project(String title) {
@@ -21,8 +29,24 @@ public class Project {
 		this.projectNumber = "P-" + counter++;
 	}
 
-	public boolean taskExists() {
-        return taskExists;
+    // Sebastian
+    public Project() {
+        Id = "" + (counter + 1);
+	}
+
+    // Sebastian
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+    
+
+    // Sebastian
+	public boolean taskExists(Task task) {
+        return tasks.contains(task);
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
 	public String getTitle() {

@@ -2,20 +2,25 @@ package hellocucumber;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import io.cucumber.java.en.*;
 
 import dtu.example.Project;
 import dtu.example.Task;
 
 public class CreateProjectSteps {
-    public Project project;
+    public Project project = new Project();
     private Task task;
     private Project createdProject;
     private String givenProjectName;
 
+    // Sebastian Francis Taylor
     @Given("there is a task")
     public void thereIsATask() {
-        assertNotNull(project.taskExists());
+        ArrayList<Task> tasks = project.getTasks();
+        project.addTask(task);
+        assertFalse(tasks.isEmpty());
     }
 
     @When("the employee creates a project")
