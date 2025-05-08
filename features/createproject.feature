@@ -1,7 +1,8 @@
-Feature: Create Project  
-As an employee,  
-I want to create a project with or without a name,  
-So that I can manage work effectively.  
+# mob programming Sebastian, Caroline, Sophia, Katarina
+
+Feature: Create Project 
+  Description: Employee creates a project
+  Actor: Employee
 
  Scenario: Employee creates a project without a name  
    Given there is a task  
@@ -9,8 +10,8 @@ So that I can manage work effectively.
    And the employee does not provide a project name  
    Then the system assigns a project number to the new project  
 
- Scenario: Employee creates a project with a name  
+ Scenario: Employee creates a project with a name 
    Given there is a task  
-   When the employee creates a project with a name  
+   When the employee creates a project with the name "ByggeProjekt"
    Then the system assigns a project number to the project  
-   And the project is saved with the given name             
+   And the project is saved with the name "ByggeProjekt"        

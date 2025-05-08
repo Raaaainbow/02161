@@ -1,26 +1,32 @@
+// mob programming Sophia, Katarina, Caroline
+
 package dtu.example;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Employee {
-    private ArrayList<Project> project;
-    private String name;
-    private String ID;
-/*
-    public Employee(String name, String ID){
+    private String initials;
+    private boolean employeeExists = false; 
+    private static List<String> employeeList = new ArrayList<>();
 
+    public Employee(String initials){
+        this.initials = initials; 
+
+        checkEmployeeExists(initials);
     }
 
-    public String createTask(){
-        return null;
+    public void checkEmployeeExists(String initials) {
+        if (employeeList.contains(initials)) {
+            employeeExists = true; 
+        }
     }
 
-    public void assignTask(){
-
+    public Boolean employeeExists() {
+    return employeeExists; 
     }
 
-    public void assignProjectLeader(Employee employee){
-
+    public String getInitials() {
+        return initials; 
     }
-    */
 }

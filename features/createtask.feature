@@ -1,3 +1,5 @@
+# mob programming Sophia, Katarina, Sebastian
+
 Feature: Create activity
     Description: Creating an activity
     Actor: Project leader

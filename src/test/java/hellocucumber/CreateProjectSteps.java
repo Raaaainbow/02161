@@ -39,9 +39,9 @@ public class CreateProjectSteps {
         System.out.println("Assigned project number: " + createdProject.projectNumber);
     }
 
-    @When("the employee creates a project with a name")
+    @When("the employee creates a project with the name {string}")
     public void theEmployeeCreatesAProjectWithAName() {
-        givenProjectName = "Byggeprojekt";
+        givenProjectName = "ByggeProjekt";
         createdProject = new Project(givenProjectName);
     }
 
@@ -50,7 +50,7 @@ public class CreateProjectSteps {
         assertNotNull(createdProject.getProjectNumber());
     }
 
-    @And("the project is saved with the given name")
+    @Then("the project is saved with the name {string}")
     public void theProjectIsSavedWithTheGivenName() {
         assertEquals(givenProjectName, createdProject.getTitle());
     }

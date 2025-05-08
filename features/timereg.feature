@@ -1,3 +1,5 @@
+# mob programming Sophia, Caroline, Sebastian
+
 Feature: Register time
     Description: Employee registers their spent time
     Actor: Employee
