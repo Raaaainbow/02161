@@ -1,3 +1,5 @@
+# mob programming Sophia, Katarina, Sebastian
+
 Feature: Employee login
    Description: Employee login to the application
    Actors: Employee

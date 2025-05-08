@@ -1,3 +1,5 @@
+// mob programming Sophia, Katarina, Caroline
+
 package dtu.example;
 
 import java.util.ArrayList;
