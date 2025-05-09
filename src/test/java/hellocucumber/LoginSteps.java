@@ -50,4 +50,17 @@ public class LoginSteps {
         logIn.loggingIn(initials);
         assertFalse(logIn.isLoggedIn());
     }
+
+    @Given("that the employee is logged in")
+    public void thatTheEmployeeIsLoggedIn() {
+        assertTrue(logIn.isLoggedIn());
+    }
+
+    @Then("the employee {string} is already logged in")
+    public void theEmployeeIsAlreadyLoggedIn(String initials) {
+        logIn.loggingIn(initials);
+        assertTrue(logIn.isLoggedIn());
+    }
+
+   
 }
