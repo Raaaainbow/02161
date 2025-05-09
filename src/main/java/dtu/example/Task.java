@@ -13,9 +13,11 @@ public class Task {
   private int hours;
   private int startWeek;
   private int endWeek;
+  private boolean taskExists = false;
 
   public Task(String title) {
     this.title = title;
+    this.taskExists = true;
   }
 
   public void setStartWeek(int startWeek) {
@@ -55,7 +57,11 @@ public class Task {
   }
 
   public void add(Task task) {
-    
+
+  }
+
+  public boolean taskExists() {
+    return taskExists;
   }
 
 }

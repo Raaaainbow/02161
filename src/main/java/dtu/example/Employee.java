@@ -13,7 +13,8 @@ public class Employee {
     private List<String> employeeListProject = new ArrayList<>();
     private boolean employeeInProject = false;
     private List<String> projectLeaderListProject = new ArrayList<>();
-    private boolean projectLeaderInProject = false;
+    private boolean taskExists;
+    private List<Task> taskList = new ArrayList<>();
 
     public Employee(String initials) {
         setInitials(initials);
@@ -28,7 +29,7 @@ public class Employee {
     }
 
     public Boolean employeeExists() {
-        return employeeExists;
+        return employeeList.contains(initials);
     }
 
     public String changeInitials(String newInitials) {
@@ -44,25 +45,17 @@ public class Employee {
         return initials;
     }
 
-    public void checkEmployeeInProject(String initials) {
-        employeeInProject = employeeListProject.contains(initials);
+    public boolean checkEmployeeInProject(String initials) {
+        return employeeListProject.contains(initials);
     }
 
-    // public boolean employeeInProject() {
-    //     return employeeInProject;
-    // }
-
     // public void checkEmployeeisProjectLeader(String initials) {
-    //     projectLeaderInProject = projectLeaderListProject.contains(initials);
+    // projectLeaderInProject = projectLeaderListProject.contains(initials);
     // }
 
-    // public boolean projectLeaderIsInProject(String initials) {
-    //     return employeeInProject;
-    // }
-
-    // public boolean getProjectLeaderInProject() {
-    //     return projectLeaderInProject;
-    // }
+    public boolean projectLeaderInProject() {
+        return !projectLeaderListProject.isEmpty();
+    }
 
     public void createProjectWithTitle(String title) {
         Database database = new Database();
@@ -76,11 +69,26 @@ public class Employee {
 
     public boolean projectExistsTitle(String title) {
         Database database = new Database();
-        return database.projectExistsTitle(title); 
+        return database.projectExistsTitle(title);
     }
 
     public boolean projectExistsNumber(String number) {
         Database database = new Database();
-        return database.projectExistsNumber(number); 
+        return database.projectExistsNumber(number);
     }
+
+    public void createTask(String title) {
+        Task task = new Task(title); 
+        taskList.add(task); 
+    }
+
+    public boolean taskExists(String title) {
+        for (Task task : taskList) {
+            if (task.getTitle().equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

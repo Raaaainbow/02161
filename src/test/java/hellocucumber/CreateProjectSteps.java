@@ -23,6 +23,11 @@ public class CreateProjectSteps {
         assertFalse(tasks.isEmpty());
     }
 
+    @When("the employee creates a project")
+    public void the_employee_creates_a_project() {
+        // Write code here that turns the phrase above into concrete actions
+    }
+
     @And("the employee does not provide a project name")
     public void theEmployeeDoesNotProvideAProjectName() {
         assertNull(createdProject.getTitle());
@@ -49,5 +54,6 @@ public class CreateProjectSteps {
     public void theProjectIsSavedWithTheGivenName() {
         assertEquals(givenProjectName, createdProject.getTitle());
     }
+
 }
 

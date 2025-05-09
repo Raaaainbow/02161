@@ -10,6 +10,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import dtu.example.Employee;
+import dtu.example.Task;
 
 public class EmployeeSteps {
     private Employee employee;
@@ -45,37 +46,6 @@ public class EmployeeSteps {
         assertEquals(initials, employee.getInitials());
     }
 
-    // @Given("employee {string} exists in the Database for the given project")
-    // public void employeeExistsinProject(String initials) {
-    //     employee.checkEmployeeInProject(initials);
-    //     assertTrue(employee.employeeInProject());
-    // }
-
-    // @Given("there is no project leader in the project")
-    // public void thereIsNoProjectLeaderInTheProject() {
-    //     assertFalse(employee.getProjectLeaderInProject()); 
-    // }
-
-    // @When("the employee creates a task in the project")
-    // public void theEmployeeCreatesATaskInTheProject() {
-
-    // }
-
-    // @Then("the task is created")
-    // public void theTaskIsCreated() {
-
-    // }
-
-    // @Given("there is a project leader in the project")
-    // public void thereIsAProjectLeaderInTheProject() {
-    //     assertTrue(employee.getProjectLeaderInProject()); 
-    // }
-
-    // @Then("the task is not created and an error message occurs")
-    // public void theTaskIsNotCreatedAndAnErrorMessageOccurs() {
-
-    // }
-
     @When("the employee creates a project with the title {string}")
     public void theEmployeeCreatesAProjectWithTheTitle(String title) {
         employee.createProjectWithTitle(title);
@@ -96,4 +66,33 @@ public class EmployeeSteps {
         assertTrue(employee.projectExistsNumber(number));
     }
 
+    @Given("the employee {string} exists in the Database for the given project")
+    public void theEmployeeExistsInTheDatabaseForTheGivenProject(String initials) {
+        assertTrue(employee.checkEmployeeInProject(initials));
+    }
+
+    @Given("there is no project leader in the project")
+    public void thereIsNoProjectLeaderInTheProject() {
+        assertFalse(employee.projectLeaderInProject());
+    }
+    
+    @When("the employee creates a task {string} in the project")
+    public void theEmployeeCreatesATaskInTheProject(String title) {
+        employee.createTask(title);
+    }
+    
+    @Then("the task {string} is created")
+    public void theTaskIsCreated(String title) {
+        assertTrue(employee.taskExists(title));      
+    }
+
+    @Given("there is a project leader in the project")
+    public void thereIsAProjectLeaderInTheProject() {
+        assertTrue(employee.projectLeaderInProject());
+    }
+
+    @Then("the task {string} is not created")
+    public void theTaskIsNotCreated(String title) {
+        assertFalse(employee.taskExists(title));
+    }
 }
