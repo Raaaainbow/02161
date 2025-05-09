@@ -1,8 +1,3 @@
-/*
- * Contributors:
- * Sebastian Francis Taylor
- *
- */
 package dtu.example;
 
 import java.util.ArrayList;
