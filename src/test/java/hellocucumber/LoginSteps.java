@@ -30,11 +30,12 @@ public class LoginSteps {
 
     @When("the employee enters {string}")
     public void theEmployeeEnters(String initials) {
-        logIn.loggingIn(initials);
+        assertEquals(initials, logIn.getCorrectInitials());
     }
 
-    @Then("the employee is logged in")
-    public void theEmployeeIsLoggedIn() {
+    @Then("the employee {string} is logged in")
+    public void theEmployeeIsLoggedIn(String initials) {
+        logIn.loggingIn(initials);
         assertTrue(logIn.isLoggedIn());
     }
 
@@ -44,8 +45,9 @@ public class LoginSteps {
         System.out.println("Redirecting to application...");
     }
 
-    @Then("the employee is not logged in")
-    public void theEmployeeIsNotLoggedIn() {
+    @Then("the employee {string} is not logged in")
+    public void theEmployeeIsNotLoggedIn(String initials) {
+        logIn.loggingIn(initials);
         assertFalse(logIn.isLoggedIn());
     }
 }
