@@ -29,7 +29,6 @@ public class EmployeeSteps {
     public void theEmployeeDoesNotExistInTheDatabase(String string) {
         assertFalse(employee.employeeExists());
     }
-
     @Given("an employee has the initials {string}")
     public void anEmployeeHasTheInitials(String initials) {
         employee = new Employee(initials);
@@ -44,5 +43,34 @@ public class EmployeeSteps {
     @Then("the employee has the initials {string}")
     public void theEmployeeHasTheInitials(String initials) {
         assertEquals(initials, employee.getInitials());
+    }
+
+    @Given("employee exists in the Database for the given project")
+    public void employeeExistsInTheDatabaseForTheGivenProject() {
+        
+    }
+
+    @Given("there is no project leader in the project")
+    public void thereIsNoProjectLeaderInTheProject() {
+    }
+
+    @When("the employee creates a task in the project")
+    public void theEmployeeCreatesATaskInTheProject() {
+
+    }
+
+    @Then("the task is created")
+    public void theTaskIsCreated() {
+
+    }
+
+    @Given("there is a project leader in the project")
+    public void thereIsAProjectLeaderInTheProject() {
+
+    }
+
+    @Then("the task is not created and an error message occurs")
+    public void theTaskIsNotCreatedAndAnErrorMessageOccurs() {
+
     }
 }
