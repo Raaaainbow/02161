@@ -8,6 +8,9 @@ public class Database {
 
     List<Project> projects = new ArrayList<>();
     List<Employee> employees = new ArrayList<>();
+    private String projectNumber;
+    private int counter = projects.size();
+    private String year = "25";
 
     public Database() {
         initEmployees();
@@ -30,24 +33,30 @@ public class Database {
 
     }
 
-    public void createProject(Task task) {
-        Project proj = new Project(task);
-        projects.add(proj);
-    }
-
     public void createProject(String title) {
         Project proj = new Project(title);
+        this.projectNumber = "P-" + year + counter;
         projects.add(proj);
     }
 
     public void createProject() {
         Project proj = new Project();
+        this.projectNumber = "P-" + year + counter;
         projects.add(proj);
     }
 
-    public boolean projectExists(String inputTitle) {
+    public boolean projectExistsTitle(String inputTitle) {
         for (Project project: projects) {
             if (project.getTitle() == inputTitle) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean projectExistsNumber(String projectNumber) {
+        for (Project project: projects) {
+            if (project.getProjectNumber() == projectNumber) {
                 return true;
             }
         }
