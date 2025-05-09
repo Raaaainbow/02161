@@ -19,14 +19,10 @@ public class EmployeeSteps {
         employee = new Employee(initials);
     }
 
-    @Then("the employee exists in the Database")
-    public void theEmployeeExistsInTheDatabase() {
+    @Then("the employee {string} exists in the Database")
+    public void theEmployeeExistsInTheDatabase(String initials) {
+        employee.checkEmployeeExists(initials);
         assertTrue(employee.employeeExists());
-    }
-
-    @Then("has the initials {string}")
-    public void hasTheInitials(String initials) {
-        assertEquals(initials, employee.getInitials());
     }
 
     @Then("the employee {string} does not exist in the Database")

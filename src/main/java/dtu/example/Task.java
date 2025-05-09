@@ -1,7 +1,5 @@
 package dtu.example;
 
-import java.util.ArrayList;
-
 public class Task {
   private String description;
   private Employee assignedEmployee;

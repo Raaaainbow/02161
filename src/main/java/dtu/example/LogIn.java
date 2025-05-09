@@ -1,10 +1,10 @@
 package dtu.example;
-//Katarina
+// mob programming Caroline, Katarina
 public class LogIn {
     private boolean loggedIn = false;
     private String correctInitials = "abcd";
     private String enteredInitials;
-    //Katarina
+    
     public void loggingIn(String enteredInitials) {
         this.enteredInitials = enteredInitials;
         if (loggedIn = false) {
@@ -21,7 +21,7 @@ public class LogIn {
             System.out.println("You are already logged in!");
         }
     }
-    //Katarina
+    
     public boolean isLoggedIn() {
         return loggedIn;
     }

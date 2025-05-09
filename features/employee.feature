@@ -6,8 +6,7 @@ Feature: Employee
 
     Scenario: Employee exists in the Database
         Given an employee is created with initials "abcd" 
-        Then the employee exists in the Database 
-        And has the initials "abcd" 
+        Then the employee "abcd" exists in the Database 
 
     Scenario: Employee does not exist in the Database
         Given an employee is created with initials "abcd"

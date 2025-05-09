@@ -1,4 +1,4 @@
-//mob programming Sebastian, Caroline, Sophia
+//mob programming Sebastian, Caroline, Sophia, Katarina
 
 package dtu.example;
 

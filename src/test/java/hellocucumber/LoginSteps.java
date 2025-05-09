@@ -9,21 +9,23 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
+import dtu.example.Employee;
 import dtu.example.LogIn;
 
 public class LoginSteps {
     private LogIn logIn = new LogIn();
-    private String errorMessage = null;
+    private Employee employee;
+
+    @Given("that the employee {string} exists")
+    public void thatTheEmployeeExists(String initials) {
+        employee = new Employee(initials);
+        employee.checkEmployeeExists(initials);
+        assertTrue(employee.employeeExists());
+    }
 
     @Given("that the employee is not logged in")
     public void thatTheEmployeeIsNotLoggedIn() {
         assertFalse(logIn.isLoggedIn());
-    }
-
-    @And("the right initials is {string}")
-    public void theRightInitialsIs(String initials) {
-        logIn.setCorrectInitials(initials);
     }
 
     @When("the employee enters {string}")
@@ -45,11 +47,5 @@ public class LoginSteps {
     @Then("the employee is not logged in")
     public void theEmployeeIsNotLoggedIn() {
         assertFalse(logIn.isLoggedIn());
-    }
-
-    @And("the employee is shown an error message")
-    public void theEmployeeIsShownAnErrorMessage() {
-        assertNotNull(errorMessage);
-        assertEquals("Incorrect initials", errorMessage);
     }
 }
