@@ -16,3 +16,9 @@ Feature: Employee login
       And that the employee is not logged in
       When the employee enters "xyz"
       Then the employee "abcd" is not logged in
+
+   Scenario: Employee is already logged in
+      Given that the employee "abcd" exists
+      And that the employee is logged in
+      When the employee enters "abcd"
+      Then the employee "abcd" is already logged in
