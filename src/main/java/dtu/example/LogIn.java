@@ -7,7 +7,7 @@ public class LogIn {
     
     public void loggingIn(String enteredInitials) {
         this.enteredInitials = enteredInitials;
-        if (loggedIn = false) {
+        if (loggedIn == false) {
             if (enteredInitials.equals(correctInitials)) {
                 loggedIn = true;
                 System.out.println("You are now logged in!");
