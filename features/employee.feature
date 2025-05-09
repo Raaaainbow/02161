@@ -16,3 +16,15 @@ Feature: Employee
         Given an employee has the initials "abcd"
         When the employee change their initials to "efgh"
         Then the employee has the initials "efgh"
+
+    Scenario: An employee creates a task in a project
+        Given employee exists in the Database for the given project
+        And there is no project leader in the project 
+        When the employee creates a task in the project
+        Then the task is created 
+
+    Scenario: An employee creates a task in a project but there is a project leader
+        Given employee exists in the Database for the given project
+        And there is a project leader in the project 
+        When the employee creates a task in the project
+        Then the task is not created and an error message occurs 

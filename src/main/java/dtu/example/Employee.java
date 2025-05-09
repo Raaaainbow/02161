@@ -37,4 +37,12 @@ public class Employee {
     public String getInitials() {
         return initials; 
     }
+
+    public void employeeExistsinproject(String initials) {
+        employeeExistsinproject(initials) = employeeList.contains(initials);
+    }
+
+    public boolean createTask(Project project, Task task) {
+    return project.addTaskAsEmployee(this, task);
+    }
 }
