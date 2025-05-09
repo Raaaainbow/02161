@@ -34,7 +34,7 @@ public class TimeRegistrationSteps {
 
     @Then("the date should be {string}")
     public void the_date_should_be(String expectedDate) {
-        assertEquals(LocalDate.parse(expectedDate), timeRegistration.getLocalDate());
+        assertEquals(LocalDate.parse(expectedDate), timeRegistration.getDate());
     }
 
     // Scenario: Update shift start time

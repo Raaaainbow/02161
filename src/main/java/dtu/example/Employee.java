@@ -8,7 +8,7 @@ import java.util.List;
 public class Employee {
     private String initials;
     private boolean employeeExists = false; 
-    private static List<String> employeeList = new ArrayList<>();
+    private List<String> employeeList = new ArrayList<>();
     private String newInitials;
 
     public Employee(String initials){

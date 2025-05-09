@@ -1,18 +1,20 @@
+//mob programming Sebastian, Caroline, Sophia
+
 package dtu.example;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class TimeRegistration {
-    private LocalDateTime ShiftStart;
-    private LocalDateTime ShiftEnd;
-    private LocalDate Date;
+    private LocalDateTime shiftStart;
+    private LocalDateTime shiftEnd;
+    private LocalDate date;
     private boolean deleted;
 
-    public TimeRegistration(LocalDateTime ShiftStart, LocalDateTime ShiftEnd, LocalDate Date){
-        this.ShiftStart = ShiftStart;
-        this.ShiftEnd = ShiftEnd;
-        this.Date = Date;
+    public TimeRegistration(LocalDateTime shiftStart, LocalDateTime shiftEnd, LocalDate date){
+        this.shiftStart = shiftStart;
+        this.shiftEnd = shiftEnd;
+        setDate(date);
     }
 
     public void deleteTimeReg(){
@@ -23,28 +25,28 @@ public class TimeRegistration {
         return deleted;
     }
 
-    public void setShiftStart(LocalDateTime ShiftStart){
-        this.ShiftStart = ShiftStart;
+    public void setShiftStart(LocalDateTime shiftStart){
+        this.shiftStart = shiftStart;
     }
 
     public LocalDateTime getShiftStart(){
-        return ShiftStart;
+        return shiftStart;
     }
 
-    public void setShiftEnd(LocalDateTime ShiftEnd){
-        this.ShiftEnd = ShiftEnd;
+    public void setShiftEnd(LocalDateTime shiftEnd){
+        this.shiftEnd = shiftEnd;
     }
 
     public LocalDateTime getShiftEnd(){
-        return ShiftEnd;
+        return shiftEnd;
     }
 
-    public void setLocalDate(LocalDate Date){
-        this.Date = Date;
+    public void setDate(LocalDate date){
+        this.date = date;
     }
 
-    public LocalDate getLocalDate(){
-        return Date;
+    public LocalDate getDate(){
+        return date;
     }
     
 }

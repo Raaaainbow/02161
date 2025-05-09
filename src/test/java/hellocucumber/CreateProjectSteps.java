@@ -2,7 +2,7 @@ package hellocucumber;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import io.cucumber.java.en.*;
 
@@ -18,7 +18,7 @@ public class CreateProjectSteps {
     // Sebastian Francis Taylor
     @Given("there is a task")
     public void thereIsATask() {
-        ArrayList<Task> tasks = project.getTasks();
+        List<Task> tasks = project.getTasks();
         project.addTask(task);
         assertFalse(tasks.isEmpty());
     }

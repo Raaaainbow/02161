@@ -1,6 +1,7 @@
 package dtu.example;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Project {
     private String title;
@@ -9,7 +10,7 @@ public class Project {
     private int endWeek;
 	private String projectLead;
     public String projectNumber;
-    private ArrayList<Task> tasks = new ArrayList<Task>();
+    private List<Task> tasks = new ArrayList<Task>();
     private Project createdProject;
     private String givenProjectName;
 	private int counter = 1;
@@ -40,7 +41,7 @@ public class Project {
         return tasks.contains(task);
     }
 
-    public ArrayList<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
