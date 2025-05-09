@@ -8,10 +8,6 @@ public class Project {
 	private String Id;
 	private int startWeek;
 	private int endWeek;
-	private String title;
-	private String Id;
-	private int startWeek;
-	private int endWeek;
 	private String projectLead;
 	public String projectNumber;
 	private List<Task> tasks = new ArrayList<Task>();
@@ -28,14 +24,10 @@ public class Project {
 	}
 
 	public Project(String title) {
-	public Project(String title) {
 		this.title = title;
 		this.projectNumber = "P-" + counter++;
 	}
 
-	// Sebastian
-	public Project() {
-		Id = "" + (counter + 1);
 	// Sebastian
 	public Project() {
 		Id = "" + (counter + 1);
@@ -50,13 +42,8 @@ public class Project {
 	public boolean taskExists(Task task) {
 		return tasks.contains(task);
 	}
-		return tasks.contains(task);
-	}
-
-	public ArrayList<Task> getTasks() {
-		return tasks;
-	}
-	public ArrayList<Task> getTasks() {
+	
+	public List<Task> getTasks() {
 		return tasks;
 	}
 
@@ -80,7 +67,6 @@ public class Project {
 
 	public int getStartWeek() {
 		return (startWeek > 0 && startWeek < 52) ? startWeek : 0;
-		return (startWeek > 0 && startWeek < 52) ? startWeek : 0;
 	}
 
 
@@ -88,20 +74,13 @@ public class Project {
 		if (startWeek > 0 && startWeek < 52) {
 			this.startWeek = startWeek;
 		}
-		if (startWeek > 0 && startWeek < 52) {
-			this.startWeek = startWeek;
-		}
 	}
 
 	public int getEndWeek() {
 		return (endWeek > 0 && endWeek < 52) ? endWeek : 0;
-		return (endWeek > 0 && endWeek < 52) ? endWeek : 0;
 	}
 
 	public void setEndWeek(int endWeek) {
-		if (endWeek > 0 && endWeek < 52) {
-			this.endWeek = endWeek;
-		}
 		if (endWeek > 0 && endWeek < 52) {
 			this.endWeek = endWeek;
 		}
@@ -127,7 +106,5 @@ public class Project {
 		} else {
 			return false;
 		}
-	
-
-}
+	}
 }
