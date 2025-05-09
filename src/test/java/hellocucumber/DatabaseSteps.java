@@ -51,7 +51,7 @@ public class DatabaseSteps {
     public void aProjectWithNameExistsInTheDatabase(String string) {
         db.createProject(string);
         Project proj = db.getProject(string);
-        assertTrue(db.projectExists(proj.getTitle())); // <-- proj is null here
+        assertTrue(db.projectExistsTitle(proj.getTitle())); // <-- proj is null here
     }
 
     @When("I update the project {string} to end in week {int}")

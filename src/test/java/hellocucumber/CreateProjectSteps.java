@@ -23,11 +23,6 @@ public class CreateProjectSteps {
         assertFalse(tasks.isEmpty());
     }
 
-    @When("the employee creates a project")
-    public void theEmployeeCreatesAProject() {
-        createdProject = new Project(task);
-    }
-
     @And("the employee does not provide a project name")
     public void theEmployeeDoesNotProvideAProjectName() {
         assertNull(createdProject.getTitle());
