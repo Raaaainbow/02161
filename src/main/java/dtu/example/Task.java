@@ -1,5 +1,7 @@
 package dtu.example;
 
+import java.util.ArrayList;
+
 public class Task {
   private String description;
   private Employee assignedEmployee;
@@ -53,7 +55,7 @@ public class Task {
   }
 
   public void add(Task task) {
-    throw new UnsupportedOperationException("Unimplemented method 'add'");
+    
   }
 
 }
