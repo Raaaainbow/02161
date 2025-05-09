@@ -15,13 +15,7 @@ public class Project {
 	private String givenProjectName;
 	private int counter = 1;
 	private static List<String> projectLeaderListProject = new ArrayList<>();
-	private boolean projectLeaderExistsinproject = false;
-
-	public Project(Task task) {
-		this.projectNumber = "P-" + counter++;
-		tasks.add(task);
-		tasks.add(task);
-	}
+	private boolean projectLeaderInProject = false;
 
 	public Project(String title) {
 		this.title = title;
@@ -97,14 +91,5 @@ public class Project {
 
 	public String getProjectNumber() {
 		return projectNumber;
-	}
-
-	public boolean addTaskAsEmployee(Employee employee, Task task) {
-		if (!projectLeaderExistsinproject) {
-			task.add(task);
-			return true;
-		} else {
-			return false;
-		}
 	}
 }

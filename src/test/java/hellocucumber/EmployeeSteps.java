@@ -45,32 +45,55 @@ public class EmployeeSteps {
         assertEquals(initials, employee.getInitials());
     }
 
-    @Given("employee exists in the Database for the given project")
-    public void employeeExistsInTheDatabaseForTheGivenProject() {
-        
+    // @Given("employee {string} exists in the Database for the given project")
+    // public void employeeExistsinProject(String initials) {
+    //     employee.checkEmployeeInProject(initials);
+    //     assertTrue(employee.employeeInProject());
+    // }
+
+    // @Given("there is no project leader in the project")
+    // public void thereIsNoProjectLeaderInTheProject() {
+    //     assertFalse(employee.getProjectLeaderInProject()); 
+    // }
+
+    // @When("the employee creates a task in the project")
+    // public void theEmployeeCreatesATaskInTheProject() {
+
+    // }
+
+    // @Then("the task is created")
+    // public void theTaskIsCreated() {
+
+    // }
+
+    // @Given("there is a project leader in the project")
+    // public void thereIsAProjectLeaderInTheProject() {
+    //     assertTrue(employee.getProjectLeaderInProject()); 
+    // }
+
+    // @Then("the task is not created and an error message occurs")
+    // public void theTaskIsNotCreatedAndAnErrorMessageOccurs() {
+
+    // }
+
+    @When("the employee creates a project with the title {string}")
+    public void theEmployeeCreatesAProjectWithTheTitle(String title) {
+        employee.createProjectWithTitle(title);
     }
 
-    @Given("there is no project leader in the project")
-    public void thereIsNoProjectLeaderInTheProject() {
+    @Then("a project with the title {string} is created")
+    public void aProjectWithTheTitleIsCreated(String title) {
+        assertTrue(employee.projectExistsTitle(title));
     }
 
-    @When("the employee creates a task in the project")
-    public void theEmployeeCreatesATaskInTheProject() {
-
+    @When("the employee creates a project without a title")
+    public void theEmployeeCreatesAProjectWithoutATitle() {
+        employee.createProject();
     }
 
-    @Then("the task is created")
-    public void theTaskIsCreated() {
-
+    @Then("a project without a title is created with the project number {string}")
+    public void aProjectWithoutATitleIsCreatedWithTheProjectNumber(String number) {
+        assertTrue(employee.projectExistsNumber(number));
     }
 
-    @Given("there is a project leader in the project")
-    public void thereIsAProjectLeaderInTheProject() {
-
-    }
-
-    @Then("the task is not created and an error message occurs")
-    public void theTaskIsNotCreatedAndAnErrorMessageOccurs() {
-
-    }
 }
