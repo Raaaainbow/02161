@@ -41,5 +41,21 @@ public class Task {
   public void setEstimatedTime(int hours) {
     this.hours = hours;
   }
-  
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void assignEmployee(Employee employee) {
+    this.assignedEmployee = employee;
+  }
+
+  public Employee getAssignedEmployee() {
+    return assignedEmployee;
+  }
+
+  public void add(Task task) {
+    
+  }
+
 }

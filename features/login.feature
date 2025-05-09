@@ -5,15 +5,20 @@ Feature: Employee login
    Actors: Employee
 
    Scenario: Employee can log in
-      Given that the employee is not logged in
-      And the right initials is "abcd"
+      Given that the employee "abcd" exists
+      And that the employee is not logged in
       When the employee enters "abcd"
-      Then the employee is logged in
+      Then the employee "abcd" is logged in
       And the employee is redirected to the application
 
    Scenario: Employee cannot log in
-      Given that the employee is not logged in
-      And the right initials is "abcd"
+      Given that the employee "abcd" exists
+      And that the employee is not logged in
       When the employee enters "xyz"
-      Then the employee is not logged in
-      And the employee is shown an error message
+      Then the employee "abcd" is not logged in
+
+   Scenario: Employee is already logged in
+      Given that the employee "abcd" exists
+      And that the employee is logged in
+      When the employee enters "abcd"
+      Then the employee "abcd" is already logged in

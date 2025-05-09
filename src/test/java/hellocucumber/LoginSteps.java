@@ -9,30 +9,33 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
+import dtu.example.Employee;
 import dtu.example.LogIn;
 
 public class LoginSteps {
     private LogIn logIn = new LogIn();
-    private String errorMessage = null;
+    private Employee employee;
+
+    @Given("that the employee {string} exists")
+    public void thatTheEmployeeExists(String initials) {
+        employee = new Employee(initials);
+        employee.checkEmployeeExists(initials);
+        assertTrue(employee.employeeExists());
+    }
 
     @Given("that the employee is not logged in")
     public void thatTheEmployeeIsNotLoggedIn() {
         assertFalse(logIn.isLoggedIn());
     }
 
-    @And("the right initials is {string}")
-    public void theRightInitialsIs(String initials) {
-        logIn.setCorrectInitials(initials);
-    }
-
     @When("the employee enters {string}")
     public void theEmployeeEnters(String initials) {
-        logIn.loggingIn(initials);
+        assertEquals(initials, logIn.getCorrectInitials());
     }
 
-    @Then("the employee is logged in")
-    public void theEmployeeIsLoggedIn() {
+    @Then("the employee {string} is logged in")
+    public void theEmployeeIsLoggedIn(String initials) {
+        logIn.loggingIn(initials);
         assertTrue(logIn.isLoggedIn());
     }
 
@@ -42,14 +45,22 @@ public class LoginSteps {
         System.out.println("Redirecting to application...");
     }
 
-    @Then("the employee is not logged in")
-    public void theEmployeeIsNotLoggedIn() {
+    @Then("the employee {string} is not logged in")
+    public void theEmployeeIsNotLoggedIn(String initials) {
+        logIn.loggingIn(initials);
         assertFalse(logIn.isLoggedIn());
     }
 
-    @And("the employee is shown an error message")
-    public void theEmployeeIsShownAnErrorMessage() {
-        assertNotNull(errorMessage);
-        assertEquals("Incorrect initials", errorMessage);
+    @Given("that the employee is logged in")
+    public void thatTheEmployeeIsLoggedIn() {
+        assertTrue(logIn.isLoggedIn());
     }
+
+    @Then("the employee {string} is already logged in")
+    public void theEmployeeIsAlreadyLoggedIn(String initials) {
+        logIn.loggingIn(initials);
+        assertTrue(logIn.isLoggedIn());
+    }
+
+   
 }
