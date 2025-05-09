@@ -2,6 +2,8 @@ package hellocucumber;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 
@@ -76,4 +78,25 @@ public class DatabaseSteps {
         assertTrue(db.employeeExists(string));
     }
 
+    @When("I create a new project without any parameters")
+    public void iCreateaANewProjectWithoutAnyParameters() {
+        db.createProject();
+    }
+
+    @Then("the project is created with a generated Id")
+    public void theProjectIsCreatedWithAGeneratedId() {
+        List<Project> projects = db.getProjects();
+        assertNotNull(projects.getLast().getId());
+        
+    }
+
+    @When("I request a list of all employees")
+    public void iRequestAListOfAllEmployees() {
+        db.getEmployees();
+    }
+
+    @Then("I get a list of all employees")
+    public void iGetAListOfAllEmployees() {
+        assertNotNull(db.getEmployees());
+    }
 }

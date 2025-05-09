@@ -8,7 +8,6 @@ public class Database {
 
     List<Project> projects = new ArrayList<>();
     List<Employee> employees = new ArrayList<>();
-    private String projectNumber;
     private int counter = projects.size();
     private String year = "25";
 
@@ -35,13 +34,11 @@ public class Database {
 
     public void createProject(String title) {
         Project proj = new Project(title);
-        this.projectNumber = "P-" + year + counter;
         projects.add(proj);
     }
 
     public void createProject() {
         Project proj = new Project();
-        this.projectNumber = "P-" + year + counter;
         projects.add(proj);
     }
 
@@ -70,6 +67,10 @@ public class Database {
             }
         }
         return null;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
     }
 
     public void createEmployee(String initials) {

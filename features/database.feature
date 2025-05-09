@@ -22,4 +22,12 @@ Feature: Project Management in the Database
         When I create a new user with initials "U001"
         Then the user "U001" should be stored in the database
     
-    
+    Scenario: Creating a project without any parameters
+        Given the database is initialized
+        When I create a new project without any parameters
+        Then the project is created with a generated Id
+
+    Scenario: Getting a list of all employees
+        Given the database is initialized
+        When I request a list of all employees
+        Then I get a list of all employees
