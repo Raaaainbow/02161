@@ -2,13 +2,14 @@ package dtu.example;
 // mob programming Caroline, Katarina
 public class LogIn {
     private boolean loggedIn = false;
-    private String correctInitials = "abcd";
+    private String correctInitials;
     private String enteredInitials;
     
-    public void loggingIn(String enteredInitials) {
+    public void loggingIn(Employee employee, String enteredInitials) {
+        correctInitials = employee.getInitials();
         this.enteredInitials = enteredInitials;
         if (loggedIn == false) {
-            if (enteredInitials.equals(correctInitials)) {
+            if (correctInitials.equals(enteredInitials)) {
                 loggedIn = true;
                 System.out.println("You are now logged in!");
             }
@@ -26,17 +27,17 @@ public class LogIn {
         return loggedIn;
     }
     
-    public void setCorrectInitials(String initials) {
-        this.correctInitials = initials;
-    }
+    // public void setCorrectInitials(String initials) {
+    //     this.correctInitials = initials;
+    // }
     
-    public String getCorrectInitials() {
-        return correctInitials;
-    }
+    // public String getCorrectInitials() {
+    //     return correctInitials;
+    // }
 
-    public String getEnteredInitials() {
-        return enteredInitials;
-    }
+    // public String getEnteredInitials() {
+    //     return enteredInitials;
+    // }
 
 }
 

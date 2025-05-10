@@ -15,7 +15,7 @@ public class Employee {
     private List<String> projectLeaderListProject = new ArrayList<>();
     private boolean taskExists;
     private List<Task> taskList = new ArrayList<>();
-
+    
     public Employee(String initials) {
         setInitials(initials);
         employeeList.add(initials);
@@ -24,12 +24,13 @@ public class Employee {
         checkEmployeeInProject(initials);
     }
 
-    public void checkEmployeeExists(String initials) {
-        employeeExists = employeeList.contains(initials);
+    public boolean checkEmployeeExists(String initials) {
+        this.employeeExists = employeeList.contains(initials);
+        return employeeExists;
     }
 
     public Boolean employeeExists() {
-        return employeeList.contains(initials);
+        return employeeExists;
     }
 
     public String changeInitials(String newInitials) {
