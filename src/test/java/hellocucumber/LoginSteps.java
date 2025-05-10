@@ -10,21 +10,23 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import dtu.example.Database;
 import dtu.example.Employee;
 import dtu.example.LogIn;
 
 public class LoginSteps {
     private LogIn logIn = new LogIn();
     private Employee employee;
+    private Database database;
     private String wrongInitials = "";
     private String initials;
 
     @Given("that the employee {string} exists")
     public void thatTheEmployeeExists(String initials) {
         this.initials = initials;
+        database = new Database();
         employee = new Employee(initials);
-        employee.checkEmployeeExists(initials);
-        assertTrue(employee.employeeExists());
+        assertTrue(database.employeeExists(initials));
     }
 
     @Given("that the employee is not logged in")

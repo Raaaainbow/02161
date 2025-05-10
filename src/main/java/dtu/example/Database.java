@@ -51,9 +51,18 @@ public class Database {
         projects.add(proj);
     }
 
+    public Project getProjectByNumber(String projectNumber) {
+        for (Project proj : projects) {
+            if (proj.getProjectNumber().equals(projectNumber)) {
+                return proj;
+            }
+        }
+        return null;
+    }
+
     public boolean projectExistsTitle(String inputTitle) {
         for (Project project: projects) {
-            if (project.getTitle() == inputTitle) {
+            if (project.getTitle().equals(inputTitle)) {
                 return true;
             }
         }
@@ -62,7 +71,7 @@ public class Database {
 
     public boolean projectExistsNumber(String projectNumber) {
         for (Project project: projects) {
-            if (project.getProjectNumber() == projectNumber) {
+            if (project.getProjectNumber().equals(projectNumber)) {
                 return true;
             }
         }

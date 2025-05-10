@@ -4,32 +4,44 @@ package hellocucumber;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import dtu.example.Database;
 import dtu.example.Employee;
+import dtu.example.Project;
 import dtu.example.Task;
 
 public class EmployeeSteps {
     private Employee employee;
     private Task task;
+    private Database database;
+    private Project project;
 
     @Given("an employee is created with initials {string}")
     public void anEmployeeExistsWithInitials(String initials) {
-        employee = new Employee(initials);
+        database.createEmployee(initials);
+        employee = database.getEmployee(initials);
+    }
+
+    @Given("the database is initialized")
+    public void theDatabaseIsInitialized() {
+        database = new Database();
     }
 
     @Then("the employee {string} exists in the Database")
     public void theEmployeeExistsInTheDatabase(String initials) {
-        employee.checkEmployeeExists(initials);
-        assertTrue(employee.employeeExists());
+        assertTrue(database.employeeExists(initials));
     }
 
     @Then("the employee {string} does not exist in the Database")
-    public void theEmployeeDoesNotExistInTheDatabase(String string) {
-        assertFalse(employee.employeeExists());
+    public void theEmployeeDoesNotExistInTheDatabase(String initials) {
+        assertFalse(database.employeeExists(initials));
     }
     @Given("an employee has the initials {string}")
     public void anEmployeeHasTheInitials(String initials) {
@@ -49,43 +61,47 @@ public class EmployeeSteps {
 
     @When("the employee creates a project with the title {string}")
     public void theEmployeeCreatesAProjectWithTheTitle(String title) {
-        employee.createProjectWithTitle(title);
+        database.createProject(title);
+        this.project = database.getProject(title);
     }
 
     @Then("a project with the title {string} is created")
     public void aProjectWithTheTitleIsCreated(String title) {
-        assertTrue(employee.projectExistsTitle(title));
+        assertTrue(database.projectExistsTitle(title));
     }
 
     @When("the employee creates a project without a title")
     public void theEmployeeCreatesAProjectWithoutATitle() {
-        employee.createProject();
+        database.createProject();
+        List<Project> projects = database.getProjects();
+        String projectNumber = projects.getLast().getProjectNumber();
+        this.project = database.getProjectByNumber(projectNumber);
     }
 
     @Then("a project without a title is created with the project number {string}")
     public void aProjectWithoutATitleIsCreatedWithTheProjectNumber(String number) {
-        assertTrue(employee.projectExistsNumber(number));
+        assertTrue(database.projectExistsNumber(number));
     }
 
-    @Given("the employee {string} exists in the Database for the given project")
-    public void theEmployeeExistsInTheDatabaseForTheGivenProject(String initials) {
-        assertTrue(employee.checkEmployeeInProject(initials));
+    @Then("the project has the project number {string}")
+    public void theProjectHasTheProjectNumber(String projectNumber) {
+        assertEquals(project.getProjectNumber(), projectNumber);
     }
 
     @Given("there is no project leader in the project")
     public void thereIsNoProjectLeaderInTheProject() {
-        assertFalse(employee.projectLeaderInProject());
+        assertFalse(project.projectLeaderInProject());
     }
     
     @When("the employee creates a task {string} using {int} hours starting in week {int} and ending in week {int} in the project {string} in the project")
     public void theEmployeeCreatesAnActivityUsingHoursStartingInWeekAndEndingInWeekInTheProject(String title, int hours, int startWeek, int endWeek, String projectNumber) {
-        employee.createTask(title, hours, startWeek, endWeek, projectNumber);
-        this.task = employee.getTask();
+        project.createTask(title, hours, startWeek, endWeek, projectNumber);
+        this.task = project.getTask();
     }
     
     @Then("the task {string} is created")
     public void theTaskIsCreated(String title) {
-        assertTrue(employee.taskExists(title));      
+        assertTrue(project.taskExists(title));      
     }
 
     @Then("the activity {string} has the starting week {int} and ending week {int}")
@@ -96,11 +112,12 @@ public class EmployeeSteps {
 
     @Given("there is a project leader in the project")
     public void thereIsAProjectLeaderInTheProject() {
-        assertTrue(employee.projectLeaderInProject());
+        assertTrue(project.projectLeaderInProject());
     }
 
     @Then("the task {string} is not created")
     public void theTaskIsNotCreated(String title) {
-        assertFalse(employee.taskExists(title));
+        assertFalse(project.taskExists(title));
+
     }
 }
