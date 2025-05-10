@@ -17,6 +17,10 @@ public class Project {
 	private static List<String> projectLeaderListProject = new ArrayList<>();
 	private boolean projectLeaderInProject = false;
 
+	public Project() {
+		
+	}
+
 	public Project(String title, String projectNumber) {
 		this.title = title;
 		this.projectNumber = projectNumber;
@@ -50,13 +54,13 @@ public class Project {
 	}
 
 
-	public String getId() {
-		return Id;
-	}
+	// public String getId() {
+	// 	return Id;
+	// }
 
-	public void setId(String id) {
-		Id = id;
-	}
+	// public void setId(String id) {
+	// 	Id = id;
+	// }
 
 
 	public int getStartWeek() {
