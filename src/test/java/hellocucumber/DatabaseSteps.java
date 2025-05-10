@@ -14,8 +14,8 @@ public class DatabaseSteps {
 
     private Database db;
 
-    @Given("the database is initialized")
-    public void theDatabaseIsInitialized() {
+    @Given("the database has been initialized")
+    public void theDatabaseHasBeenInitialized() {
         db = new Database();
     }
 

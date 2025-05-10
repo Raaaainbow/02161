@@ -16,10 +16,7 @@ public class Project {
 	private String givenProjectName;
 	private static List<String> projectLeaderListProject = new ArrayList<>();
 	private boolean projectLeaderInProject = false;
-
-	public Project() {
-		
-	}
+	private Task task;
 
 	public Project(String title, String projectNumber) {
 		this.title = title;
@@ -84,6 +81,25 @@ public class Project {
 		}
 	}
 
+	public void createTask(String title, int hours, int startWeek, int endWeek, String projectNumber) {
+        Task task = new Task(title, hours, startWeek, endWeek, projectNumber); 
+        tasks.add(task);
+        this.task = task; 
+    }
+
+	public boolean taskExists(String title) {
+        for (Task task : tasks) {
+            if (task.getTitle().equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+	public Task getTask() {
+        return task;
+    }
+
 	public String getProjectLead() {
 		return projectLead;
 	}
@@ -96,4 +112,8 @@ public class Project {
 	public String getProjectNumber() {
 		return projectNumber;
 	}
+
+	public boolean projectLeaderInProject() {
+        return !projectLeaderListProject.isEmpty();
+    }
 }
