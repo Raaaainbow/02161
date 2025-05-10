@@ -18,7 +18,7 @@ public class Database {
     }
 
     private void initEmployees() {
-        String[] initList = {"SFT", "SASS", "KHF", "CP", "HUBA"};
+        String[] initList = {"sft", "sass", "khf", "cp", "huba"};
         for (int i = 0; i < initList.length; i++) {
             createEmployee(initList[i]);
         }
@@ -92,6 +92,15 @@ public class Database {
             }
         }
         return false;
+    }
+
+    public Employee getEmployee(String iD) {
+        for (Employee employee: employees) {
+            if (employee.getInitials().equals(iD)) {
+                return employee;
+            }
+        }
+        return null;
     }
 
     public boolean employeeExists(Employee employee) {
