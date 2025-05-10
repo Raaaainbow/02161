@@ -8,6 +8,7 @@ import java.util.List;
 public class Employee {
     private String initials;
     private boolean employeeExists = false;
+    private Task task;
     private List<String> employeeList = new ArrayList<>();
     private String newInitials;
     private List<String> employeeListProject = new ArrayList<>();
@@ -15,6 +16,7 @@ public class Employee {
     private List<String> projectLeaderListProject = new ArrayList<>();
     private boolean taskExists;
     private List<Task> taskList = new ArrayList<>();
+    //private List<Employee> employeeList = new Database().getEmployees();
     
     public Employee(String initials) {
         setInitials(initials);
@@ -23,6 +25,11 @@ public class Employee {
         employeeListProject.add(initials);
         checkEmployeeInProject(initials);
     }
+
+    // public void addEmployeeToProject(String initials) {
+    //     employeeListProject.add(initials);
+    //     checkEmployeeInProject(initials);
+    // }
 
     public boolean checkEmployeeExists(String initials) {
         this.employeeExists = employeeList.contains(initials);
@@ -78,9 +85,10 @@ public class Employee {
         return database.projectExistsNumber(number);
     }
 
-    public void createTask(String title) {
-        Task task = new Task(title); 
-        taskList.add(task); 
+    public void createTask(String title, int hours, int startWeek, int endWeek, String projectNumber) {
+        Task task = new Task(title, hours, startWeek, endWeek, projectNumber); 
+        taskList.add(task);
+        this.task = task; 
     }
 
     public boolean taskExists(String title) {
@@ -90,6 +98,10 @@ public class Employee {
             }
         }
         return false;
+    }
+
+    public Task getTask() {
+        return task;
     }
 
 }

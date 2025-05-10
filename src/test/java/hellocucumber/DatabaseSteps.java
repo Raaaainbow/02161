@@ -86,7 +86,7 @@ public class DatabaseSteps {
     @Then("the project is created with a generated Id")
     public void theProjectIsCreatedWithAGeneratedId() {
         List<Project> projects = db.getProjects();
-        assertNotNull(projects.getLast().getId());
+        assertNotNull(projects.getLast().getProjectNumber());
         
     }
 

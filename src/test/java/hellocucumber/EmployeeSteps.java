@@ -14,6 +14,7 @@ import dtu.example.Task;
 
 public class EmployeeSteps {
     private Employee employee;
+    private Task task;
 
     @Given("an employee is created with initials {string}")
     public void anEmployeeExistsWithInitials(String initials) {
@@ -76,15 +77,22 @@ public class EmployeeSteps {
         assertFalse(employee.projectLeaderInProject());
     }
     
-    @When("the employee creates a task {string} in the project")
-    public void theEmployeeCreatesATaskInTheProject(String title) {
-        employee.createTask(title);
+    @When("the employee creates a task {string} using {int} hours starting in week {int} and ending in week {int} in the project {string} in the project")
+    public void theEmployeeCreatesAnActivityUsingHoursStartingInWeekAndEndingInWeekInTheProject(String title, int hours, int startWeek, int endWeek, String projectNumber) {
+        employee.createTask(title, hours, startWeek, endWeek, projectNumber);
+        this.task = employee.getTask();
     }
     
     @Then("the task {string} is created")
     public void theTaskIsCreated(String title) {
         assertTrue(employee.taskExists(title));      
     }
+
+    @Then("the activity {string} has the starting week {int} and ending week {int}")
+    public void theActivityHasTheStartingWeekAndEndingWeek(String title, int startWeek, int endweek) {
+        assertEquals(task.getStartWeek(), startWeek);
+        assertEquals(task.getEndWeek(), endweek);
+    } 
 
     @Given("there is a project leader in the project")
     public void thereIsAProjectLeaderInTheProject() {

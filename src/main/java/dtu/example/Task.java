@@ -1,6 +1,9 @@
 package dtu.example;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import dtu.example.Project;
 
 public class Task {
   private String description;
@@ -15,29 +18,38 @@ public class Task {
   private int endWeek;
   private boolean taskExists = false;
 
-  public Task(String title) {
+  public Task(String title, int hours, int startWeek, int endWeek, String projectNumber) {
     this.title = title;
+    setEstimatedTime(hours);
+    setStartWeek(startWeek);
+    setEndWeek(endWeek);
     this.taskExists = true;
   }
 
   public void setStartWeek(int startWeek) {
-    if (startWeek > 0 && startWeek < 52) {
+    if (startWeek > 0 && startWeek <= 52) {
       this.startWeek = startWeek;
+    }
+    else {
+      System.out.println("The inputted week does not exist, input another week");
     }
   }
 
   public int getStartWeek() {
-    return (startWeek > 0 && startWeek < 52) ? startWeek : 0;
+    return startWeek;
   }
 
   public void setEndWeek(int endWeek) {
-    if (endWeek > 0 && endWeek < 52) {
+    if (endWeek > 0 && endWeek <= 52) {
       this.endWeek = endWeek;
+    }
+    else {
+      System.out.println("The inputted week does not exist, input another week");
     }
   }
 
   public int getEndWeek() {
-    return (endWeek > 0 && endWeek < 52) ? endWeek : 0;
+    return endWeek;
   }
 
   public void setEstimatedTime(int hours) {
@@ -48,20 +60,20 @@ public class Task {
     return title;
   }
 
-  public void assignEmployee(Employee employee) {
-    this.assignedEmployee = employee;
-  }
+  // public void assignEmployee(Employee employee) {
+  //   this.assignedEmployee = employee;
+  // }
 
-  public Employee getAssignedEmployee() {
-    return assignedEmployee;
-  }
+  // public Employee getAssignedEmployee() {
+  //   return assignedEmployee;
+  // }
 
-  public void add(Task task) {
+  // public void add(Task task) {
 
-  }
+  // }
 
-  public boolean taskExists() {
-    return taskExists;
-  }
+  // public boolean taskExists() {
+  //   return taskExists;
+  // }
 
 }
