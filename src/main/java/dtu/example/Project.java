@@ -31,6 +31,7 @@ public class Project {
 		if (startWeek <= 0 || startWeek > 52 || endWeek <= 0 || endWeek > 52) {
 			throw new IllegalArgumentException("Start week or end week is not valid");
 		} else {
+			setTitle(title);
 			setStartWeek(startWeek);
 			setEndWeek(endWeek);
 			Task task = new Task(title, hours, startWeek, endWeek, projectNumber); 
@@ -52,41 +53,36 @@ public class Project {
 		return tasks.contains(task);
 	}
 
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
 	public Task getTask() {
         return task;
     }
-
-	public String getProjectLead() {
-		return projectLead;
-	}
-
-
-	public void setProjectLead(String projectLead) {
-		this.projectLead = projectLead;
-	}
-
-	public String getProjectNumber() {
-		return projectNumber;
-	}
 
 	public boolean projectLeaderInProject() {
         return !projectLeaderListProject.isEmpty();
     }
 
-	public List<Task> getTasks() {
-		return tasks;
+	public String getProjectNumber() {
+		return projectNumber;
 	}
 
-	public String getTitle() {
-		return title;
+	public void setProjectLead(String projectLead) {
+		this.projectLead = projectLead;
+	}
+
+	public String getProjectLead() {
+		return projectLead;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public int getStartWeek() {
-		return startWeek;
+	public String getTitle() {
+		return title;
 	}
 
 	public void setStartWeek(int startWeek) {
@@ -95,13 +91,17 @@ public class Project {
 		}
 	}
 
-	public int getEndWeek() {
-		return endWeek;
+	public int getStartWeek() {
+		return startWeek;
 	}
 
 	public void setEndWeek(int endWeek) {
 		if (endWeek > 0 && endWeek <= 52) {
 			this.endWeek = endWeek;
 		}
+	}
+
+	public int getEndWeek() {
+		return endWeek;
 	}
 }
