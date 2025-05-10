@@ -118,10 +118,4 @@ public class Database {
     public Employee getEmployee(String initials) {
         return employeesHash.get(initials);
     }
-
-    public boolean employeeExists(Employee employee) {
-        return employees.contains(employee);
-    }
-
-    
 }
