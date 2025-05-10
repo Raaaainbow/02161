@@ -2,6 +2,7 @@ package dtu.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import dtu.example.Database;
 
 public class Project {
 	private String title;
@@ -13,18 +14,17 @@ public class Project {
 	private List<Task> tasks = new ArrayList<Task>();
 	private Project createdProject;
 	private String givenProjectName;
-	private int counter = 1;
 	private static List<String> projectLeaderListProject = new ArrayList<>();
 	private boolean projectLeaderInProject = false;
 
-	public Project(String title) {
+	public Project(String title, String projectNumber) {
 		this.title = title;
-		this.projectNumber = "P-" + counter++;
+		this.projectNumber = projectNumber;
 	}
 
 	// Sebastian
-	public Project() {
-		Id = "" + (counter + 1);
+	public Project(String projectNumber) {
+		this.projectNumber = projectNumber;
 	}
 
 	// Sebastian

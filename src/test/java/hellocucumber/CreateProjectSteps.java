@@ -10,12 +10,12 @@ import dtu.example.Project;
 import dtu.example.Task;
 
 public class CreateProjectSteps {
-    public Project project = new Project();
+    public Project project = new Project("P-255");
     private Task task;
     private Project createdProject;
     private String givenProjectName;
 
-    // Sebastian Francis Taylor
+    // Sebastian Francis TaprojectNumber = "P-" + year + counter;ylor
     @Given("there is a task")
     public void thereIsATask() {
         List<Task> tasks = project.getTasks();
