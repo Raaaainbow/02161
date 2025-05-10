@@ -12,7 +12,6 @@ public class Database {
     private List<Employee> employees = new ArrayList<>();
     private List<String> emploeesString = new ArrayList<>();
     private Map<String, Employee> employeesHash = new HashMap<>();
-    private int counter = projects.size();
     private String year = "25";
     private String projectNumber;
 
@@ -34,19 +33,20 @@ public class Database {
     private void initProjects() {
         String[] initList = {"proj1", "proj2", "proj3", "proj4"};
         for (int i = 0; i < initList.length; i++) {
-            createProject(initList[i]);
+            Project project = new Project(initList[i]);
+            projects.add(project);
         }
 
     }
 
     public void createProject(String title) {
-        projectNumber = "P-" + year + counter;
+        projectNumber = "P-" + year + (projects.size()+1);
         Project proj = new Project(title, projectNumber);
         projects.add(proj);
     }
 
     public void createProject() {
-        projectNumber = "P-" + year + counter;
+        projectNumber = "P-" + year + (projects.size()+1);
         Project proj = new Project(projectNumber);
         projects.add(proj);
     }
