@@ -5,21 +5,20 @@ public class LogIn {
     private String correctInitials;
     private String enteredInitials;
     
-    public void loggingIn(Employee employee, String enteredInitials) {
-        correctInitials = employee.getInitials();
-        this.enteredInitials = enteredInitials;
-        if (loggedIn == false) {
-            if (correctInitials.equals(enteredInitials)) {
-                loggedIn = true;
-                System.out.println("You are now logged in!");
-            }
-            else {
-                loggedIn = false;
-                System.out.println("Wrong initials! Try again.");
-            }
+    public boolean loggingIn(Employee employee, String enteredInitials) {
+        if (employee == null) {
+            System.out.println("Employee does not exist!");
+            return false;
         }
-        else {
-            System.out.println("You are already logged in!");
+        
+        String correctInitials = employee.getInitials();
+        
+        if (correctInitials.equals(enteredInitials)) {
+            System.out.println("You are now logged in!");
+            return true;
+        } else {
+            System.out.println("Wrong initials! Try again.");
+            return false;
         }
     }
     
