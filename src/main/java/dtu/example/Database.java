@@ -2,12 +2,16 @@
 package dtu.example;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Database {
 
-    List<Project> projects = new ArrayList<>();
-    List<Employee> employees = new ArrayList<>();
+    private List<Project> projects = new ArrayList<>();
+    private List<Employee> employees = new ArrayList<>();
+    private List<String> emploeesString = new ArrayList<>();
+    private Map<String, Employee> employeesHash = new HashMap<>();
     private int counter = projects.size();
     private String year = "25";
     private String projectNumber;
@@ -20,9 +24,11 @@ public class Database {
     private void initEmployees() {
         String[] initList = {"sft", "sass", "khf", "cp", "huba"};
         for (int i = 0; i < initList.length; i++) {
-            createEmployee(initList[i]);
+            Employee employee = new Employee(initList[i]);
+            employeesHash.put(initList[i], employee);
+            emploeesString.add(initList[i]);
+            employees.add(employee);
         }
-
     }
 
     private void initProjects() {
@@ -78,7 +84,9 @@ public class Database {
 
     public void createEmployee(String initials) {
         Employee employee = new Employee(initials);
+        emploeesString.add(initials);
         employees.add(employee);
+        employeesHash.put(initials, employee);
     }
 
     public List<Employee> getEmployees() {
@@ -94,13 +102,8 @@ public class Database {
         return false;
     }
 
-    public Employee getEmployee(String iD) {
-        for (Employee employee: employees) {
-            if (employee.getInitials().equals(iD)) {
-                return employee;
-            }
-        }
-        return null;
+    public Employee getEmployee(String initials) {
+        return employeesHash.get(initials);
     }
 
     public boolean employeeExists(Employee employee) {
