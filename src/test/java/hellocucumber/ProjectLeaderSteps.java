@@ -14,26 +14,26 @@ public class ProjectLeaderSteps {
     Project project;
 
 
-    @Given("a project with a project leader exists")
-    public void aProjectWithAProjectLeaderExists() {
-        project.getProjectNumber();
-        String initials = "abcd"; 
-        projectLeader = new Employee(initials);
-        project.setProjectLead(projectLeader.getInitials());
-    }
+    // @Given("a project with a project leader exists")
+    // public void aProjectWithAProjectLeaderExists() {
+    //     project.getProjectNumber();
+    //     String initials = "abcd"; 
+    //     projectLeader = new Employee(initials);
+    //     project.setProjectLead(projectLeader.getInitials());
+    // }
 
-    @Given("the project leader is loggen in")
-    public void theProjectLeaderIsLoggenIn() {
+    // @Given("the project leader is loggen in")
+    // public void theProjectLeaderIsLoggenIn() {
         
-    }
+    // }
 
-    @When("the project leader adds a task to the project")
-    public void theProjectLeaderAddsATaskToTheProject() {
+    // @When("the project leader adds a task to the project")
+    // public void theProjectLeaderAddsATaskToTheProject() {
         
-    }
+    // }
 
-    @Then("a task is created in the project")
-    public void aTaskIsCreatedInTheProject() {
+    // @Then("a task is created in the project")
+    // public void aTaskIsCreatedInTheProject() {
         
-    }
+    // }
 }

@@ -14,7 +14,7 @@ public class Project {
 	private List<Task> tasks = new ArrayList<Task>();
 	private Project createdProject;
 	private String givenProjectName;
-	private static List<String> projectLeaderListProject = new ArrayList<>();
+	private List<String> projectLeaderListProject = new ArrayList<>();
 	private boolean projectLeaderInProject = false;
 	private Task task;
 
@@ -23,68 +23,20 @@ public class Project {
 		this.projectNumber = projectNumber;
 	}
 
-	// Sebastian
 	public Project(String projectNumber) {
 		this.projectNumber = projectNumber;
 	}
 
-	// Sebastian
-	public void addTask(Task task) {
-		tasks.add(task);
-	}
-
-	// Sebastian
-	public boolean taskExists(Task task) {
-		return tasks.contains(task);
-	}
-	
-	public List<Task> getTasks() {
-		return tasks;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-
-	// public String getId() {
-	// 	return Id;
-	// }
-
-	// public void setId(String id) {
-	// 	Id = id;
-	// }
-
-
-	public int getStartWeek() {
-		return (startWeek > 0 && startWeek < 52) ? startWeek : 0;
-	}
-
-
-	public void setStartWeek(int startWeek) {
-		if (startWeek > 0 && startWeek < 52) {
-			this.startWeek = startWeek;
-		}
-	}
-
-	public int getEndWeek() {
-		return (endWeek > 0 && endWeek < 52) ? endWeek : 0;
-	}
-
-	public void setEndWeek(int endWeek) {
-		if (endWeek > 0 && endWeek < 52) {
-			this.endWeek = endWeek;
-		}
-	}
-
 	public void createTask(String title, int hours, int startWeek, int endWeek, String projectNumber) {
-        Task task = new Task(title, hours, startWeek, endWeek, projectNumber); 
-        tasks.add(task);
-        this.task = task; 
+		if (startWeek <= 0 || startWeek > 52 || endWeek <= 0 || endWeek > 52) {
+			throw new IllegalArgumentException("Start week or end week is not valid");
+		} else {
+			setStartWeek(startWeek);
+			setEndWeek(endWeek);
+			Task task = new Task(title, hours, startWeek, endWeek, projectNumber); 
+        	tasks.add(task);
+        	this.task = task;
+		} 
     }
 
 	public boolean taskExists(String title) {
@@ -95,6 +47,10 @@ public class Project {
         }
         return false;
     }
+
+	public boolean taskExists(Task task) {
+		return tasks.contains(task);
+	}
 
 	public Task getTask() {
         return task;
@@ -116,4 +72,36 @@ public class Project {
 	public boolean projectLeaderInProject() {
         return !projectLeaderListProject.isEmpty();
     }
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getStartWeek() {
+		return startWeek;
+	}
+
+	public void setStartWeek(int startWeek) {
+		if (startWeek > 0 && startWeek <= 52) {
+			this.startWeek = startWeek;
+		}
+	}
+
+	public int getEndWeek() {
+		return endWeek;
+	}
+
+	public void setEndWeek(int endWeek) {
+		if (endWeek > 0 && endWeek <= 52) {
+			this.endWeek = endWeek;
+		}
+	}
 }

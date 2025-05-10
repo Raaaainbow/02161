@@ -5,6 +5,7 @@ package hellocucumber;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -23,15 +24,15 @@ public class EmployeeSteps {
     private Database database;
     private Project project;
 
+    @Given("the database is initialized")
+    public void theDatabaseIsInitialized() {
+        database = new Database();
+    }
+    
     @Given("an employee is created with initials {string}")
     public void anEmployeeExistsWithInitials(String initials) {
         database.createEmployee(initials);
         employee = database.getEmployee(initials);
-    }
-
-    @Given("the database is initialized")
-    public void theDatabaseIsInitialized() {
-        database = new Database();
     }
 
     @Then("the employee {string} exists in the Database")
@@ -93,9 +94,9 @@ public class EmployeeSteps {
         assertFalse(project.projectLeaderInProject());
     }
     
-    @When("the employee creates a task {string} using {int} hours starting in week {int} and ending in week {int} in the project {string} in the project")
-    public void theEmployeeCreatesAnActivityUsingHoursStartingInWeekAndEndingInWeekInTheProject(String title, int hours, int startWeek, int endWeek, String projectNumber) {
-        project.createTask(title, hours, startWeek, endWeek, projectNumber);
+    @When("the employee creates a task {string} using {int} hours starting in week {int} and ending in week {int} in the project")
+    public void theEmployeeCreatesAnActivityUsingHoursStartingInWeekAndEndingInWeekInTheProject(String title, int hours, int startWeek, int endWeek) {
+        project.createTask(title, hours, startWeek, endWeek, project.getProjectNumber());
         this.task = project.getTask();
     }
     
@@ -113,6 +114,15 @@ public class EmployeeSteps {
     @Given("there is a project leader in the project")
     public void thereIsAProjectLeaderInTheProject() {
         assertTrue(project.projectLeaderInProject());
+    }
+
+    @When("the employee tries to create a task {string} using {int} hours starting in week {int} and ending in week {int} in the project")
+    public void theEmployeeTriesToCreateAnActivityUsingHoursStartingInWeekAndEndingInWeekInTheProject(String title, int hours, int startWeek, int endWeek) {
+        try {
+            project.createTask(title, hours, startWeek, endWeek, project.getProjectNumber());
+        } catch (IllegalArgumentException e) {
+            assertEquals("Start week or end week is not valid", e.getMessage());
+        }
     }
 
     @Then("the task {string} is not created")

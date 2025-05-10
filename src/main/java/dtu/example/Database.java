@@ -10,7 +10,7 @@ public class Database {
 
     private List<Project> projects = new ArrayList<>();
     private List<Employee> employees = new ArrayList<>();
-    private List<String> emploeesString = new ArrayList<>();
+    private List<String> employeesString = new ArrayList<>();
     private Map<String, Employee> employeesHash = new HashMap<>();
     private String year = "25";
     private String projectNumber;
@@ -25,7 +25,7 @@ public class Database {
         for (int i = 0; i < initList.length; i++) {
             Employee employee = new Employee(initList[i]);
             employeesHash.put(initList[i], employee);
-            emploeesString.add(initList[i]);
+            employeesString.add(initList[i]);
             employees.add(employee);
         }
     }
@@ -62,7 +62,7 @@ public class Database {
 
     public boolean projectExistsTitle(String inputTitle) {
         for (Project project: projects) {
-            if (project.getTitle().equals(inputTitle)) {
+            if (project.getTitle() != null && project.getTitle().equals(inputTitle)) {
                 return true;
             }
         }
@@ -71,7 +71,7 @@ public class Database {
 
     public boolean projectExistsNumber(String projectNumber) {
         for (Project project: projects) {
-            if (project.getProjectNumber().equals(projectNumber)) {
+            if (project.getProjectNumber() != null && project.getProjectNumber().equals(projectNumber)) {
                 return true;
             }
         }
@@ -80,7 +80,7 @@ public class Database {
 
     public Project getProject(String title) {
         for (Project project: projects) {
-            if (project.getTitle().equals(title)) {
+            if (project.getTitle() != null && project.getTitle().equals(title)) {
                 return project;
             }
         }
@@ -93,7 +93,7 @@ public class Database {
 
     public void createEmployee(String initials) {
         Employee employee = new Employee(initials);
-        emploeesString.add(initials);
+        employeesString.add(initials);
         employees.add(employee);
         employeesHash.put(initials, employee);
     }
@@ -103,8 +103,12 @@ public class Database {
     }
 
     public boolean employeeExists(String name) {
+        if (name == null || name.isEmpty()) {
+        return false; 
+        }
+
         for (Employee employee: employees) {
-            if (employee.getInitials().equals(name)) {
+            if (employee.getInitials() != null && employee.getInitials().equals(name)) {
                 return true;
             }
         }

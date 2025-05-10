@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Employee {
     private String initials;
-    private List<String> projectLeaderListProject = new ArrayList<>();
 
     public Employee(String initials) {
         setInitials(initials);
