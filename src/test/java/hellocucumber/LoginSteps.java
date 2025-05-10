@@ -18,14 +18,15 @@ public class LoginSteps {
     private LogIn logIn = new LogIn();
     private Employee employee;
     private Database database;
-    private String wrongInitials = "";
-    private String initials;
+
+    @Given("that the database is initialized")
+    public void thatTheDatabaseIsInitialized() {
+        database = new Database();
+    }
 
     @Given("that the employee {string} exists")
     public void thatTheEmployeeExists(String initials) {
-        this.initials = initials;
-        database = new Database();
-        employee = new Employee(initials);
+        database.createEmployee(initials);
         assertTrue(database.employeeExists(initials));
     }
 
@@ -67,6 +68,18 @@ public class LoginSteps {
     public void theEmployeeIsAlreadyLoggedIn() {
         assertTrue(logIn.isLoggedIn());
     }
+
+    @Given("that the employee {string} does not exist")
+    public void thatTheEmployeeDoesNotExist(String initials) {
+        assertFalse(database.employeeExists(initials));
+    }
+
+    @When("the employee enters {string}")
+    public void theEmployeeEnters(String enteredInitials) {
+        logIn.loggingIn(employee, enteredInitials);
+    }
+
+   
 
    
 }
