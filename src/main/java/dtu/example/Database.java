@@ -10,6 +10,7 @@ public class Database {
     List<Employee> employees = new ArrayList<>();
     private int counter = projects.size();
     private String year = "25";
+    private String projectNumber;
 
     public Database() {
         initEmployees();
@@ -33,12 +34,14 @@ public class Database {
     }
 
     public void createProject(String title) {
-        Project proj = new Project(title);
+        projectNumber = "P-" + year + counter;
+        Project proj = new Project(title, projectNumber);
         projects.add(proj);
     }
 
     public void createProject() {
-        Project proj = new Project();
+        projectNumber = "P-" + year + counter;
+        Project proj = new Project(projectNumber);
         projects.add(proj);
     }
 
@@ -94,4 +97,6 @@ public class Database {
     public boolean employeeExists(Employee employee) {
         return employees.contains(employee);
     }
+
+    
 }
