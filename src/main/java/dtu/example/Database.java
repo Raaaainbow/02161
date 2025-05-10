@@ -102,13 +102,13 @@ public class Database {
         return employees;
     }
 
-    public boolean employeeExists(String name) {
-        if (name == null || name.isEmpty()) {
+    public boolean employeeExists(String initials) {
+        if (initials == null || initials.isEmpty()) {
         return false; 
         }
 
         for (Employee employee: employees) {
-            if (employee.getInitials() != null && employee.getInitials().equals(name)) {
+            if (employee.getInitials() != null && employee.getInitials().equals(initials)) {
                 return true;
             }
         }
