@@ -1,3 +1,5 @@
+// mob programming Sophia, Caroline, Sebastian, Katarina
+
 package dtu.example;
 
 import java.util.ArrayList;
@@ -6,7 +8,6 @@ import dtu.example.Database;
 
 public class Project {
 	private String title;
-	private String Id;
 	private int startWeek;
 	private int endWeek;
 	private String projectLead;
@@ -28,12 +29,13 @@ public class Project {
 	}
 
 	public void createTask(String title, int hours, int startWeek, int endWeek, String projectNumber) {
-		if (startWeek <= 0 || startWeek > 52 || endWeek <= 0 || endWeek > 52) {
-			throw new IllegalArgumentException("Start week or end week is not valid");
+		if ((startWeek <= 0 || startWeek > 52) && (endWeek <= 0 || endWeek > 52)) {
+			throw new IllegalArgumentException("Start week and end week is not valid");
+		} else if (startWeek <= 0 || startWeek > 52) {
+			throw new IllegalArgumentException("Start week is not valid");
+		} else if (endWeek <= 0 || endWeek > 52) {
+			throw new IllegalArgumentException("End week is not valid");
 		} else {
-			setTitle(title);
-			setStartWeek(startWeek);
-			setEndWeek(endWeek);
 			Task task = new Task(title, hours, startWeek, endWeek, projectNumber); 
         	tasks.add(task);
         	this.task = task;
@@ -49,25 +51,37 @@ public class Project {
         return false;
     }
 
-	public boolean taskExists(Task task) {
-		return tasks.contains(task);
+	public void makeProjectLeader(String initials) {
+		if (!projectLeaderInProject()){
+			setProjectLead(initials);
+		} else {
+			throw new IllegalArgumentException(getProjectLead() + "is the project leader of this project");
+		}
 	}
-
-	public List<Task> getTasks() {
-		return tasks;
-	}
-
-	public Task getTask() {
-        return task;
-    }
 
 	public boolean projectLeaderInProject() {
-        return !projectLeaderListProject.isEmpty();
+		if (getProjectLead() == null) {
+			return false;
+		}
+        return true;
     }
 
 	public String getProjectNumber() {
 		return projectNumber;
 	}
+
+	public List<Task> getTaskList() {
+		return tasks;
+	}
+
+	public Task getTaskByTitle(String title) {
+		for (Task task : tasks) {
+			if (task.getTitle().equals(title)) {
+				return task;
+			}
+		}
+    	return null;
+    }
 
 	public void setProjectLead(String projectLead) {
 		this.projectLead = projectLead;
@@ -83,25 +97,5 @@ public class Project {
 
 	public String getTitle() {
 		return title;
-	}
-
-	public void setStartWeek(int startWeek) {
-		if (startWeek > 0 && startWeek <= 52) {
-			this.startWeek = startWeek;
-		}
-	}
-
-	public int getStartWeek() {
-		return startWeek;
-	}
-
-	public void setEndWeek(int endWeek) {
-		if (endWeek > 0 && endWeek <= 52) {
-			this.endWeek = endWeek;
-		}
-	}
-
-	public int getEndWeek() {
-		return endWeek;
 	}
 }

@@ -1,4 +1,4 @@
-// Sebastian
+// mob programming Caroline, Sophia, Sebastian, Katarina
 package dtu.example;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class Database {
     }
 
     private void initProjects() {
-        String[] initList = {"proj1", "proj2", "proj3", "proj4"};
+        String[] initList = {"P-251", "P-252", "P-253", "P-254"};
         for (int i = 0; i < initList.length; i++) {
             Project project = new Project(initList[i]);
             projects.add(project);

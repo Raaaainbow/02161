@@ -1,3 +1,5 @@
+// mob programming Sophia, Caroline, Katarina
+
 package hellocucumber;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

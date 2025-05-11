@@ -97,7 +97,7 @@ public class EmployeeSteps {
     @When("the employee creates a task {string} using {int} hours starting in week {int} and ending in week {int} in the project")
     public void theEmployeeCreatesAnActivityUsingHoursStartingInWeekAndEndingInWeekInTheProject(String title, int hours, int startWeek, int endWeek) {
         project.createTask(title, hours, startWeek, endWeek, project.getProjectNumber());
-        this.task = project.getTask();
+        this.task = project.getTaskByTitle(title);
     }
     
     @Then("the task {string} is created")
@@ -105,8 +105,8 @@ public class EmployeeSteps {
         assertTrue(project.taskExists(title));      
     }
 
-    @Then("the activity {string} has the starting week {int} and ending week {int}")
-    public void theActivityHasTheStartingWeekAndEndingWeek(String title, int startWeek, int endweek) {
+    @Then("the task {string} has the starting week {int} and ending week {int}")
+    public void theTaskHasTheStartingWeekAndEndingWeek(String title, int startWeek, int endweek) {
         assertEquals(task.getStartWeek(), startWeek);
         assertEquals(task.getEndWeek(), endweek);
     } 
@@ -121,8 +121,13 @@ public class EmployeeSteps {
         try {
             project.createTask(title, hours, startWeek, endWeek, project.getProjectNumber());
         } catch (IllegalArgumentException e) {
-            assertEquals("Start week or end week is not valid", e.getMessage());
+            assertTrue(
+                e.getMessage().equals("Start week and end week is not valid") ||
+                e.getMessage().equals("Start week is not valid") ||
+                e.getMessage().equals("End week is not valid")
+            );
         }
+        assertNull(project.getTaskByTitle(title));
     }
 
     @Then("the task {string} is not created")

@@ -40,7 +40,7 @@ Feature: Employee
         And there is no project leader in the project   
         When the employee creates a task "Coding" using 50 hours starting in week 20 and ending in week 22 in the project
         Then the task "Coding" is created
-        And the activity "Coding" has the starting week 20 and ending week 22
+        And the task "Coding" has the starting week 20 and ending week 22
 
     Scenario: An employee creates a task in a project but there is a project leader
         Given the database is initialized
@@ -63,7 +63,15 @@ Feature: Employee
         And an employee is created with initials "abcd"
         And the employee creates a project without a title
         And there is no project leader in the project   
-        When the employee tries to create a task "Coding" using 50 hours starting in week -2 and ending in week 0 in the project
+        When the employee tries to create a task "Coding" using 50 hours starting in week -2 and ending in week 1 in the project
+        Then the task "Coding" is not created
+
+    Scenario: An employee creates a task in a project with a non-valid week number
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        And the employee creates a project without a title
+        And there is no project leader in the project   
+        When the employee tries to create a task "Coding" using 50 hours starting in week 40 and ending in week 62 in the project
         Then the task "Coding" is not created
 
     

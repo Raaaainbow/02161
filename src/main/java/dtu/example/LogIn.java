@@ -1,5 +1,7 @@
-package dtu.example;
 // mob programming Caroline, Katarina
+
+package dtu.example;
+
 public class LogIn {
     private boolean loggedIn = false;
     
