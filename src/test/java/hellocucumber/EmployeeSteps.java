@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import io.cucumber.java.en.Given;
@@ -23,6 +24,14 @@ public class EmployeeSteps {
     private Task task;
     private Database database;
     private Project project;
+    private String title;
+    private LocalDate vacationStartDate;
+    private LocalDate vacationEndDate;
+    private LocalDate sickLeaveStartDate;
+    private LocalDate sickLeaveEndDate;
+    private LocalDate courseStartDate;
+    private LocalDate courseEndDate;
+
 
     @Given("the database is initialized")
     public void theDatabaseIsInitialized() {
@@ -135,4 +144,74 @@ public class EmployeeSteps {
         assertFalse(project.taskExists(title));
 
     }
+
+    @When("the employee creates a vacation task starting {string} and ending {string}")
+    public void theEmployeeCreatesAVacationTaskStartingAndEnding(String startDate, String endDate) {
+        this.vacationStartDate = LocalDate.parse(startDate);
+        this.vacationEndDate = LocalDate.parse(endDate);
+        employee.createVacation(vacationStartDate, vacationEndDate);
+        this.title = employee.getTitle();
+    }
+
+    @Then("the vacation task is created")
+    public void theVacationTaskIsCreated() {
+        assertNotNull(employee.getVacation(title));
+    }
+
+    @When("the employee creates a sick leave task starting {string} and ending {string}")
+    public void theEmployeeCreatesASickLeaveTaskStartingAndEnding(String startDate, String endDate) {
+        this.sickLeaveStartDate = LocalDate.parse(startDate);
+        this.sickLeaveEndDate = LocalDate.parse(endDate);
+        employee.createSickLeave(sickLeaveStartDate, sickLeaveEndDate);
+        this.title = employee.getTitle();
+    }
+
+    @Then("the sick leave task is created")
+    public void theSickLeaveTaskIsCreated() {
+        assertNotNull(employee.getSickLeave(title));
+    }
+
+    @When("the employee creates a course task starting {string} and ending {string}")
+    public void theEmployeeCreatesACourseTaskStartingAndEnding(String startDate, String endDate) {
+        this.courseStartDate = LocalDate.parse(startDate);
+        this.courseEndDate = LocalDate.parse(endDate);
+        employee.createCourse(courseStartDate, courseEndDate);
+        this.title = employee.getTitle();
+    }
+
+    @Then("the course task is created")
+    public void theCourseTaskIsCreated() {
+        assertNotNull(employee.getCourse(title));
+    }
+
+    @When("the employee creates their vacation list")
+    public void theEmployeeCreatesTheirVacationList() {
+        employee.getVacationList();
+    }
+
+    @Then("the vacation list is shown")
+    public void theVacationListIsShown() {
+        assertNotNull(employee.getVacationList());
+    }
+
+    @When("the employee creates their sick leave list")
+    public void theEmployeeCreatesTheirSickLeaveList() {
+        employee.getSickLeaveList();
+    }
+
+    @Then("the sick leave list is shown")
+    public void theSickLeaveListIsShown() {
+        assertNotNull(employee.getSickLeaveList());
+    }
+
+    @When("the employee creates their course list")
+    public void theEmployeeCreatesTheirCourseList() {
+        employee.getCourseList();
+    }
+
+    @Then("the course list is shown")
+    public void theCourseListIsShown() {
+        assertNotNull(employee.getCourseList());
+    }
+    
 }

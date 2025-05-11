@@ -36,7 +36,9 @@ public class Database {
             Project project = new Project(initList[i]);
             projects.add(project);
         }
-
+        getProjectByNumber("P-251").setTitle("Vacation");
+        getProjectByNumber("P-252").setTitle("Sick Leave");
+        getProjectByNumber("P-253").setTitle("Course");
     }
 
     public void createProject(String title) {

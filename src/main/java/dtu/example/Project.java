@@ -4,12 +4,12 @@ package dtu.example;
 
 import java.util.ArrayList;
 import java.util.List;
-import dtu.example.Database;
 
 public class Project {
 	private String title;
 	private int startWeek;
 	private int endWeek;
+	private double hours;
 	private String projectLead;
 	public String projectNumber;
 	private List<Task> tasks = new ArrayList<Task>();
@@ -20,15 +20,15 @@ public class Project {
 	private Task task;
 
 	public Project(String title, String projectNumber) {
-		this.title = title;
-		this.projectNumber = projectNumber;
+		setTitle(title);
+		setProjectNumber(projectNumber);
 	}
 
 	public Project(String projectNumber) {
-		this.projectNumber = projectNumber;
+		setProjectNumber(projectNumber);
 	}
 
-	public void createTask(String title, int hours, int startWeek, int endWeek, String projectNumber) {
+	public void createTask(String title, double hours, int startWeek, int endWeek, String projectNumber) {
 		if ((startWeek <= 0 || startWeek > 52) && (endWeek <= 0 || endWeek > 52)) {
 			throw new IllegalArgumentException("Start week and end week is not valid");
 		} else if (startWeek <= 0 || startWeek > 52) {
@@ -66,36 +66,40 @@ public class Project {
         return true;
     }
 
+	public void setProjectNumber(String projectNumber) {
+		this.projectNumber = projectNumber;
+	}
+
 	public String getProjectNumber() {
 		return projectNumber;
 	}
-
-	public List<Task> getTaskList() {
-		return tasks;
+	
+	public void setProjectLead(String projectLead) {
+		this.projectLead = projectLead;
 	}
-
+	
+	public String getProjectLead() {
+		return projectLead;
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	
 	public Task getTaskByTitle(String title) {
 		for (Task task : tasks) {
 			if (task.getTitle().equals(title)) {
 				return task;
 			}
 		}
-    	return null;
-    }
-
-	public void setProjectLead(String projectLead) {
-		this.projectLead = projectLead;
+		return null;
 	}
 
-	public String getProjectLead() {
-		return projectLead;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getTitle() {
-		return title;
+	public List<Task> getTaskList() {
+		return tasks;
 	}
 }

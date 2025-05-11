@@ -2,25 +2,21 @@
 
 package dtu.example;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import dtu.example.Project;
+import java.time.LocalDate;
 
 public class Task {
-  private String description;
   private Employee assignedEmployee;
-  private boolean projectLeaderAssigned;
-  private boolean isProjectLeader;
   private int budgetedHours;
   private int spentHours;
+  private double hours;
   private String title;
-  private int hours;
   private int startWeek;
   private int endWeek;
+  private LocalDate startDate;
+  private LocalDate endDate;
   private boolean taskExists = false;
 
-  public Task(String title, int hours, int startWeek, int endWeek, String projectNumber) {
+  public Task(String title, double hours, int startWeek, int endWeek, String projectNumber) {
     this.title = title;
     setEstimatedTime(hours);
     setStartWeek(startWeek);
@@ -28,13 +24,31 @@ public class Task {
     this.taskExists = true;
   }
 
+  public Task(LocalDate startDate, LocalDate endDate, String title) {
+    setStartDate(startDate);
+    setEndDate(endDate);
+    this.title = title + startDate + " " + endDate;
+  }
+
+  public void setStartDate(LocalDate startDate){
+    this.startDate = startDate;
+  }
+
+  public LocalDate getStartDate(){
+    return startDate;
+  }
+
+  public void setEndDate(LocalDate endDate){
+    this.endDate = endDate;
+  }
+
+  public LocalDate getEndDate(){
+    return endDate;
+  }
+
   public void setStartWeek(int startWeek) {
-    if (startWeek > 0 && startWeek <= 52) {
-      this.startWeek = startWeek;
-    }
-    else {
-      System.out.println("The inputted week does not exist, input another week");
-    }
+    this.startWeek = startWeek;
+    
   }
 
   public int getStartWeek() {
@@ -42,19 +56,14 @@ public class Task {
   }
 
   public void setEndWeek(int endWeek) {
-    if (endWeek > 0 && endWeek <= 52) {
-      this.endWeek = endWeek;
-    }
-    else {
-      System.out.println("The inputted week does not exist, input another week");
-    }
+    this.endWeek = endWeek;
   }
 
   public int getEndWeek() {
     return endWeek;
   }
 
-  public void setEstimatedTime(int hours) {
+  public void setEstimatedTime(double hours) {
     this.hours = hours;
   }
 

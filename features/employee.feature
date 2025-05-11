@@ -74,5 +74,46 @@ Feature: Employee
         When the employee tries to create a task "Coding" using 50 hours starting in week 40 and ending in week 62 in the project
         Then the task "Coding" is not created
 
+    Scenario: An employee creates a vacation task
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        When the employee creates a vacation task starting "2025-01-01" and ending "2025-01-10"
+        Then the vacation task is created
+    
+    Scenario: An employee creates a sick leave task
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        When the employee creates a sick leave task starting "2025-01-01" and ending "2025-01-10"
+        Then the sick leave task is created
+
+    Scenario: An employee creates a course task
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        When the employee creates a course task starting "2025-01-01" and ending "2025-01-10"
+        Then the course task is created
+
+    Scenario: An employee wants to see their vacation list
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        And the employee creates a vacation task starting "2025-01-01" and ending "2025-01-10"
+        And the employee creates a vacation task starting "2025-02-01" and ending "2025-02-10"
+        When the employee creates their vacation list
+        Then the vacation list is shown
+
+    Scenario: An employee wants to see their sick leave list
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        And the employee creates a sick leave task starting "2025-01-01" and ending "2025-01-10"
+        And the employee creates a sick leave task starting "2025-02-01" and ending "2025-02-10"
+        When the employee creates their sick leave list
+        Then the sick leave list is shown
+    
+    Scenario: An employee wants to see their course list
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        And the employee creates a course task starting "2025-01-01" and ending "2025-01-10"
+        And the employee creates a course task starting "2025-02-01" and ending "2025-02-10"
+        When the employee creates their course list
+        Then the course list is shown
     
         

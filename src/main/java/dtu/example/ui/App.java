@@ -1,3 +1,5 @@
+// mob programming Katarina, Sophia, Sebastian, Caroline
+
 package dtu.example.ui;
 
 import dtu.example.*;
@@ -64,10 +66,10 @@ public class App {
             if (parts.length >= 3) {
                 String projectName = parts[2];
                 database.createProject(projectName);
-                System.out.println("project " + projectName + " created");
+                System.out.println("project " + projectName + " created with project number " + database.getProject(projectName).getProjectNumber());
             } else {
                 database.createProject();
-                System.out.println("project " + database.getProjects().getLast().getProjectNumber() + " created");
+                System.out.println("project created with project number " + database.getProjects().getLast().getProjectNumber());
             }
             return;
         }
@@ -81,15 +83,41 @@ public class App {
             
             try {
                 String title = parts[2];
-                int hours = Integer.parseInt(parts[3]);
+                double hours = Double.parseDouble(parts[3]);
                 int startWeek = Integer.parseInt(parts[4]);
                 int endWeek = Integer.parseInt(parts[5]);
-                String projectNumber = parts[6];
+                String projectNumber = parts[6].toUpperCase().trim();
                 
-                Task task = new Task(title, hours, startWeek, endWeek, projectNumber);
+                // Kommentar
+                if ((startWeek <= 0 || startWeek > 52) && (endWeek <= 0 || endWeek > 52)) {
+                    System.out.println("Error: Start and end week must be between 1 and 52.");
+                    return;
+                }
+
+                if (startWeek <= 0 || startWeek > 52) {
+                    System.out.println("Error: Start week must be between 1 and 52.");
+                    return;
+                }
+
+                if (endWeek <= 0 || endWeek > 52) {
+                    System.out.println("Error: End week must be between 1 and 52.");
+                    return;
+                }
+
+                if (hours <= 0.0) {
+                    System.out.println("Error: Hours must be a positive number larger .");
+                    return;
+                }
+
+                Project project = database.getProjectByNumber(projectNumber);
+                if (!database.projectExistsNumber(projectNumber)) {
+                    System.out.println("Error: Project with number " + projectNumber + " does not exist.");
+                    return;
+                }
+
+                project.createTask(title, hours, startWeek, endWeek, projectNumber);
                 System.out.println("Task '" + title + "' created successfully for project " + projectNumber);
-                
-                
+
                 return;
             } catch (NumberFormatException e) {
                 System.out.println("Error: HOURS, STARTWEEK, and ENDWEEK must be numbers.");
