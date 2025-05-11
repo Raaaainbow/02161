@@ -1,4 +1,4 @@
-// mob programming Sophia, Caroline, Katarina 
+// Katarina
 
 package dtu;
 
@@ -15,7 +15,7 @@ import dtu.example.Database;
 import dtu.example.Project;
 
 public class ProjectExistsNumberTest {
-
+    // Katarina
     @Test
     public void testProjectExistsNumber_MatchingProjectNumber() {
         Database database = new Database();
@@ -25,7 +25,7 @@ public class ProjectExistsNumberTest {
         assertEquals("P-255", projectNumber);
         assertTrue(database.projectExistsNumber("P-255"));
     }
-
+    // Katarina
     @Test
     public void testProjectExistsNumber_NoMatch() {
         Database database = new Database();
@@ -35,7 +35,7 @@ public class ProjectExistsNumberTest {
         assertNotEquals("P-001", projectNumber);
         assertFalse(database.projectExistsNumber("P-001"));
     }
-
+    // Katarina
     @Test
     public void testProjectExistsNumber_NullInput() {
         Database database = new Database();
@@ -45,11 +45,4 @@ public class ProjectExistsNumberTest {
         assertNotEquals(null, projectNumber);
         assertFalse(database.projectExistsNumber(null));
     }
-
-
-
-
-
-
-
 }

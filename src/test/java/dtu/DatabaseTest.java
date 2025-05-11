@@ -11,28 +11,28 @@ import dtu.example.Database;
 import dtu.example.Employee;
 
 public class DatabaseTest {
-
+    // Sebastian
     @Test
     public void testEmployeeExists_MatchingInitials() {
         Database database = new Database();
         database.createEmployee("EET");
         assertTrue(database.employeeExists("EET"));
     }
-
+    // Sebastian
     @Test
     public void testEmployeeExists_NullInput() {
         Database database = new Database();
         database.createEmployee("EET");
         assertFalse(database.employeeExists(null));
     }
-
+    // Sebastian
     @Test
     public void testEmployeeExists_EmptyInput() {
         Database database = new Database();
         database.createEmployee("EET");
         assertFalse(database.employeeExists(""));
     }
-
+    // Sebastian
     @Test
     public void testEmployeeExists_EmployeeWithNullInitials() {
         Database database = new Database();
@@ -40,7 +40,7 @@ public class DatabaseTest {
         database.createEmployee("EET");
         assertTrue(database.employeeExists("EET"));
     }
-
+    // Sebastian
     @Test
     public void testEmployeeExists_NoMatch() {
         Database database = new Database();

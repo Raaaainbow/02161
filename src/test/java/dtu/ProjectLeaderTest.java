@@ -1,3 +1,5 @@
+// Sophia
+
 package dtu;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,6 +13,7 @@ import dtu.example.Database;
 import dtu.example.Project;
 
 public class ProjectLeaderTest {
+    // Sophia
     @Test
     public void testProjectLeaderInProject_ThereIsAProjectLeader() {
         Database database = new Database();
@@ -22,7 +25,7 @@ public class ProjectLeaderTest {
         project.makeProjectLeader("sass");
         assertTrue(project.projectLeaderInProject());
     }
-
+    // Sophia
     @Test
     public void testProjectLeaderExists_ThereIsNoProjectLeaderInProject() {
         Database database = new Database();
