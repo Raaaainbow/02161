@@ -143,32 +143,86 @@ public class App {
                 return;
             }
         }
-
-        if (parts[0].equals("create") && parts[1].equals("time") && parts[2].equals("registration")) {
-            if (parts.length < 6) {
-                System.out.println("Error: Not enough arguments for time registration.");
-                System.out.println("Usage: create time registration SHIFTSTART SHIFTEND DATE");
+        if (parts[0].equals("edit") && parts[1].equals("task")) {
+            try {
+            String taskTitle = parts[2];
+            
+            Employee currentEmployeeObject = database.getEmployee(currentEmployee);
+            List<Task> tasks = currentEmployeeObject.getAssignedTasks();
+            Task taskToEdit = null;
+            
+            for (Task task : tasks) {
+                if (task.getTitle().equals(taskTitle)) {
+                    taskToEdit = task;
+                    break;
+                }
+            }
+            
+            if (taskToEdit == null) {
+                System.out.println("Error: Task " + taskTitle + " not found in your assigned tasks");
                 return;
             }
             
-            try {
-                // Parse LocalDateTime from strings
-                LocalDateTime shiftStart = LocalDateTime.parse(parts[3]);
-                LocalDateTime shiftEnd = LocalDateTime.parse(parts[4]);
-                LocalDate date = LocalDate.parse(parts[5]);
-                
-                System.out.println("This feature has yet to be implemented");
-                // add time registration code here!
-                System.out.println("Time registration created successfully");
-                
-            } catch (DateTimeParseException e) {
-                System.out.println("Error: Date/time format is incorrect.");
-                System.out.println("SHIFTSTART and SHIFTEND must be in format: yyyy-MM-ddTHH:mm:ss");
-                System.out.println("DATE must be in format: yyyy-MM-dd");
-                System.out.println("Usage: create time registration SHIFTSTART SHIFTEND DATE");
+            System.out.println("What would you like to edit?");
+            System.out.println("1. Task hours");
+            System.out.println("2. Start week");
+            System.out.println("3. End week");
+            System.out.println("Enter choice (1-3): ");
+            
+            String choice = console.nextLine();
+            
+            switch(choice) {
+                case "1":
+                    System.out.print("Enter new hours: ");
+                    try {
+                        double newHours = Double.parseDouble(console.nextLine());
+                        if (newHours <= 0) {
+                            System.out.println("Error: Hours must be positive");
+                            return;
+                        }
+                        taskToEdit.setEstimatedTime(newHours);
+                        System.out.println("Hours updated successfully");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error: Invalid number format");
+                    }
+                    break;
+                case "2":
+                    System.out.print("Enter new start week: ");
+                    try {
+                        int newStartWeek = Integer.parseInt(console.nextLine());
+                        if (newStartWeek <= 0 || newStartWeek > 52) {
+                            System.out.println("Error: Start week must be between 1 and 52");
+                            return;
+                        }
+                        taskToEdit.setStartWeek(newStartWeek);
+                        System.out.println("Start week updated successfully");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error: Invalid number format");
+                    }
+                    break;
+                case "3":
+                    System.out.print("Enter new end week: ");
+                    try {
+                        int newEndWeek = Integer.parseInt(console.nextLine());
+                        if (newEndWeek <= 0 || newEndWeek > 52) {
+                            System.out.println("Error: End week must be between 1 and 52");
+                            return;
+                        }
+                        taskToEdit.setEndWeek(newEndWeek);
+                        System.out.println("End week updated successfully");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error: Invalid number format");
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid choice");
             }
-            return;
-        }
+        return;
+        
+    } catch (ArrayIndexOutOfBoundsException e) {
+        System.out.println("Error: Usage: edit task TASK_TITLE");
+    }
+}
 
         if (parts[0].equals("register") && parts[1].equals("vacation")) {
             if (parts.length < 4) {
@@ -451,6 +505,8 @@ public class App {
             System.out.println("    Creates a new task for specified project");
             System.out.println("\ncreate time registration SHIFTSTART SHIFTEND DATE");
             System.out.println("    Creates a time registration (not yet implemented)");
+            System.out.println("\nedit task TASK_TITLE");
+            System.out.println("    Edits task hours, start week, or end week");
             System.out.println("\nregister vacation STARTDATE ENDDATE");
             System.out.println("    Registers vacation for the current employee");
             System.out.println("\nregister sick leave STARTDATE ENDDATE");
