@@ -91,6 +91,4 @@ public class TimeRegistrationSteps {
     public void the_time_registration_should_be_marked_as_deleted() {
         assertTrue(timeRegistration.isDeleted());
     }
-
-   
 }
