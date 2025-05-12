@@ -13,7 +13,7 @@ import java.util.List;
 
 public class App {
 
-    private static Employee currentEmployee;
+    private static String currentEmployee;
 
     public static void main(String[] args) {
         Scanner console = new Scanner(System.in);
@@ -54,7 +54,7 @@ public class App {
             loginSuccessful = login.loggingIn(employee, initials);
             
             if (loginSuccessful) {
-                currentEmployee = employee;
+                currentEmployee = initials;
             }
         }
     }
@@ -64,7 +64,7 @@ public class App {
 
         if (parts[0].equals("create") && parts[1].equals("project")) {
             if (parts.length >= 3) {
-                String projectName = parts[2];
+                String projectName = parts[2].toUpperCase();
                 database.createProject(projectName);
                 System.out.println("project " + projectName + " created with project number " + database.getProject(projectName).getProjectNumber());
             } else {
@@ -116,6 +116,8 @@ public class App {
                 }
 
                 project.createTask(title, hours, startWeek, endWeek, projectNumber);
+                Employee currentEmployeeObject = database.getEmployee(currentEmployee);
+                currentEmployeeObject.createTask(title, hours, startWeek, endWeek);
                 System.out.println("Task '" + title + "' created successfully for project " + projectNumber);
 
                 return;
@@ -139,6 +141,7 @@ public class App {
                 LocalDateTime shiftEnd = LocalDateTime.parse(parts[4]);
                 LocalDate date = LocalDate.parse(parts[5]);
                 
+                System.out.println("This feature has yet to be implemented");
                 // add time registration code here!
                 System.out.println("Time registration created successfully");
                 
@@ -167,20 +170,71 @@ public class App {
             for (Employee employee: employees) {
                 output += employee.getInitials() + " ";
             }
+            System.out.println(output);
+        }
+
+        if (parts[0].equals("view") && parts[1].equals("time") && parts[2].equals("registration")) {
+           String projectNumber = parts.length > 3 ? parts[3].toUpperCase() : null;
+
+           Employee employee = database.getEmployee(currentEmployee);
+
+           if (projectNumber == null) {
+               List<Task> tasks = employee.getAssignedTasks();                
+               for (Task task: tasks) {
+                   System.out.println(task.toString());
+               }
+           } else {
+               Project project = database.getProjectByNumber(projectNumber);
+               List<Task> tasks =  project.getTasks();
+               for (Task task: tasks) {
+                   System.out.println(task.toString());
+               }
+           }
+        }
+
+        if (parts[0].equals("assign") && parts[1].equals("project") && parts[2].equals("leader")) {
+            try {
+                String projectNumber = parts[3].toUpperCase();
+                String initials = parts[4];
+
+                System.out.println(projectNumber + " " + initials);
+
+                Project project = database.getProjectByNumber(projectNumber);
+                if (project != null) {
+                    project.makeProjectLeader(initials);
+                    System.out.println("Employee " + initials + " has been set as project leader on the project " + projectNumber);
+                } else {
+                    System.out.println("Error project " + projectNumber + " does not exist");
+                }
+
+
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: PROJECTNUMBER invalid");
+                System.out.println("Error: INITIALS invalid");
+            }
+            
         }
 
         if (parts[0].equals("help")) {
-                System.out.println("\n=== AVAILABLE COMMANDS ===");
-                System.out.println("exit\n    Exits the program");
-                System.out.println("\ncreate project [PROJECTNAME]");
-                System.out.println("    Creates a new project with optional name");
-                System.out.println("\ncreate task TITLE HOURS STARTWEEK ENDWEEK PROJECTNUMBER");
-                System.out.println("    Creates a new task for specified project");
-                System.out.println("\nlist projects");
-                System.out.println("    lists project numbers from the database");
-                System.out.println("\nhelp");
-                System.out.println("    Displays this command list");
-                System.out.println("\n=========================\n");
+            System.out.println("\n=== AVAILABLE COMMANDS ===");
+            System.out.println("exit\n    Exits the program");
+            System.out.println("\nassign project leader PROJECTNUMBER INITIALS");
+            System.out.println("    Assigns a project leader to specified project");
+            System.out.println("\ncreate project [PROJECTNAME]");
+            System.out.println("    Creates a new project with optional name");
+            System.out.println("\ncreate task TITLE HOURS STARTWEEK ENDWEEK PROJECTNUMBER");
+            System.out.println("    Creates a new task for specified project");
+            System.out.println("\ncreate time registration SHIFTSTART SHIFTEND DATE");
+            System.out.println("    Creates a time registration (not yet implemented)");
+            System.out.println("\nlist employees");
+            System.out.println("    Lists all employee initials from the database");
+            System.out.println("\nlist projects");
+            System.out.println("    Lists project numbers from the database");
+            System.out.println("\nview time registration");
+            System.out.println("    Views time registration (not yet implemented)");
+            System.out.println("\nhelp");
+            System.out.println("    Displays this command list");
+            System.out.println("\n=========================\n");
         }
     }
 }

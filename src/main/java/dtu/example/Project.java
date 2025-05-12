@@ -7,17 +7,9 @@ import java.util.List;
 
 public class Project {
 	private String title;
-	private int startWeek;
-	private int endWeek;
-	private double hours;
 	private String projectLead;
 	public String projectNumber;
 	private List<Task> tasks = new ArrayList<Task>();
-	private Project createdProject;
-	private String givenProjectName;
-	private List<String> projectLeaderListProject = new ArrayList<>();
-	private boolean projectLeaderInProject = false;
-	private Task task;
 
 	public Project(String title, String projectNumber) {
 		setTitle(title);
@@ -38,7 +30,6 @@ public class Project {
 		} else {
 			Task task = new Task(title, hours, startWeek, endWeek, projectNumber); 
         	tasks.add(task);
-        	this.task = task;
 		} 
     }
 
@@ -60,10 +51,7 @@ public class Project {
 	}
 
 	public boolean projectLeaderInProject() {
-		if (getProjectLead() == null) {
-			return false;
-		}
-        return true;
+        return (getProjectLead() != null);
     }
 
 	public void setProjectNumber(String projectNumber) {
@@ -99,7 +87,7 @@ public class Project {
 		return null;
 	}
 
-	public List<Task> getTaskList() {
+	public List<Task> getTasks() {
 		return tasks;
 	}
 }

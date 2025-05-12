@@ -9,6 +9,7 @@ import java.util.List;
 public class Employee {
     private String initials;
     private String title;
+    private List<Task> tasks = new ArrayList<Task>();
     private List<Task> vacationList = new ArrayList<Task>();
     private List<Task> sickLeaveList = new ArrayList<Task>();
     private List<Task> courseList = new ArrayList<Task>();
@@ -39,6 +40,19 @@ public class Employee {
         Task course = new Task(startDate, endDate, "Courses");
         this.title = course.getTitle();
         courseList.add(course);
+    }
+
+	public void createTask(String title, double hours, int startWeek, int endWeek) {
+		if ((startWeek <= 0 || startWeek > 52) && (endWeek <= 0 || endWeek > 52)) {
+			throw new IllegalArgumentException("Start week and end week is not valid");
+		} else if (startWeek <= 0 || startWeek > 52) {
+			throw new IllegalArgumentException("Start week is not valid");
+		} else if (endWeek <= 0 || endWeek > 52) {
+			throw new IllegalArgumentException("End week is not valid");
+		} else {
+			Task task = new Task(title, hours, startWeek, endWeek); 
+        	tasks.add(task);
+		} 
     }
     
     public List<Task> getVacationList() {
@@ -90,5 +104,9 @@ public class Employee {
     
     public String getTitle() {
         return title;
+    }
+
+    public List<Task> getAssignedTasks() {
+        return tasks;
     }
 }

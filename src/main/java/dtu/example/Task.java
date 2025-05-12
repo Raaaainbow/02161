@@ -6,28 +6,44 @@ import java.time.LocalDate;
 
 public class Task {
   private Employee assignedEmployee;
-  private int budgetedHours;
-  private int spentHours;
   private double hours;
   private String title;
   private int startWeek;
   private int endWeek;
   private LocalDate startDate;
   private LocalDate endDate;
-  private boolean taskExists = false;
+  private Project project;
 
   public Task(String title, double hours, int startWeek, int endWeek, String projectNumber) {
     this.title = title;
     setEstimatedTime(hours);
     setStartWeek(startWeek);
     setEndWeek(endWeek);
-    this.taskExists = true;
+  }
+
+  public Task(String title, double hours, int startWeek, int endWeek) {
+    this.title = title;
+    setEstimatedTime(hours);
+    setStartWeek(startWeek);
+    setEndWeek(endWeek);
   }
 
   public Task(LocalDate startDate, LocalDate endDate, String title) {
     setStartDate(startDate);
     setEndDate(endDate);
     this.title = title + startDate + " " + endDate;
+  }
+
+  public void setProject(Project project) {
+    this.project = project;
+  }
+
+  public void setAssignedEmployee(Employee employee) {
+      this.assignedEmployee = employee;
+  }
+
+  public Employee getAssignedEmployee() {
+      return assignedEmployee;
   }
 
   public void setStartDate(LocalDate startDate){
@@ -70,6 +86,17 @@ public class Task {
   public String getTitle() {
     return title;
   }
+
+  // Sebastian
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append("Task: ").append(title).append("\n");
+        output.append("  Duration: Week ").append(startWeek).append(" - ").append(endWeek);
+        output.append(" (").append(hours).append(" hours)").append("\n");
+        output.append("  Employee: ").append(assignedEmployee != null ? assignedEmployee.getInitials() : "Not assigned").append("\n");
+        output.append("  Status: Active");
+        return output.toString();
+    }
 
   // public void assignEmployee(Employee employee) {
   //   this.assignedEmployee = employee;
