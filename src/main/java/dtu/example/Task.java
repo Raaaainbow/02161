@@ -39,32 +39,32 @@ public class Task {
   }
 
   public void setAssignedEmployee(Employee employee) {
-      this.assignedEmployee = employee;
+    this.assignedEmployee = employee;
   }
 
   public Employee getAssignedEmployee() {
-      return assignedEmployee;
+    return assignedEmployee;
   }
 
-  public void setStartDate(LocalDate startDate){
+  public void setStartDate(LocalDate startDate) {
     this.startDate = startDate;
   }
 
-  public LocalDate getStartDate(){
+  public LocalDate getStartDate() {
     return startDate;
   }
 
-  public void setEndDate(LocalDate endDate){
+  public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
   }
 
-  public LocalDate getEndDate(){
+  public LocalDate getEndDate() {
     return endDate;
   }
 
   public void setStartWeek(int startWeek) {
     this.startWeek = startWeek;
-    
+
   }
 
   public int getStartWeek() {
@@ -88,22 +88,31 @@ public class Task {
   }
 
   // Sebastian
-    public String toString() {
-        StringBuilder output = new StringBuilder();
-        output.append("Task: ").append(title).append("\n");
-        output.append("  Duration: Week ").append(startWeek).append(" - ").append(endWeek);
-        output.append(" (").append(hours).append(" hours)").append("\n");
-        output.append("  Employee: ").append(assignedEmployee != null ? assignedEmployee.getInitials() : "Not assigned").append("\n");
-        output.append("  Status: Active");
-        return output.toString();
-    }
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("Task: ").append(title).append("\n");
+    output.append("  Duration: Week ").append(startWeek).append(" - ").append(endWeek);
+    output.append(" (").append(hours).append(" hours)").append("\n");
+    output.append("  Employee: ").append(assignedEmployee != null ? assignedEmployee.getInitials() : "Not assigned")
+        .append("\n");
+    output.append("  Status: Active");
+    return output.toString();
+  }
+
+  public String toString2() {
+    StringBuilder output = new StringBuilder();
+    output.append("").append(title).append("\n");
+    output.append("  Duration: ").append(startDate).append(" - ").append(endDate).append("\n");
+    output.append("  Status: Approved");
+    return output.toString();
+  }
 
   // public void assignEmployee(Employee employee) {
-  //   this.assignedEmployee = employee;
+  // this.assignedEmployee = employee;
   // }
 
   // public Employee getAssignedEmployee() {
-  //   return assignedEmployee;
+  // return assignedEmployee;
   // }
 
   // public void add(Task task) {
@@ -111,7 +120,7 @@ public class Task {
   // }
 
   // public boolean taskExists() {
-  //   return taskExists;
+  // return taskExists;
   // }
 
 }

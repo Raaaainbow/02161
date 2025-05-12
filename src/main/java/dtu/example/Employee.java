@@ -25,19 +25,21 @@ public class Employee {
     }
 
     public void createVacation(LocalDate startDate, LocalDate endDate) {
-        Task vacation = new Task(startDate, endDate, "Vacation");
+        Task vacation = new Task(startDate, endDate, "Vacation ");
         this.title = vacation.getTitle();
         vacationList.add(vacation);
+        //String intials = getInitials();
+        //vacation.setAssignedEmployee(initials);
     }
 
     public void createSickLeave(LocalDate startDate, LocalDate endDate) {
-        Task sickLeave = new Task(startDate, endDate, "Sick Leave");
+        Task sickLeave = new Task(startDate, endDate, "Sick Leave ");
         this.title = sickLeave.getTitle();
         sickLeaveList.add(sickLeave);
     }
 
     public void createCourse(LocalDate startDate, LocalDate endDate) {
-        Task course = new Task(startDate, endDate, "Courses");
+        Task course = new Task(startDate, endDate, "Course ");
         this.title = course.getTitle();
         courseList.add(course);
     }

@@ -153,6 +153,69 @@ public class App {
             }
         }
 
+        if (parts[0].equals("register") && parts[1].equals("vacation")) {
+            if (parts.length < 4) {
+                System.out.println("Error: Not enough arguments for vacation registration.");
+                System.out.println("Usage: register vacation STARTDATE ENDDATE");
+                return;
+            }
+
+            try {
+                LocalDate startDate = LocalDate.parse(parts[2]);
+                LocalDate endDate = LocalDate.parse(parts[3]);
+                Employee employee = database.getEmployee(currentEmployee);
+                employee.createVacation(startDate, endDate);
+                System.out.println("Vacation registered successfully from " + startDate + " to " + endDate);
+
+            } catch (DateTimeParseException e) {
+                System.out.println("Error: Date format is incorrect.");
+                System.out.println("STARTDATE and ENDDATE must be in format: yyyy-MM-dd");
+                System.out.println("Usage: register vacation STARTDATE ENDDATE");
+            }
+        }
+
+        if (parts[0].equals("register") && parts[1].equals("sick") && parts[2].equals("leave")) {
+            if (parts.length < 4) {
+                System.out.println("Error: Not enough arguments for sick leave registration.");
+                System.out.println("Usage: register sick leave STARTDATE ENDDATE");
+                return;
+            }
+
+            try {
+                LocalDate startDate = LocalDate.parse(parts[3]);
+                LocalDate endDate = LocalDate.parse(parts[4]);
+                Employee employee = database.getEmployee(currentEmployee);
+                employee.createSickLeave(startDate, endDate);
+                System.out.println("Sick leave registered successfully from " + startDate + " to " + endDate);
+                
+            } catch (DateTimeParseException e) {
+                System.out.println("Error: Date format is incorrect.");
+                System.out.println("STARTDATE and ENDDATE must be in format: yyyy-MM-dd");
+                System.out.println("Usage: register sick leave STARTDATE ENDDATE");
+            }
+        }
+
+        if (parts[0].equals("register") && parts[1].equals("course")) {
+            if (parts.length < 4) {
+                System.out.println("Error: Not enough arguments for course registration.");
+                System.out.println("Usage: register course STARTDATE ENDDATE");
+                return;
+            }
+
+            try {
+                LocalDate startDate = LocalDate.parse(parts[2]);
+                LocalDate endDate = LocalDate.parse(parts[3]);
+                Employee employee = database.getEmployee(currentEmployee);
+                employee.createCourse(startDate, endDate);
+                System.out.println("Course registered successfully from " + startDate + " to " + endDate);
+                
+            } catch (DateTimeParseException e) {
+                System.out.println("Error: Date format is incorrect.");
+                System.out.println("STARTDATE and ENDDATE must be in format: yyyy-MM-dd");
+                System.out.println("Usage: register course STARTDATE ENDDATE");
+            }
+        }
+
         if (parts[0].equals("list") && parts[1].equals("projects")) {
             List<Project> projects = database.getProjects();
             String str = "";
@@ -192,6 +255,54 @@ public class App {
            }
         }
 
+        if (parts[0].equals("view") && parts[1].equals("vacation")) {
+            Employee employee = database.getEmployee(currentEmployee);
+            List<Task> vacationList = employee.getVacationList();
+
+            if (vacationList.isEmpty()) {
+                System.out.println("No vacation registered.");
+                return;
+            }
+
+            System.out.println("Vacation overview for " + currentEmployee + ":");
+
+            for (Task vacation : vacationList) {
+                System.out.println(vacation.toString2());
+            }
+        }
+
+        if (parts[0].equals("view") && parts[1].equals("sick") && parts[2].equals("leave")) {
+            Employee employee = database.getEmployee(currentEmployee);
+            List<Task> sickLeaveList = employee.getSickLeaveList();
+
+            if (sickLeaveList.isEmpty()) {
+                System.out.println("No sick leave registered.");
+                return;
+            }
+
+            System.out.println("Sick leave overview for " + currentEmployee + ":");
+
+            for (Task sickLeave : sickLeaveList) {
+                System.out.println(sickLeave.toString2());
+            }
+        }
+
+        if (parts[0].equals("view") && parts[1].equals("course")) {
+            Employee employee = database.getEmployee(currentEmployee);
+            List<Task> courseList = employee.getCourseList();
+
+            if (courseList.isEmpty()) {
+                System.out.println("No courses registered.");
+                return;
+            }
+
+            System.out.println("Course overview for " + currentEmployee + ":");
+
+            for (Task course : courseList) {
+                System.out.println(course.toString2());
+            }
+        }
+
         if (parts[0].equals("assign") && parts[1].equals("project") && parts[2].equals("leader")) {
             try {
                 String projectNumber = parts[3].toUpperCase();
@@ -226,12 +337,24 @@ public class App {
             System.out.println("    Creates a new task for specified project");
             System.out.println("\ncreate time registration SHIFTSTART SHIFTEND DATE");
             System.out.println("    Creates a time registration (not yet implemented)");
+            System.out.println("\nregister vacation STARTDATE ENDDATE");
+            System.out.println("    Registers vacation for the current employee");
+            System.out.println("\nregister sick leave STARTDATE ENDDATE");
+            System.out.println("    Registers sick leave for the current employee");
+            System.out.println("\nregister course STARTDATE ENDDATE");
+            System.out.println("    Registers course for the current employee");
             System.out.println("\nlist employees");
             System.out.println("    Lists all employee initials from the database");
             System.out.println("\nlist projects");
             System.out.println("    Lists project numbers from the database");
             System.out.println("\nview time registration");
             System.out.println("    Views time registration (not yet implemented)");
+            System.out.println("\nview vacation");
+            System.out.println("    Views vacation for the current employee");
+            System.out.println("\nview sick leave");
+            System.out.println("    Views sick leave for the current employee");
+            System.out.println("\nview course");
+            System.out.println("    Views course for the current employee");
             System.out.println("\nhelp");
             System.out.println("    Displays this command list");
             System.out.println("\n=========================\n");
