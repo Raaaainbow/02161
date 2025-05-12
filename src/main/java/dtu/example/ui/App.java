@@ -117,6 +117,11 @@ public class App {
                 }
                 Employee currentEmployeeObject = database.getEmployee(currentEmployee);
 
+                if (project.projectLeaderInProject() && !project.getProjectLead().equals(currentEmployee)) {
+                System.out.println("Error: You are not the project leader of this project.");
+                return;
+                }
+
                 if (currentEmployeeObject.getAssignedTasks().size() >= maxTasks) {
                    System.out.println("Error: Employee " + currentEmployee + " already has " + maxTasks +  " tasks assigned.");
                     return;
