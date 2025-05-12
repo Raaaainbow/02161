@@ -15,6 +15,7 @@ import java.util.List;
 public class App {
 
     private static String currentEmployee;
+    private static final int maxTasks = 20;
 
     public static void main(String[] args) {
         Scanner console = new Scanner(System.in);
@@ -114,13 +115,17 @@ public class App {
                     System.out.println("Error: Project with number " + projectNumber + " does not exist.");
                     return;
                 }
+                Employee currentEmployeeObject = database.getEmployee(currentEmployee);
 
+                if (currentEmployeeObject.getAssignedTasks().size() >= maxTasks) {
+                   System.out.println("Error: Employee " + currentEmployee + " already has " + maxTasks +  " tasks assigned.");
+                    return;
+                }
                 // Create task only in project
 
                 Task newTask = project.createTask(title, hours, startWeek, endWeek, projectNumber);
                 
                 // Add the same task to current employee
-                Employee currentEmployeeObject = database.getEmployee(currentEmployee);
                 currentEmployeeObject.addTask(newTask);
                 newTask.setAssignedEmployee(currentEmployeeObject);
 
@@ -282,6 +287,10 @@ public class App {
                             System.out.println("Error: Employee " + NewInitials + " not found");
                             return;
                         }
+                        if (newEmployee.getAssignedTasks().size() >= maxTasks) {
+                           System.out.println("Error: Employee " + currentEmployee + " already has " + maxTasks +  " tasks assigned.");
+                            return;
+                        } 
                         System.out.println("assigning new employee");
                         task.setAssignedEmployee(newEmployee);
                         newEmployee.addTask(task);
