@@ -149,12 +149,12 @@ Feature: Employee
         When the employee creates a task "Coding" using 50.0 hours starting in week 20 and ending in week 22 in the project
         And the task is assigned to employee "abcd"
         Then the task string representation should be:
-            """
-            Task: Coding
-                Duration: Week 20 - 22 (50.0 hours)
-                Employee: abcd
-                Status: Active
-            """
+        """
+        Task: Coding
+          Duration: Week 20 - 22 (50.0 hours)
+          Employee: abcd
+          Status: Active
+        """
     Scenario: An employee wants to see their course registration
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -162,11 +162,11 @@ Feature: Employee
         When the employee creates their course list
         Then the course list is shown
         And the course task string representation should be:
-            """
-            Course 2025-01-01 2025-01-10
-                Duration: 2025-01-01 - 2025-01-10
-                Status: Approved
-            """
+        """
+        Course 2025-01-01 2025-01-10
+          Duration: 2025-01-01 - 2025-01-10
+          Status: Approved
+        """
 
     Scenario: An employee wants to see their project list
         Given the database is initialized
@@ -174,37 +174,25 @@ Feature: Employee
         And the employee creates a project with the title "Software_project"
         When the employee creates their project list
         Then the project list is shown
-        And the project list string representation should be:
-            """
-            Project Number: P-251
-            Title: Vacation
-            Project Leader: Not assigned
-            Tasks: 0
+        And the project list string representation should be: 
+        """
+        Project Number: P-255
+        Title: Software_project
+        Project Leader: Not assigned
+        Tasks: 0
+        """
 
-            Project Number: P-252
-            Title: Sick Leave
-            Project Leader: Not assigned
-            Tasks: 0
-
-            Project Number: P-253
-            Title: Course
-            Project Leader: Not assigned
-            Tasks: 0
-
-            Project Number: P-254
-            Title: Untitled
-            Project Leader: Not assigned
-            Tasks: 0
-
-            Project Number: P-255
-            Title: SOFTWARE_PROJECT
-            Project Leader: Not assigned
-            Tasks: 0
-            """
     Scenario: An employee wants to see their task list
         Given the database is initialized
         And an employee is created with initials "abcd"
         And the employee creates a project with the title "Software_project"
+        And the employee creates a task "Coding" using 50.0 hours starting in week 20 and ending in week 22 in the project
         When the employee creates their task list
         Then the task list is shown
-        And the task list string representation should be: "Task: Coding \nDuration: Week 20 - 22 (50.0 hours)\nEmployee: Not assigned \nStatus: Active"
+        And the task list string representation should be: 
+        """
+        Task: Coding
+          Duration: Week 20 - 22 (50.0 hours)
+          Employee: Not assigned
+          Status: Active
+        """

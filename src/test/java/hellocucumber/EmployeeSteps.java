@@ -290,9 +290,9 @@ public class EmployeeSteps {
         assertNotNull(project.getTasks());
     }
 
-    @Then("the task list string representation should be: {string}")
-    public void theTaskListStringRepresentationShouldBe(String hej) {
-        assertEquals(hej.trim(), task.toString().trim());
+    @Then("the task list string representation should be:")
+    public void theTaskListStringRepresentationShouldBe(String expected) {
+        assertEquals(expected.trim(), task.toString().trim());
     }
     
 }
