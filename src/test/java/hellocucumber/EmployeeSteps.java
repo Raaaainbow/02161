@@ -214,4 +214,17 @@ public class EmployeeSteps {
         assertNotNull(employee.getCourseList());
     }
     
+    @When("the employee creates a task {string} using {int} hours starting in week {int} and ending in week {int}")
+    public void theEmployeeCreatesAnActivityUsingHoursStartingInWeekAndEndingInWeek(String title, int hours, int startWeek, int endWeek) {
+        employee.createTask(title, hours, startWeek, endWeek);
+        this.task = project.getTaskByTitle(title);
+    }
+
+    @When("the employee tries to create a task {string} using {int} hours starting in week {int} and ending in week {int}")
+    public void theEmployeeTriesToCreateATaskUsingHoursStartingInWeekAndEndingInWeek(String title, int hours, int startWeek, int endWeek) {
+        employee.createTask(title, hours, startWeek, endWeek);
+        this.task = project.getTaskByTitle(title);
+    }
+
+    
 }

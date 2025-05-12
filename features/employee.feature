@@ -115,5 +115,28 @@ Feature: Employee
         And the employee creates a course task starting "2025-02-01" and ending "2025-02-10"
         When the employee creates their course list
         Then the course list is shown
-    
-        
+
+    Scenario: An employee creates a task without a project number
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        When the employee creates a task "Coding" using 50 hours starting in week 20 and ending in week 22
+        Then the task "Coding" is created
+        And the task "Coding" has the starting week 20 and ending week 22
+
+    Scenario: An employee creates a task without a project number with a non-valid week number
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        When the employee tries to create a task "Coding" using 50 hours starting in week 60 and ending in week 62
+        Then the task "Coding" is not created
+
+    Scenario: An employee creates a task without a project number with a non-valid week number
+        Given the database is initialized
+        And an employee is created with initials "abcd" 
+        When the employee tries to create a task "Coding" using 50 hours starting in week -2 and ending in week 1
+        Then the task "Coding" is not created
+
+    Scenario: An employee creates a task without a project number with a non-valid week number
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        When the employee tries to create a task "Coding" using 50 hours starting in week 40 and ending in week 62
+        Then the task "Coding" is not created
