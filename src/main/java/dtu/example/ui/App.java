@@ -32,7 +32,7 @@ public class App {
                 break;
             }
 
-            inputHandling(input, database);
+            inputHandling(input, database, console);
             System.out.print("> ");
         }
 
@@ -61,7 +61,7 @@ public class App {
         }
     }
 
-    private static void inputHandling(String input, Database database) {
+    private static void inputHandling(String input, Database database, Scanner console) {
         String[] parts = input.split("\\s+");
 
         if (parts[0].equals("create") && parts[1].equals("project")) {
@@ -167,6 +167,7 @@ public class App {
                 System.out.println("DATE must be in format: yyyy-MM-dd");
                 System.out.println("Usage: create time registration SHIFTSTART SHIFTEND DATE");
             }
+            return;
         }
 
         if (parts[0].equals("register") && parts[1].equals("vacation")) {
@@ -188,6 +189,7 @@ public class App {
                 System.out.println("STARTDATE and ENDDATE must be in format: yyyy-MM-dd");
                 System.out.println("Usage: register vacation STARTDATE ENDDATE");
             }
+            return;
         }
 
         if (parts[0].equals("register") && parts[1].equals("sick") && parts[2].equals("leave")) {
@@ -209,6 +211,7 @@ public class App {
                 System.out.println("STARTDATE and ENDDATE must be in format: yyyy-MM-dd");
                 System.out.println("Usage: register sick leave STARTDATE ENDDATE");
             }
+            return;
         }
 
         if (parts[0].equals("register") && parts[1].equals("course")) {
@@ -224,6 +227,7 @@ public class App {
                 Employee employee = database.getEmployee(currentEmployee);
                 employee.createCourse(startDate, endDate);
                 System.out.println("Course registered successfully from " + startDate + " to " + endDate);
+                return;
                 
             } catch (DateTimeParseException e) {
                 System.out.println("Error: Date format is incorrect.");
@@ -238,6 +242,7 @@ public class App {
             for (Project project: projects) {
                 System.out.println(project.toString());
             }
+            return;
         }
         
         if (parts[0].equals("list") && parts[1].equals("employees")) {
@@ -248,6 +253,7 @@ public class App {
                 output += employee.getInitials() + " ";
             }
             System.out.println(output);
+            return;
         }
 
         if (parts[0].equals("view") && parts[1].equals("time") && parts[2].equals("registration")) {
@@ -267,6 +273,7 @@ public class App {
                    System.out.println(task.toString());
                }
            }
+           return;
         }
 
         if (parts[0].equals("assign") && parts[1].equals("task")) {
@@ -311,6 +318,7 @@ public class App {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Error: Usage: assign task TASK_TITLE OLD_EMPLOYEE_INITIALS NEW_EMPLOYEE_INITIALS");
             }
+            return;
         }
 
         if (parts[0].equals("view") && parts[1].equals("vacation")) {
@@ -327,6 +335,7 @@ public class App {
             for (Task vacation : vacationList) {
                 System.out.println(vacation.toString2());
             }
+            return;
         }
 
         if (parts[0].equals("view") && parts[1].equals("sick") && parts[2].equals("leave")) {
@@ -343,6 +352,7 @@ public class App {
             for (Task sickLeave : sickLeaveList) {
                 System.out.println(sickLeave.toString2());
             }
+            return;
         }
 
         if (parts[0].equals("view") && parts[1].equals("course")) {
@@ -359,6 +369,7 @@ public class App {
             for (Task course : courseList) {
                 System.out.println(course.toString2());
             }
+            return;
         }
         
         if (parts[0].equals("assign") && parts[1].equals("project") && parts[2].equals("leader")) {
@@ -381,7 +392,48 @@ public class App {
                 System.out.println("Error: PROJECTNUMBER invalid");
                 System.out.println("Error: INITIALS invalid");
             }
-            
+            return;
+        }
+        
+        if (parts[0].equals("edit") && parts[1].equals("project")) {
+           try {
+               String projectNumber = parts[2].toUpperCase();
+               Project project = database.getProjectByNumber(projectNumber);
+               
+               if (project == null) {
+                   System.out.println("Error: Project " + projectNumber + " not found");
+                   return;
+               }
+               
+               System.out.println("What would you like to edit?");
+               System.out.println("1. Project title");
+               System.out.println("2. Project leader");
+               System.out.println("Enter choice (1-2): ");
+               
+               String choice = console.nextLine();
+               
+               switch(choice) {
+                   case "1":
+                       System.out.print("Enter new title: ");
+                       String newTitle = console.nextLine();
+                       project.setTitle(newTitle);
+                       System.out.println("Title updated successfully");
+                       break;
+                   case "2":
+                       System.out.print("Enter new leader initials: ");
+                       String newLeader = console.nextLine();
+                       project.setProjectLead(newLeader);
+                       System.out.println("Leader updated successfully");
+                       break;
+                   default:
+                       System.out.println("Invalid choice");
+                       return;
+               }
+            return;
+               
+           } catch (ArrayIndexOutOfBoundsException e) {
+               System.out.println("Error: Usage: edit project PROJECTNUMBER");
+           }
         }
 
         if (parts[0].equals("help")) {
@@ -391,6 +443,8 @@ public class App {
             System.out.println("    Assigns a project leader to specified project");
             System.out.println("\nassign task TASK_TITLE OLD_INITIALS NEW_INITIALS");
             System.out.println("    Reassigns a task from one employee to another");
+            System.out.println("\nedit project PROJECTNUMBER");
+            System.out.println("    Edits project title or leader");
             System.out.println("\ncreate project [PROJECTNAME]");
             System.out.println("    Creates a new project with optional name");
             System.out.println("\ncreate task TITLE HOURS STARTWEEK ENDWEEK PROJECTNUMBER");
@@ -418,6 +472,7 @@ public class App {
             System.out.println("\nhelp");
             System.out.println("    Displays this command list");
             System.out.println("\n=========================\n");
+            return;
         }
 
         System.out.println("Unknown command '" + input + "' type 'help' to see available commands.");
