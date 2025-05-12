@@ -23,6 +23,15 @@ public class Employee {
         return initials;
     }
 
+    public boolean taskExists(String title) {
+		for (Task task : tasks) {
+			if (task.getTitle().equals(title)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
     public void createVacation(LocalDate startDate, LocalDate endDate) {
         Task vacation = new Task(startDate, endDate, "Vacation ");
         this.title = vacation.getTitle();
@@ -112,4 +121,13 @@ public class Employee {
     public void addTask(Task task) {
         tasks.add(task);
     }
+
+    public Task getTaskByTitle(String title) {
+		for (Task task : tasks) {
+			if (task.getTitle().equals(title)) {
+				return task;
+			}
+		}
+		return null;
+	}
 }

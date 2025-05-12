@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -110,9 +111,14 @@ public class EmployeeSteps {
         this.task = project.getTaskByTitle(title);
     }
     
+    @Then("the task {string} is created in the project")
+    public void theTaskIsCreatedInTheProject(String title) {
+        assertTrue(project.taskExists(title));      
+    }
+
     @Then("the task {string} is created")
     public void theTaskIsCreated(String title) {
-        assertTrue(project.taskExists(title));      
+        assertTrue(employee.taskExists(title));      
     }
 
     @Then("the task {string} has the starting week {int} and ending week {int}")
@@ -142,10 +148,14 @@ public class EmployeeSteps {
         assertNull(project.getTaskByTitle(title));
     }
 
+    @Then("the task {string} is not created in the project")
+    public void theTaskIsNotCreatedInTheProject(String title) {
+        assertFalse(project.taskExists(title));
+    }
+
     @Then("the task {string} is not created")
     public void theTaskIsNotCreated(String title) {
-        assertFalse(project.taskExists(title));
-
+        assertFalse(employee.taskExists(title));      
     }
 
     @When("the employee creates a vacation task starting {string} and ending {string}")
@@ -221,7 +231,7 @@ public class EmployeeSteps {
     @When("the employee creates a task {string} using {double} hours starting in week {int} and ending in week {int}")
     public void theEmployeeCreatesAnActivityUsingHoursStartingInWeekAndEndingInWeek(String title, double hours, int startWeek, int endWeek) {
         employee.createTask(title, hours, startWeek, endWeek);
-        this.task = project.getTaskByTitle(title);
+        this.task = employee.getTaskByTitle(title);
     }
 
     @When("the employee tries to create a task {string} using {double} hours starting in week {double} and ending in week {int}")
