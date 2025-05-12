@@ -15,9 +15,11 @@ public class LogIn {
         
         if (correctInitials.equals(enteredInitials)) {
             System.out.println("You are now logged in!");
+            this.loggedIn = true;
             return true;
         } else {
             System.out.println("Wrong initials! Try again.");
+            this.loggedIn = false;
             return false;
         }
     }

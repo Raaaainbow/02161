@@ -35,7 +35,7 @@ public class LoginSteps {
 
     @When("the employee {string} enters {string}")
     public void theEmployeeEnters(String correctInitials, String enteredInitials) {
-        Employee employee = new Employee(correctInitials);
+        this.employee = database.getEmployee(correctInitials);
         logIn.loggingIn(employee, enteredInitials);
     }
 
