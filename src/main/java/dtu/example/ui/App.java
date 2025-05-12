@@ -8,7 +8,7 @@ import dtu.example.backend.Employee;
 import dtu.example.backend.LogIn;
 import dtu.example.backend.Project;
 import dtu.example.backend.Task;
-import io.cucumber.messages.types.SourceMediaType;
+import dtu.example.backend.TimeRegistration;
 
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -20,6 +20,7 @@ import java.util.List;
 public class App {
 
     private static String currentEmployee;
+    private static Employee currentEmployeeObject;
     private static final int maxTasks = 20;
 
     public static void main(String[] args) {
@@ -28,7 +29,7 @@ public class App {
         initialise(database, console);
 
         System.out.println("Enter a command (type 'help' to see a list of commands):");
-            System.out.print("> ");
+        System.out.print("> ");
         while (console.hasNextLine()) {
             String input = console.nextLine().toLowerCase();
 
@@ -51,14 +52,14 @@ public class App {
         while (!loginSuccessful) {
             System.out.print("Enter initials: ");
             String initials = console.nextLine().toLowerCase();
-            Employee employee = database.getEmployee(initials);
+            currentEmployeeObject = database.getEmployee(initials);
             
-            if (employee == null) {
+            if (currentEmployeeObject == null) {
                 System.out.println("Employee not found. Please try again.");
                 continue;
             }
             
-            loginSuccessful = login.loggingIn(employee, initials);
+            loginSuccessful = login.loggingIn(currentEmployeeObject, initials);
             
             if (loginSuccessful) {
                 currentEmployee = initials;
@@ -148,6 +149,7 @@ public class App {
                 return;
             }
         }
+
         if (parts[0].equals("edit") && parts[1].equals("task")) {
             try {
             String taskTitle = parts[2];
@@ -228,6 +230,38 @@ public class App {
         System.out.println("Error: Usage: edit task TASK_TITLE");
     }
 }
+
+        if (parts[0].equals("register") && parts[1].equals("time")) {
+            try {
+                String taskName = parts[2];
+                double hours = Double.parseDouble(parts[3]);
+                LocalDate date = LocalDate.parse(parts[4]);
+                
+                if (currentEmployeeObject == null) {
+                    System.out.println("Error: Not logged in");
+                    return;
+                }
+                
+                TimeRegistration time = new TimeRegistration(hours, currentEmployee, date);
+                List<Task> tasks = currentEmployeeObject.getAssignedTasks();
+                boolean taskFound = false;
+                
+                for (Task task : tasks) {
+                    if (task.getTitle().equals(taskName)) {
+                        task.addTimeRegistration(time);
+                        taskFound = true;
+                        break;
+                    }
+                }
+                
+                if (!taskFound) {
+                    System.out.println("Error: Task not found or not assigned to you");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Error: time format is incorrect");
+            }
+            return;
+        }
 
         if (parts[0].equals("register") && parts[1].equals("vacation")) {
             if (parts.length < 4) {
@@ -313,6 +347,10 @@ public class App {
             }
             System.out.println(output);
             return;
+        }
+
+        if (parts[0].equals("create") && parts[1].equals("time") && parts[2].equals("registration")) {
+
         }
 
         if (parts[0].equals("view") && parts[1].equals("time") && parts[2].equals("registration")) {
@@ -508,10 +546,10 @@ public class App {
             System.out.println("    Creates a new project with optional name");
             System.out.println("\ncreate task TITLE HOURS STARTWEEK ENDWEEK PROJECTNUMBER");
             System.out.println("    Creates a new task for specified project");
-//            System.out.println("\ncreate time registration SHIFTSTART SHIFTEND DATE");
-//            System.out.println("    Creates a time registration (not yet implemented)");
             System.out.println("\nedit task TASK_TITLE");
             System.out.println("    Edits task hours, start week, or end week");
+            System.out.println("\nregister time TASKNAME HOURS DATE");
+            System.out.println("    Registers time for specified task (format: yyyy-MM-dd)");
             System.out.println("\nregister vacation STARTDATE ENDDATE");
             System.out.println("    Registers vacation for the current employee");
             System.out.println("\nregister sick leave STARTDATE ENDDATE");

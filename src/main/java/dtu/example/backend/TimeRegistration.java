@@ -10,11 +10,15 @@ public class TimeRegistration {
     private LocalDateTime shiftEnd;
     private LocalDate date;
     private boolean deleted;
+    private double hours;
+    private String initials;
 
-    public TimeRegistration(LocalDateTime shiftStart, LocalDateTime shiftEnd, LocalDate date){
-        this.shiftStart = shiftStart;
-        this.shiftEnd = shiftEnd;
-        setDate(date);
+    public TimeRegistration(double hours, String initials, LocalDate date) {
+        double roundedHours= Math.round(hours * 2.0)/2.0;
+        roundedHours = Math.abs(roundedHours);
+        this.hours = roundedHours;
+        this.initials = initials;
+        this.date = date;
     }
 
     public void deleteTimeReg(){
@@ -25,28 +29,23 @@ public class TimeRegistration {
         return deleted;
     }
 
-    public void setShiftStart(LocalDateTime shiftStart){
-        this.shiftStart = shiftStart;
-    }
-
-    public LocalDateTime getShiftStart(){
-        return shiftStart;
-    }
-
-    public void setShiftEnd(LocalDateTime shiftEnd){
-        this.shiftEnd = shiftEnd;
-    }
-
-    public LocalDateTime getShiftEnd(){
-        return shiftEnd;
-    }
-
     public void setDate(LocalDate date){
         this.date = date;
     }
 
     public LocalDate getDate(){
         return date;
+    }
+
+    public double getHours() {
+        return hours;
+    }
+
+    public String toString() {
+       return String.format("%s - %.1f hours (%s)", 
+           date != null ? date.toString() : "No date", 
+           hours, 
+           initials);
     }
     
 }
