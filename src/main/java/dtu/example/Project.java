@@ -20,18 +20,19 @@ public class Project {
 		setProjectNumber(projectNumber);
 	}
 
-	public void createTask(String title, double hours, int startWeek, int endWeek, String projectNumber) {
-		if ((startWeek <= 0 || startWeek > 52) && (endWeek <= 0 || endWeek > 52)) {
-			throw new IllegalArgumentException("Start week and end week is not valid");
-		} else if (startWeek <= 0 || startWeek > 52) {
-			throw new IllegalArgumentException("Start week is not valid");
-		} else if (endWeek <= 0 || endWeek > 52) {
-			throw new IllegalArgumentException("End week is not valid");
-		} else {
-			Task task = new Task(title, hours, startWeek, endWeek, projectNumber);
-			tasks.add(task);
-		}
-	}
+public Task createTask(String title, double hours, int startWeek, int endWeek, String projectNumber) {
+    if ((startWeek <= 0 || startWeek > 52) && (endWeek <= 0 || endWeek > 52)) {
+        throw new IllegalArgumentException("Start week and end week is not valid");
+    } else if (startWeek <= 0 || startWeek > 52) {
+        throw new IllegalArgumentException("Start week is not valid");
+    } else if (endWeek <= 0 || endWeek > 52) {
+        throw new IllegalArgumentException("End week is not valid");
+    } else {
+        Task task = new Task(title, hours, startWeek, endWeek, projectNumber); 
+        tasks.add(task);
+        return task;
+    } 
+}
 
 	public boolean taskExists(String title) {
 		assert title != null : "Pre-condition fail: title should not be null";

@@ -111,4 +111,8 @@ public class Employee {
     public List<Task> getAssignedTasks() {
         return tasks;
     }
+
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
 }
