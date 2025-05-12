@@ -110,9 +110,14 @@ public class EmployeeSteps {
         this.task = project.getTaskByTitle(title);
     }
     
+    @Then("the task {string} is created in the project")
+    public void theTaskIsCreatedInTheProject(String title) {
+        assertTrue(project.taskExists(title));      
+    }
+
     @Then("the task {string} is created")
     public void theTaskIsCreated(String title) {
-        assertTrue(project.taskExists(title));      
+        assertTrue(employee.taskExists(title));      
     }
 
     @Then("the task {string} has the starting week {int} and ending week {int}")
@@ -124,28 +129,35 @@ public class EmployeeSteps {
     @Given("there is a project leader in the project")
     public void thereIsAProjectLeaderInTheProject() {
         String initials = employee.getInitials();
-        project.makeProjectLeader(initials);
+        project.makeProjectLeader("efgh");
         assertTrue(project.projectLeaderInProject());
     }
 
     @When("the employee tries to create a task {string} using {double} hours starting in week {int} and ending in week {int} in the project")
     public void theEmployeeTriesToCreateAnActivityUsingHoursStartingInWeekAndEndingInWeekInTheProject(String title, double hours, int startWeek, int endWeek) {
-        try {
-            project.createTask(title, hours, startWeek, endWeek, project.getProjectNumber());
-        } catch (IllegalArgumentException e) {
-            assertTrue(
-                e.getMessage().equals("Start week and end week is not valid") ||
-                e.getMessage().equals("Start week is not valid") ||
-                e.getMessage().equals("End week is not valid")
-            );
+        if (!project.projectLeaderInProject() || project.getProjectLead().equals(employee.getInitials())) {
+            try {
+                project.createTask(title, hours, startWeek, endWeek, project.getProjectNumber());
+            } catch (IllegalArgumentException e) {
+                assertTrue(
+                    e.getMessage().equals("Start week and end week is not valid") ||
+                    e.getMessage().equals("Start week is not valid") ||
+                    e.getMessage().equals("End week is not valid")
+                );
+            }
         }
+        
         assertNull(project.getTaskByTitle(title));
+    }
+
+    @Then("the task {string} is not created in the project")
+    public void theTaskIsNotCreatedInTheProject(String title) {
+        assertFalse(project.taskExists(title));
     }
 
     @Then("the task {string} is not created")
     public void theTaskIsNotCreated(String title) {
-        assertFalse(project.taskExists(title));
-
+        assertFalse(employee.taskExists(title));      
     }
 
     @When("the employee creates a vacation task starting {string} and ending {string}")
@@ -221,13 +233,20 @@ public class EmployeeSteps {
     @When("the employee creates a task {string} using {double} hours starting in week {int} and ending in week {int}")
     public void theEmployeeCreatesAnActivityUsingHoursStartingInWeekAndEndingInWeek(String title, double hours, int startWeek, int endWeek) {
         employee.createTask(title, hours, startWeek, endWeek);
-        this.task = project.getTaskByTitle(title);
+        this.task = employee.getTaskByTitle(title);
     }
 
-    @When("the employee tries to create a task {string} using {double} hours starting in week {double} and ending in week {int}")
+    @When("the employee tries to create a task {string} using {double} hours starting in week {int} and ending in week {int}")
     public void theEmployeeTriesToCreateATaskUsingHoursStartingInWeekAndEndingInWeek(String title, double hours, int startWeek, int endWeek) {
-        employee.createTask(title, hours, startWeek, endWeek);
-        this.task = project.getTaskByTitle(title);
+        try {
+            employee.createTask(title, hours, startWeek, endWeek);
+        } catch (IllegalArgumentException e) {
+            assertTrue(
+                e.getMessage().equals("Start week and end week is not valid") ||
+                e.getMessage().equals("Start week is not valid") ||
+                e.getMessage().equals("End week is not valid")
+            );
+        }
     }
 
     @When("the task is assigned to employee {string}")
@@ -244,6 +263,36 @@ public class EmployeeSteps {
     @Then("the course task string representation should be:")
     public void theCourseTaskStringRepresentationShouldBe(String expected) {
         assertEquals(expected.trim(), course.toString2().trim());
+    }
+
+    @When("the employee creates their project list")
+    public void theEmployeeCreatesTheirProjectList() {
+        database.getProjects(); 
+    }
+
+    @Then("the project list is shown")
+    public void theProjectListIsShown() {
+        assertNotNull(database.getProjects());
+    }
+
+    @Then("the project list string representation should be:")
+    public void theProjectListStringRepresentationShouldBe(String expected) {
+        assertEquals(expected.trim(), project.toString().trim());
+    }
+
+    @When("the employee creates their task list")
+    public void theEmployeeCreatesTheirTaskList() {
+        project.getTasks();
+    }
+
+    @Then("the task list is shown")
+    public void theTaskListIsShown() {
+        assertNotNull(project.getTasks());
+    }
+
+    @Then("the task list string representation should be: {string}")
+    public void theTaskListStringRepresentationShouldBe(String hej) {
+        assertEquals(hej.trim(), task.toString().trim());
     }
     
 }

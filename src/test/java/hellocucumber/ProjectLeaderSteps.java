@@ -3,11 +3,11 @@
 package hellocucumber;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dtu.example.backend.Database;
-import dtu.example.backend.Employee;
 import dtu.example.backend.Project;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -58,39 +58,23 @@ public class ProjectLeaderSteps {
         assertNotEquals(initials, project.getProjectLead());
     }
 
-//     @When("I promote employee with initials {string} to project leader on {string}")
-//     public void iPromoteEmployeeWithInitialsToProjectLeaderOn(String initials, String projectNumber) {
-//         Project project = database.getProjectByNumber(projectNumber);
-//         project.setProjectLead(initials);
-//     }
+    @Given("employee with initials {string} is a project leader in the project {string}")
+    public void employeeWithInitialsIsAProjectLeaderInTheProject(String initials, String projectNumber) {
+        this.project = database.getProjectByNumber(projectNumber);
+        project.makeProjectLeader(initials);
+        assertTrue(project.projectLeaderInProject());
+        assertEquals(initials, project.getProjectLead());
+    }
 
-//     @Then("the employee with initials {string} should be a project leader on {string}")
-//     public void theEmployeeWithInitialsShouldBeAProjectLeaderOn(String initials, String projectNumber) {
-//         Project project = database.getProjectByNumber(projectNumber);
-//         assertEquals(initials, project.getProjectLead());
-//     }
+    @When("an employee replaces project leader {string} with employee {string} in the project")
+    public void an_employee_replaces_project_leader_with_employee_in_the_project(String initials, String initials2) {
+        project.setProjectLead(initials2);
+        assertEquals(initials2, project.getProjectLead());
+    }
 
-//     @Given("the project {string} exist")
-//     public void theProjectExist(String projectNumber) {
-//         assertTrue(database.getProjectByNumber(projectNumber) != null);
-//     }
-
-//     @Given("the project {string} does not have a project leader")
-//     public void theProjectDoesNotHaveAProjectLeader(String projectNumber) {
-//         Project project = database.getProjectByNumber(projectNumber);
-//         assertTrue(!(project.projectLeaderInProject()));
-//     }
-
-//     @When("{string} assigns them self as project leader on project {string}")
-//     public void assignsThemSelfAsProjectLeader(String initials, String projectNumber) {
-//         Project project = database.getProjectByNumber(projectNumber);
-//         project.setProjectLead(initials);
-//     }
-
-//     @Then("a project leader with initials {string} should exist on project {string}")
-//     public void aProjectLeaderWithInitialsShouldExist(String initials, String projectNumber) {
-//         Project project = database.getProjectByNumber(projectNumber);
-//         assertEquals(initials, project.getProjectLead());
-//     }
+    @Then("employee with initials {string} should no longer be a project leader in project {string}")
+    public void employeeWithInitialsShouldNoLongerBeAProjectLeaderInProject(String initials, String projectNumber) {
+        assertNotEquals(initials, project.getProjectLead());
+    }
 
 }
