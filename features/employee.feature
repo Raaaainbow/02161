@@ -23,8 +23,8 @@ Feature: Employee
     Scenario: Employee creates project with a title
         Given the database is initialized
         And an employee is created with initials "abcd"
-        When the employee creates a project with the title "Software project"
-        Then a project with the title "Software project" is created
+        When the employee creates a project with the title "Software_project"
+        Then a project with the title "Software_project" is created
 
     Scenario: Employee creates project without a title
         Given the database is initialized
@@ -166,4 +166,38 @@ Feature: Employee
             Course 2025-01-01 2025-01-10
                 Duration: 2025-01-01 - 2025-01-10
                 Status: Approved
+            """
+
+    Scenario: An employee wants to see their project list
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        And the employee creates a project with the title "Software_project"
+        When the employee creates their project list
+        Then the project list is shown
+        And the project list string representation should be:
+            """
+            Project Number: P-251
+            Title: Vacation
+            Project Leader: Not assigned
+            Tasks: 0
+
+            Project Number: P-252
+            Title: Sick Leave
+            Project Leader: Not assigned
+            Tasks: 0
+
+            Project Number: P-253
+            Title: Course
+            Project Leader: Not assigned
+            Tasks: 0
+
+            Project Number: P-254
+            Title: Untitled
+            Project Leader: Not assigned
+            Tasks: 0
+
+            Project Number: P-255
+            Title: SOFTWARE_PROJECT
+            Project Leader: Not assigned
+            Tasks: 0
             """

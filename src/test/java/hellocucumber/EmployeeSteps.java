@@ -254,5 +254,20 @@ public class EmployeeSteps {
     public void theCourseTaskStringRepresentationShouldBe(String expected) {
         assertEquals(expected.trim(), course.toString2().trim());
     }
+
+    @When("the employee creates their project list")
+    public void theEmployeeCreatesTheirProjectList() {
+        database.getProjects(); 
+    }
+
+    @Then("the project list is shown")
+    public void theProjectListIsShown() {
+        assertNotNull(database.getProjects());
+    }
+
+    @Then("the project list string representation should be:")
+    public void theProjectListStringRepresentationShouldBe(String expected) {
+        assertEquals(expected.trim(), project.toString().trim());
+    }
     
 }
