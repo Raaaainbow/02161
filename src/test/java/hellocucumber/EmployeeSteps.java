@@ -294,5 +294,11 @@ public class EmployeeSteps {
     public void theTaskListStringRepresentationShouldBe(String expected) {
         assertEquals(expected.trim(), task.toString().trim());
     }
+
+    @Then("the assigned task list is shown")
+    public void theAssignedTaskListIsShown() {
+        List<Task> assignedTask = employee.getAssignedTasks();
+        assertNotNull(assignedTask);
+    }
     
 }

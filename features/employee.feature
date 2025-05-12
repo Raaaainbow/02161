@@ -154,6 +154,7 @@ Feature: Employee
           Duration: Week 20 - 22 (50.0 hours)
           Employee: abcd
           Status: Active
+          Time Registrations: None
         """
     Scenario: An employee wants to see their course registration
         Given the database is initialized
@@ -195,4 +196,13 @@ Feature: Employee
           Duration: Week 20 - 22 (50.0 hours)
           Employee: Not assigned
           Status: Active
+          Time Registrations: None
         """
+
+    Scenario: An employee wnats to see the tasks they are assigned to
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        And the employee creates a project with the title "Software_project"
+        And the employee creates a task "Coding" using 50.0 hours starting in week 20 and ending in week 22 in the project
+        When the employee creates their task list
+        Then the assigned task list is shown
