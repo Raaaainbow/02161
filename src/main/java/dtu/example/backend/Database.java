@@ -80,30 +80,6 @@ public class Database {
         return false;
     }
 
-    // public boolean projectExistsNumber(String projectNumber) {
-    //     assert projectNumber != null : "Pre-condition failed: projectNumber must not be null";
-
-    //     boolean result = false;
-
-    //     for (Project project : projects) {
-    //         if (project.getProjectNumber() != null && project.getProjectNumber().equals(projectNumber)) {
-    //             result = true;
-    //             break;
-    //         }
-    //     }
-    //     if (result == true) {
-    //         boolean expected = false;
-    //         for (Project project : projects) {
-    //             if (project.getProjectNumber() != null && project.getProjectNumber().equals(projectNumber)) {
-    //                 expected = true;
-    //                 break;
-    //             }
-    //         }
-    //         assert expected : "Post-condition failed: project with matching project number should exist";
-    //     }
-    //     return result;
-    // }
-
     public Project getProject(String title) {
         for (Project project: projects) {
             if (project.getTitle() != null && project.getTitle().equals(title)) {

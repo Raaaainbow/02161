@@ -43,30 +43,6 @@ public class Project {
 		return false;
 	}
 
-	// public boolean taskExists(String title) {
-	// 	assert title != null : "Pre-condition fail: title should not be null";
-
-	// 	boolean result = false;
-	// 	for (Task task : tasks) {
-	// 		if (task.getTitle().equals(title)) {
-	// 			result = true;
-	// 			break;
-	// 		}
-	// 	}
-	// 	if (result) {
-	// 		boolean expected = false;
-	// 		for (Task task : tasks) {
-	// 			if (task.getTitle().equals(title)) {
-	// 				expected = true;
-	// 				break;
-	// 			}
-	// 		}
-	// 		assert expected : "Post-condition failed: task with matching title should exist";
-	// 	}
-
-	// 	return result;
-	// }
-
 	public void makeProjectLeader(String initials) {
 		if (!projectLeaderInProject()) {
 			setProjectLead(initials);
@@ -81,18 +57,6 @@ public class Project {
 		}
 		return true;
 	}
-
-	// public boolean projectLeaderInProject() {
-	// 	assert true;
-
-	// 	boolean result = getProjectLead() != null;
-
-	// 	if (getProjectLead() == null) {
-	// 		return false;
-	// 	}
-	// 	assert result == (getProjectLead() != null) : "Post-condition failed: project leader should be null";
-	// 	return result;
-	// }
 
 	public void setProjectNumber(String projectNumber) {
 		this.projectNumber = projectNumber;

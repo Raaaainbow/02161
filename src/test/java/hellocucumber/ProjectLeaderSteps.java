@@ -3,6 +3,7 @@
 package hellocucumber;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -54,6 +55,16 @@ public class ProjectLeaderSteps {
 
     @Then("the employee {string} is not promoted to project leader")
     public void theEmployeeIsNotPromotedToProjectLeader(String initials) {
+        assertNotEquals(initials, project.getProjectLead());
+    }
+
+    @Given("employee with initials {string} is a project leader in the project {string}")
+    public void employeeWithInitialsIsAProjectLeaderInTheProject(String initials, String projectNumber) {
+        assertEquals(initials, project.getProjectLead());
+    }
+
+    @Then("employee with initials {string} should no longer be a project leader in project {string}")
+    public void employeeWithInitialsShouldNoLongerBeAProjectLeaderInProject(String initials, String projectNumber) {
         assertNotEquals(initials, project.getProjectLead());
     }
 }
