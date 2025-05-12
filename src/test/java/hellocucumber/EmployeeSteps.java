@@ -123,6 +123,8 @@ public class EmployeeSteps {
 
     @Given("there is a project leader in the project")
     public void thereIsAProjectLeaderInTheProject() {
+        String initials = employee.getInitials();
+        project.makeProjectLeader(initials);
         assertTrue(project.projectLeaderInProject());
     }
 

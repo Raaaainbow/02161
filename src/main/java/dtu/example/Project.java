@@ -67,16 +67,23 @@ public class Project {
 	}
 
 	public boolean projectLeaderInProject() {
-		assert true;
-
-		boolean result = getProjectLead() != null;
-
 		if (getProjectLead() == null) {
 			return false;
 		}
-		assert result == (getProjectLead() != null) : "Post-condition failed: project leader should be null";
-		return result;
+		return true;
 	}
+
+	// public boolean projectLeaderInProject() {
+	// 	assert true;
+
+	// 	boolean result = getProjectLead() != null;
+
+	// 	if (getProjectLead() == null) {
+	// 		return false;
+	// 	}
+	// 	assert result == (getProjectLead() != null) : "Post-condition failed: project leader should be null";
+	// 	return result;
+	// }
 
 	public void setProjectNumber(String projectNumber) {
 		this.projectNumber = projectNumber;

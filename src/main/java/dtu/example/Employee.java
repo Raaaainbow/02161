@@ -16,7 +16,6 @@ public class Employee {
 
     public Employee(String initials) {
         setInitials(initials);
-        
     }
     
     public String changeInitials(String newInitials) {
@@ -28,8 +27,6 @@ public class Employee {
         Task vacation = new Task(startDate, endDate, "Vacation ");
         this.title = vacation.getTitle();
         vacationList.add(vacation);
-        //String intials = getInitials();
-        //vacation.setAssignedEmployee(initials);
     }
 
     public void createSickLeave(LocalDate startDate, LocalDate endDate) {

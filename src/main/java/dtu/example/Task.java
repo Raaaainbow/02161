@@ -106,21 +106,4 @@ public class Task {
     output.append("  Status: Approved");
     return output.toString();
   }
-
-  // public void assignEmployee(Employee employee) {
-  // this.assignedEmployee = employee;
-  // }
-
-  // public Employee getAssignedEmployee() {
-  // return assignedEmployee;
-  // }
-
-  // public void add(Task task) {
-
-  // }
-
-  // public boolean taskExists() {
-  // return taskExists;
-  // }
-
 }
