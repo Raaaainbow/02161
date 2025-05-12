@@ -1,38 +1,37 @@
-# mob programming Sophia, Katarina, Caroline
 
 Feature: Employee 
     Description: 
     Actor: Employee
-
+    # Sophia
     Scenario: Employee exists in the Database
         Given the database is initialized
         And an employee is created with initials "abcd"
         Then the employee "abcd" exists in the Database 
-
+    # Katarina
     Scenario: Employee does not exist in the Database
         Given the database is initialized
         And an employee is created with initials "abcd"
         Then the employee "efgh" does not exist in the Database
-
+    # Caroline
     Scenario: Employee changes their initials
         Given the database is initialized
         And an employee has the initials "abcd"
         When the employee change their initials to "efgh"
         Then the employee has the initials "efgh"
-
+    # Sophia
     Scenario: Employee creates project with a title
         Given the database is initialized
         And an employee is created with initials "abcd"
         When the employee creates a project with the title "Software_project"
         Then a project with the title "Software_project" is created
-
+    # Katarina
     Scenario: Employee creates project without a title
         Given the database is initialized
         And an employee is created with initials "abcd"
         When the employee creates a project without a title
         Then a project without a title is created with the project number "P-255"
         And the project has the project number "P-255"
-
+    # Caroline
     Scenario: An employee creates a task in a project
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -41,7 +40,7 @@ Feature: Employee
         When the employee creates a task "Coding" using 50 hours starting in week 20 and ending in week 22 in the project
         Then the task "Coding" is created in the project
         And the task "Coding" has the starting week 20 and ending week 22
-
+    # Sophia
     Scenario: An employee creates a task in a project but there is a project leader
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -49,7 +48,7 @@ Feature: Employee
         And there is a project leader in the project 
         When the employee tries to create a task "Coding" using 50.0 hours starting in week 20 and ending in week 22 in the project
         Then the task "Coding" is not created in the project
-
+    # Katarina
     Scenario: An employee creates a task in a project with a non-valid week number
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -57,7 +56,7 @@ Feature: Employee
         And there is no project leader in the project   
         When the employee tries to create a task "Coding" using 50.0 hours starting in week 60 and ending in week 62 in the project
         Then the task "Coding" is not created in the project
-
+    # Caroline
     Scenario: An employee creates a task in a project with a non-valid week number
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -65,7 +64,7 @@ Feature: Employee
         And there is no project leader in the project   
         When the employee tries to create a task "Coding" using 50.0 hours starting in week -2 and ending in week 1 in the project
         Then the task "Coding" is not created in the project
-
+    # Sophia
     Scenario: An employee creates a task in a project with a non-valid week number
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -73,25 +72,25 @@ Feature: Employee
         And there is no project leader in the project   
         When the employee tries to create a task "Coding" using 50.0 hours starting in week 40 and ending in week 62 in the project
         Then the task "Coding" is not created in the project
-
+    # Katarina
     Scenario: An employee creates a vacation task
         Given the database is initialized
         And an employee is created with initials "abcd"
         When the employee creates a vacation task starting "2025-01-01" and ending "2025-01-10"
         Then the vacation task is created
-    
+    # Caroline
     Scenario: An employee creates a sick leave task
         Given the database is initialized
         And an employee is created with initials "abcd"
         When the employee creates a sick leave task starting "2025-01-01" and ending "2025-01-10"
         Then the sick leave task is created
-
+    # Sophia
     Scenario: An employee creates a course task
         Given the database is initialized
         And an employee is created with initials "abcd"
         When the employee creates a course task starting "2025-01-01" and ending "2025-01-10"
         Then the course task is created
-
+    # Katarina
     Scenario: An employee wants to see their vacation list
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -99,7 +98,7 @@ Feature: Employee
         And the employee creates a vacation task starting "2025-02-01" and ending "2025-02-10"
         When the employee creates their vacation list
         Then the vacation list is shown
-
+    # Caroline
     Scenario: An employee wants to see their sick leave list
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -107,7 +106,7 @@ Feature: Employee
         And the employee creates a sick leave task starting "2025-02-01" and ending "2025-02-10"
         When the employee creates their sick leave list
         Then the sick leave list is shown
-    
+    # Sophia
     Scenario: An employee wants to see their course list
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -115,32 +114,32 @@ Feature: Employee
         And the employee creates a course task starting "2025-02-01" and ending "2025-02-10"
         When the employee creates their course list
         Then the course list is shown
-
+    # Katarina
     Scenario: An employee creates a task without a project number
         Given the database is initialized
         And an employee is created with initials "abcd"
         When the employee creates a task "Coding" using 50.0 hours starting in week 20 and ending in week 22
         Then the task "Coding" is created
         And the task "Coding" has the starting week 20 and ending week 22
-
+    # Caroline
     Scenario: An employee creates a task without a project number with a non-valid week number
         Given the database is initialized
         And an employee is created with initials "abcd"
         When the employee tries to create a task "Coding" using 50.0 hours starting in week 60 and ending in week 62
         Then the task "Coding" is not created
-
+    # Sophia
     Scenario: An employee creates a task without a project number with a non-valid week number
         Given the database is initialized
         And an employee is created with initials "abcd" 
         When the employee tries to create a task "Coding" using 50.0 hours starting in week -2 and ending in week 1
         Then the task "Coding" is not created
-
+    # Katarina
     Scenario: An employee creates a task without a project number with a non-valid week number
         Given the database is initialized
         And an employee is created with initials "abcd"
         When the employee tries to create a task "Coding" using 50.0 hours starting in week 40 and ending in week 62
         Then the task "Coding" is not created
-
+    # Caroline
     Scenario: Task with assigned employee displays correctly
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -156,6 +155,7 @@ Feature: Employee
           Status: Active
           Time Registrations: None
         """
+    # Sophia
     Scenario: An employee wants to see their course registration
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -168,7 +168,7 @@ Feature: Employee
           Duration: 2025-01-01 - 2025-01-10
           Status: Approved
         """
-
+    # Katarina
     Scenario: An employee wants to see their project list
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -182,7 +182,7 @@ Feature: Employee
         Project Leader: Not assigned
         Tasks: 0
         """
-
+    # Caroline
     Scenario: An employee wants to see their task list
         Given the database is initialized
         And an employee is created with initials "abcd"
@@ -198,7 +198,7 @@ Feature: Employee
           Status: Active
           Time Registrations: None
         """
-
+    # Sophia
     Scenario: An employee wnats to see the tasks they are assigned to
         Given the database is initialized
         And an employee is created with initials "abcd"
