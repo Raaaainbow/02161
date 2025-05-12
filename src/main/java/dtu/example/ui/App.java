@@ -1,8 +1,9 @@
-// mob programming Katarina, Sophia, Sebastian, Caroline
+// Sebastian
 
 package dtu.example.ui;
 
 import dtu.example.*;
+import io.cucumber.messages.types.SourceMediaType;
 
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -88,7 +89,6 @@ public class App {
                 int endWeek = Integer.parseInt(parts[5]);
                 String projectNumber = parts[6].toUpperCase().trim();
                 
-                // Kommentar
                 if ((startWeek <= 0 || startWeek > 52) && (endWeek <= 0 || endWeek > 52)) {
                     System.out.println("Error: Start and end week must be between 1 and 52.");
                     return;
@@ -115,9 +115,15 @@ public class App {
                     return;
                 }
 
-                project.createTask(title, hours, startWeek, endWeek, projectNumber);
+                // Create task only in project
+
+                Task newTask = project.createTask(title, hours, startWeek, endWeek, projectNumber);
+                
+                // Add the same task to current employee
                 Employee currentEmployeeObject = database.getEmployee(currentEmployee);
-                currentEmployeeObject.createTask(title, hours, startWeek, endWeek);
+                currentEmployeeObject.addTask(newTask);
+                newTask.setAssignedEmployee(currentEmployeeObject);
+
                 System.out.println("Task '" + title + "' created successfully for project " + projectNumber);
 
                 return;
@@ -192,6 +198,46 @@ public class App {
            }
         }
 
+        if (parts[0].equals("assign") && parts[1].equals("task")) {
+            try {
+                String taskTitle = parts[2];
+                String oldInitials = parts[3];
+                String NewInitials = parts[4];
+
+                Employee oldEmployee = database.getEmployee(oldInitials);
+                if (oldEmployee == null) {
+                    System.out.println("Error: Employee " + oldInitials + " not found");
+                    return;
+                }
+                
+                List<Task> tasks = oldEmployee.getAssignedTasks();
+                boolean taskFound = false;
+                for (Task task: tasks) {
+                    if (task.getTitle().equals(taskTitle)) {
+                        Employee newEmployee = database.getEmployee(NewInitials);
+                        if (newEmployee == null) {
+                            System.out.println("Error: Employee " + NewInitials + " not found");
+                            return;
+                        }
+                        System.out.println("assigning new employee");
+                        task.setAssignedEmployee(newEmployee);
+                        newEmployee.addTask(task);
+                        
+                        oldEmployee.getAssignedTasks().remove(task);
+                        taskFound = true;
+                        break;
+                    }
+                }
+                
+                if (!taskFound) {
+                    System.out.println("Task " + taskTitle + " does not exist");
+                }
+                
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Error: Usage: assign task TASK_TITLE OLD_EMPLOYEE_INITIALS NEW_EMPLOYEE_INITIALS");
+            }
+        }
+        
         if (parts[0].equals("assign") && parts[1].equals("project") && parts[2].equals("leader")) {
             try {
                 String projectNumber = parts[3].toUpperCase();
@@ -220,6 +266,8 @@ public class App {
             System.out.println("exit\n    Exits the program");
             System.out.println("\nassign project leader PROJECTNUMBER INITIALS");
             System.out.println("    Assigns a project leader to specified project");
+            System.out.println("\nassign task TASK_TITLE OLD_INITIALS NEW_INITIALS");
+            System.out.println("    Reassigns a task from one employee to another");
             System.out.println("\ncreate project [PROJECTNAME]");
             System.out.println("    Creates a new project with optional name");
             System.out.println("\ncreate task TITLE HOURS STARTWEEK ENDWEEK PROJECTNUMBER");
@@ -230,8 +278,8 @@ public class App {
             System.out.println("    Lists all employee initials from the database");
             System.out.println("\nlist projects");
             System.out.println("    Lists project numbers from the database");
-            System.out.println("\nview time registration");
-            System.out.println("    Views time registration (not yet implemented)");
+            System.out.println("\nview time registration [PROJECTNUMBER]");
+            System.out.println("    Views tasks for current employee or specified project");
             System.out.println("\nhelp");
             System.out.println("    Displays this command list");
             System.out.println("\n=========================\n");
