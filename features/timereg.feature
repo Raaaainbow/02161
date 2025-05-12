@@ -1,26 +1,49 @@
 # mob programming Sophia, Caroline, Sebastian
+Feature: Time Registration Management
+  As an employee
+  I want to register my working hours
+  So that my time is accurately tracked for payroll and reporting
 
-Feature: Register time
-    Description: Employee registers their spent time
-    Actor: Employee
+  Background:
+    Given today's date is "2025-02-15"
 
-    Scenario: Create a new time registration
-        Given there exists a time registration on "2024-04-05T14:00" and shift ends "2024-04-05T15:00"
-        Then the shift start is "2024-04-05T14:00"
-        And the shift end is "2024-04-05T15:00"
-        And the date should be "2024-04-05"
+  Scenario: Register hours with manual input
+    Given I am an employee with initials "SK"
+    When I register 8.5 hours worked on "2025-02-15"
+    Then my time registration should show 8.5 hours
+    And the date should be "2025-02-15"
+    And my initials should be "SK"
 
-    Scenario: Update shift start time
-        Given there exists a time registration with shift start "2024-04-05T14:00" 
-        When the shift start is updated to "2024-04-05T12:00"
-        Then the shift start should be "2024-04-05T12:00"
-
-    Scenario: Update shift end time
-        Given there exists a time registration with shift end "2024-04-05T15:00"
-        When the shift end is changed to "2024-04-05T16:00"
-        Then the shift end is updated to "2024-04-05T16:00"
-
-    Scenario: Mark time registrations as deleted
-        Given there exists a time registration with shift start "2024-04-05T14:00" and shift end "2024-04-05T15:00"
-        When the time registration is deleted
-        Then the time registration should be marked as deleted
+    #  Scenario: Hours are rounded using standard rounding to nearest half hour
+    #    Given I am an employee with initials "CJ"
+    #    When I register 7.3 hours worked on "2025-02-15"
+    #    Then my time registration should show 7.5 hours
+    #
+    #  Scenario: Negative hours are converted to positive
+    #    Given I am an employee with initials "SP"
+    #    When I register -6.5 hours worked on "2025-02-15"
+    #    Then my time registration should show 6.5 hours
+    #
+    #  Scenario: Delete time registration
+    #    Given I have a time registration for 8 hours
+    #    When I delete the time registration
+    #    Then the registration should be marked as deleted
+    #
+    #  Scenario: Display time registration
+    #    Given I have a time registration with initials "CJ" for 7.5 hours on "2025-02-15"
+    #    And there are no shift times
+    #    Then the display should show "2025-02-15 - 7.5 hours (CJ)"
+    #
+    #  Scenario Outline: Round different hour values using standard rounding
+    #    Given I am an employee with initials "SP"
+    #    When I register <input_hours> hours worked on "2025-02-15"
+    #    Then my time registration should show <expected_hours> hours
+    #
+    #    Examples:
+    #      | input_hours | expected_hours |
+    #      | 8.1         | 8.0            |
+    #      | 8.25        | 8.5            |
+    #      | 8.4         | 8.5            |
+    #      | 8.6         | 8.5            |
+    #      | 8.75        | 9.0            |
+    #      | 8.9         | 9.0            |

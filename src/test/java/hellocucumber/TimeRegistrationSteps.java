@@ -5,31 +5,57 @@ package hellocucumber;
 import io.cucumber.java.en.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import dtu.example.backend.TimeRegistration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TimeRegistrationSteps {
+    private String employeeInitials;
     private TimeRegistration timeRegistration;
+    private LocalDate currentDate;
 
-    // Scenario: Create a new time registration
-    @Given("there exists a time registration on {string} and shift ends {string}")
-    public void there_exists_a_time_registration_on_and_shift_ends(String shiftStart, String shiftEnd) {
-        LocalDateTime start = LocalDateTime.parse(shiftStart);
-        LocalDateTime end = LocalDateTime.parse(shiftEnd);
-        LocalDate date = start.toLocalDate();
-        timeRegistration = new TimeRegistration(start, end, date);
+    @Given("today's date is {string}")
+    public void todays_date_is(String date) {
+        currentDate = LocalDate.parse(date);
     }
 
-    @Then("the shift start is {string}")
-    public void the_shift_start_is(String expectedStart) {
-        assertEquals(LocalDateTime.parse(expectedStart), timeRegistration.getShiftStart());
+    @Given("I am an employee with initials {string}")
+    public void i_am_an_employee_with_initials(String initials) {
+        employeeInitials = initials;
     }
 
-    @Then("the shift end is {string}")
-    public void the_shift_end_is(String expectedEnd) {
-        assertEquals(LocalDateTime.parse(expectedEnd), timeRegistration.getShiftEnd());
+    @When("I register {double} hours worked on {string}")
+    public void i_register_hours_worked_on(double hours, String date) {
+        LocalDate workDate = LocalDate.parse(date);
+        timeRegistration = new TimeRegistration(hours, employeeInitials, workDate);
+    }
+
+    @Given("I have a time registration for {double} hours")
+    public void i_have_a_time_registration_for_hours(double hours) {
+        timeRegistration = new TimeRegistration(hours, "TEST", currentDate);
+    }
+
+    @When("I delete the time registration")
+    public void i_delete_the_time_registration() {
+        timeRegistration.deleteTimeReg();
+    }
+
+    @Given("I have a time registration with initials {string} for {double} hours on {string}")
+    public void i_have_a_time_registration_with_initials_for_hours_on(String initials, double hours, String date) {
+        LocalDate workDate = LocalDate.parse(date);
+        timeRegistration = new TimeRegistration(hours, initials, workDate);
+    }
+
+    @Given("there are no shift times")
+    public void there_are_no_shift_times() {
+        // No action needed - this is the default state
+    }
+
+    @Then("my time registration should show {double} hours")
+    public void my_time_registration_should_show_hours(double expectedHours) {
+        assertEquals(expectedHours, timeRegistration.getHours(), 0.01);
     }
 
     @Then("the date should be {string}")
@@ -37,58 +63,18 @@ public class TimeRegistrationSteps {
         assertEquals(LocalDate.parse(expectedDate), timeRegistration.getDate());
     }
 
-    // Scenario: Update shift start time
-    @Given("there exists a time registration with shift start {string}")
-    public void there_exists_a_time_registration_with_shift_start(String shiftStart) {
-        LocalDateTime start = LocalDateTime.parse(shiftStart);
-        LocalDate date = start.toLocalDate();
-        timeRegistration = new TimeRegistration(start, null, date);
+    @Then("my initials should be {string}")
+    public void my_initials_should_be(String expectedInitials) {
+        assertTrue(timeRegistration.toString().contains(expectedInitials));
     }
 
-    @When("the shift start is updated to {string}")
-    public void the_shift_start_is_updated_to(String newShiftStart) {
-        timeRegistration.setShiftStart(LocalDateTime.parse(newShiftStart));
-    }
-
-    @Then("the shift start should be {string}")
-    public void the_shift_start_should_be(String expectedStart) {
-        assertEquals(LocalDateTime.parse(expectedStart), timeRegistration.getShiftStart());
-    }
-
-    // Scenario: Update shift end time
-    @Given("there exists a time registration with shift end {string}")
-    public void there_exists_a_time_registration_with_shift_end(String shiftEnd) {
-        LocalDateTime end = LocalDateTime.parse(shiftEnd);
-        LocalDate date = end.toLocalDate();
-        timeRegistration = new TimeRegistration(null, end, date);
-    }
-
-    @When("the shift end is changed to {string}")
-    public void the_shift_end_is_changed_to(String newShiftEnd) {
-        timeRegistration.setShiftEnd(LocalDateTime.parse(newShiftEnd));
-    }
-
-    @Then("the shift end is updated to {string}")
-    public void the_shift_end_is_updated_to_(String expectedEnd) {
-        assertEquals(LocalDateTime.parse(expectedEnd), timeRegistration.getShiftEnd());
-    }
-
-    // Scenario: Mark time registration as deleted
-    @Given("there exists a time registration with shift start {string} and shift end {string}")
-    public void there_exists_a_time_registration_with_shift_start_and_shift_end(String shiftStart, String shiftEnd) {
-        LocalDateTime start = LocalDateTime.parse(shiftStart);
-        LocalDateTime end = LocalDateTime.parse(shiftEnd);
-        LocalDate date = start.toLocalDate();
-        timeRegistration = new TimeRegistration(start, end, date);
-    }
-
-    @When("the time registration is deleted")
-    public void the_time_registration_is_deleted() {
-        timeRegistration.deleteTimeReg();
-    }
-
-    @Then("the time registration should be marked as deleted")
-    public void the_time_registration_should_be_marked_as_deleted() {
+    @Then("the registration should be marked as deleted")
+    public void the_registration_should_be_marked_as_deleted() {
         assertTrue(timeRegistration.isDeleted());
+    }
+
+    @Then("the display should show {string}")
+    public void the_display_should_show(String expectedDisplay) {
+        assertEquals(expectedDisplay, timeRegistration.toString());
     }
 }

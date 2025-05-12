@@ -14,11 +14,11 @@ public class TimeRegistration {
     private String initials;
 
     public TimeRegistration(double hours, String initials, LocalDate date) {
-        double roundedHours= Math.round(hours * 2.0)/2.0;
-        roundedHours = Math.abs(roundedHours);
-        this.hours = roundedHours;
-        this.initials = initials;
-        this.date = date;
+    double positiveHours = Math.abs(hours);
+    double roundedHours = Math.floor(positiveHours * 2.0 + 0.5) / 2.0;
+    this.hours = roundedHours;
+    this.initials = initials;
+    this.date = date;
     }
 
     public void deleteTimeReg(){
