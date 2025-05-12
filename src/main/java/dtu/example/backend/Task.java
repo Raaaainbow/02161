@@ -16,6 +16,7 @@ public class Task {
   private LocalDate startDate;
   private LocalDate endDate;
   private List<TimeRegistration> TimeRegistrations = new ArrayList<>();
+  private List<Employee> assignedEmployees = new ArrayList<>();
   private Project project;
 
   public Task(String title, double hours, int startWeek, int endWeek, String projectNumber) {
@@ -39,9 +40,12 @@ public class Task {
   }
 
   public void setAssignedEmployee(Employee employee) {
-    this.assignedEmployee = employee;
+    assignedEmployees.add(employee);
   }
 
+  public List<Employee> getAssignedEmployees() {
+    return assignedEmployees;
+  }
   public void setStartDate(LocalDate startDate) {
     this.startDate = startDate;
   }
@@ -84,28 +88,42 @@ public class Task {
   }
 
   // Sebastian
-    public String toString() {
-       StringBuilder output = new StringBuilder();
-       output.append("Task: ").append(title).append("\n");
-       output.append("  Duration: Week ").append(startWeek).append(" - ").append(endWeek);
-       output.append(" (").append(estimatedHours).append(" hours)").append("\n");
-       output.append("  Employee: ").append(assignedEmployee != null ? assignedEmployee.getInitials() : "Not assigned")
-           .append("\n");
-       output.append("  Status: Active").append("\n");
-       output.append("  Time Registrations: ");
-       if (TimeRegistrations.isEmpty()) {
-           output.append("None");
-       } else {
-           output.append("\n");
-           spentHours = 0;
-           for (TimeRegistration tr : TimeRegistrations) {
-               spentHours += tr.getHours();
-               output.append("    ").append(tr.toString()).append("\n");
-           }
-           output.append("  Total hours spent: ").append(spentHours);
-       }
-       return output.toString();
-    }
+  public String toString() {
+      StringBuilder output = new StringBuilder();
+      output.append("Task: ").append(title).append("\n");
+      output.append("  Duration: Week ").append(startWeek).append(" - ").append(endWeek);
+      output.append(" (").append(estimatedHours).append(" hours)").append("\n");
+      
+      output.append("  Employee: ");
+      if (assignedEmployees.isEmpty()) {
+          output.append("Not assigned");
+      } else {
+          StringBuilder employeeList = new StringBuilder();
+          for (int i = 0; i < assignedEmployees.size(); i++) {
+              employeeList.append(assignedEmployees.get(i).getInitials());
+              if (i < assignedEmployees.size() - 1) {
+                  employeeList.append(", ");
+              }
+          }
+          output.append(employeeList);
+      }
+      output.append("\n");
+      
+      output.append("  Status: Active").append("\n");
+      output.append("  Time Registrations: ");
+      if (TimeRegistrations.isEmpty()) {
+          output.append("None");
+      } else {
+          output.append("\n");
+          spentHours = 0;
+          for (TimeRegistration tr : TimeRegistrations) {
+              spentHours += tr.getHours();
+              output.append("    ").append(tr.toString()).append("\n");
+          }
+          output.append("  Total hours spent: ").append(spentHours);
+      }
+      return output.toString();
+  }
 
   public String toString2() {
     StringBuilder output = new StringBuilder();
