@@ -13,6 +13,7 @@ public class App {
     private static Employee currentEmployeeObject;
     private static final int maxTasks = 20;
 
+    // Sebastian
     public static void main(String[] args) {
         Scanner console = new Scanner(System.in);
         Database database = new Database();
@@ -35,6 +36,7 @@ public class App {
         console.close();
     }
 
+    // Sebastian
     private static void initialise(Database database, Scanner console) {
         LogIn login = new LogIn();
         boolean loginSuccessful = false;
@@ -57,6 +59,7 @@ public class App {
         }
     }
 
+        // Sebastian
         private static void inputHandling(String input, Database database, Scanner console) {
                 String[] parts = input.split("\\s+");
 
@@ -77,6 +80,7 @@ public class App {
                     return;
                 }
                 
+                // Sebastian
                 try {
                     if (parts[0].equals("create") && parts[1].equals("task")) {
                         if (parts.length < 7) {
@@ -144,6 +148,7 @@ public class App {
                     return;
                 }
 
+                // Sebastian
                 try {
                     if (parts[0].equals("edit") && parts[1].equals("task")) {
                         String taskTitle = parts[2];
@@ -228,6 +233,7 @@ public class App {
                     return;
                 }
 
+                // Sebastian
                 try {
                     if (parts[0].equals("register") && parts[1].equals("time")) {
                         String taskName = parts[2];
@@ -270,6 +276,7 @@ public class App {
                     return;
                 }
 
+                // Sebastian
                 try {
                     if (parts[0].equals("register") && parts[1].equals("vacation")) {
                         if (parts.length < 4) {
@@ -294,7 +301,7 @@ public class App {
                     System.out.println("Error registering vacation: " + e.getMessage());
                     return;
                 }
-        // Katarina
+                // Katarina
                 try {
                     if (parts[0].equals("register") && parts[1].equals("sick") && parts[2].equals("leave")) {
                         if (parts.length < 5) {
@@ -345,6 +352,7 @@ public class App {
                     return;
                 }
 
+                // Sebastian
                 try {
                     if (parts[0].equals("list") && parts[1].equals("projects")) {
                         List<Project> projects = database.getProjects();
@@ -358,6 +366,7 @@ public class App {
                     return;
                 }
                 
+                // Sebastian
                 try {
                     if (parts[0].equals("list") && parts[1].equals("employees")) {
                         List<Employee> employees = database.getEmployees();
@@ -373,6 +382,7 @@ public class App {
                     return;
                 }
 
+                // Sebastian
                 try {
                     if (parts[0].equals("view") && parts[1].equals("time") && parts[2].equals("registration")) {
                        String projectNumber = parts.length > 3 ? parts[3].toUpperCase() : null;
@@ -397,6 +407,7 @@ public class App {
                     return;
                 }
 
+                // Sebastian
                 try {
                     if (parts[0].equals("assign") && parts[1].equals("task")) {
                         String taskTitle = parts[2];
@@ -475,7 +486,7 @@ public class App {
                     System.out.println("Error assigning task: " + e.getMessage());
                     return;
                 }
-        // Caroline
+                // Caroline
                 try {
                     if (parts[0].equals("view") && parts[1].equals("vacation")) {
                         Employee employee = database.getEmployee(currentEmployee);
@@ -517,7 +528,7 @@ public class App {
                     System.out.println("Error viewing sick leave: " + e.getMessage());
                     return;
                 }
-        // Sophia
+                // Sophia
                 try {
                     if (parts[0].equals("view") && parts[1].equals("course")) {
                         Employee employee = database.getEmployee(currentEmployee);
@@ -539,6 +550,7 @@ public class App {
                     return;
                 }
                 
+                // Sebastian
                 try {
                     if (parts[0].equals("assign") && parts[1].equals("project") && parts[2].equals("leader")) {
                         String projectNumber = parts[3].toUpperCase();
@@ -561,6 +573,7 @@ public class App {
                     return;
                 }
                 
+                // Sebastian
                 try {
                     if (parts[0].equals("edit") && parts[1].equals("project")) {
                        String projectNumber = parts[2].toUpperCase();
@@ -605,6 +618,7 @@ public class App {
                     return;
                 }
 
+                // Sebastian
                 try {
                     if (parts[0].equals("help")) {
                         System.out.println("\n=== AVAILABLE COMMANDS ===");
@@ -651,6 +665,7 @@ public class App {
                     return;
                 }
 
+                // Sebastian
                 try {
                     System.out.println("Unknown command '" + input + "' type 'help' to see available commands.");
                 } catch (Exception e) {
