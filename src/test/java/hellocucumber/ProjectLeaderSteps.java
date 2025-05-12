@@ -60,11 +60,21 @@ public class ProjectLeaderSteps {
 
     @Given("employee with initials {string} is a project leader in the project {string}")
     public void employeeWithInitialsIsAProjectLeaderInTheProject(String initials, String projectNumber) {
+        this.project = database.getProjectByNumber(projectNumber);
+        project.makeProjectLeader(initials);
+        assertTrue(project.projectLeaderInProject());
         assertEquals(initials, project.getProjectLead());
+    }
+
+    @When("an employee replaces project leader {string} with employee {string} in the project")
+    public void an_employee_replaces_project_leader_with_employee_in_the_project(String initials, String initials2) {
+        project.setProjectLead(initials2);
+        assertEquals(initials2, project.getProjectLead());
     }
 
     @Then("employee with initials {string} should no longer be a project leader in project {string}")
     public void employeeWithInitialsShouldNoLongerBeAProjectLeaderInProject(String initials, String projectNumber) {
         assertNotEquals(initials, project.getProjectLead());
     }
+
 }

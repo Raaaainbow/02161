@@ -18,7 +18,9 @@ Feature: Project Leader management
     When an employee tries to promote employee "sass" to project leader in the project
     Then the employee "sass" is not promoted to project leader
     
-     Scenario: Remove project leader role
-       Given the database is initialised
-       And employee with initials "sass" is a project leader in the project "P-251"
-       Then employee with initials "sass" should no longer be a project leader in project "P-251"
+  Scenario: Replace project leader role
+    Given the database is initialised
+    And employee with initials "sass" is a project leader in the project "P-251"
+    When an employee replaces project leader "sass" with employee "cp" in the project
+    Then the employee "sass" is the project leader in the project
+    Then employee with initials "sass" should no longer be a project leader in project "P-251"

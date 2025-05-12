@@ -44,11 +44,7 @@ public class Project {
 	}
 
 	public void makeProjectLeader(String initials) {
-		if (!projectLeaderInProject()) {
-			setProjectLead(initials);
-		} else {
-			throw new IllegalArgumentException(getProjectLead() + "is the project leader of this project");
-		}
+		setProjectLead(initials);
 	}
 
 	public boolean projectLeaderInProject() {
