@@ -72,12 +72,27 @@ public class Database {
     }
 
     public boolean projectExistsNumber(String projectNumber) {
-        for (Project project: projects) {
+        assert projectNumber != null : "Pre-condition failed: projectNumber must not be null";
+
+        boolean result = false;
+
+        for (Project project : projects) {
             if (project.getProjectNumber() != null && project.getProjectNumber().equals(projectNumber)) {
-                return true;
+                result = true;
+                break;
             }
         }
-        return false;
+        if (result == true) {
+            boolean expected = false;
+            for (Project project : projects) {
+                if (project.getProjectNumber() != null && project.getProjectNumber().equals(projectNumber)) {
+                    expected = true;
+                    break;
+                }
+            }
+            assert expected : "Post-condition failed: project with matching project number should exist";
+        }
+        return result;
     }
 
     public Project getProject(String title) {

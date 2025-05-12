@@ -35,12 +35,27 @@ public Task createTask(String title, double hours, int startWeek, int endWeek, S
 }
 
 	public boolean taskExists(String title) {
+		assert title != null : "Pre-condition fail: title should not be null";
+
+		boolean result = false;
 		for (Task task : tasks) {
 			if (task.getTitle().equals(title)) {
-				return true;
+				result = true;
+				break;
 			}
 		}
-		return false;
+		if (result) {
+			boolean expected = false;
+			for (Task task : tasks) {
+				if (task.getTitle().equals(title)) {
+					expected = true;
+					break;
+				}
+			}
+			assert expected : "Post-condition failed: task with matching title should exist";
+		}
+
+		return result;
 	}
 
 	public void makeProjectLeader(String initials) {
