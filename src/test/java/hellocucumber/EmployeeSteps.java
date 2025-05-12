@@ -31,6 +31,7 @@ public class EmployeeSteps {
     private LocalDate sickLeaveEndDate;
     private LocalDate courseStartDate;
     private LocalDate courseEndDate;
+    private Task course;
 
 
     @Given("the database is initialized")
@@ -103,8 +104,8 @@ public class EmployeeSteps {
         assertFalse(project.projectLeaderInProject());
     }
     
-    @When("the employee creates a task {string} using {int} hours starting in week {int} and ending in week {int} in the project")
-    public void theEmployeeCreatesAnActivityUsingHoursStartingInWeekAndEndingInWeekInTheProject(String title, int hours, int startWeek, int endWeek) {
+    @When("the employee creates a task {string} using {double} hours starting in week {int} and ending in week {int} in the project")
+    public void theEmployeeCreatesAnActivityUsingHoursStartingInWeekAndEndingInWeekInTheProject(String title, double hours, int startWeek, int endWeek) {
         project.createTask(title, hours, startWeek, endWeek, project.getProjectNumber());
         this.task = project.getTaskByTitle(title);
     }
@@ -125,8 +126,8 @@ public class EmployeeSteps {
         assertTrue(project.projectLeaderInProject());
     }
 
-    @When("the employee tries to create a task {string} using {int} hours starting in week {int} and ending in week {int} in the project")
-    public void theEmployeeTriesToCreateAnActivityUsingHoursStartingInWeekAndEndingInWeekInTheProject(String title, int hours, int startWeek, int endWeek) {
+    @When("the employee tries to create a task {string} using {double} hours starting in week {int} and ending in week {int} in the project")
+    public void theEmployeeTriesToCreateAnActivityUsingHoursStartingInWeekAndEndingInWeekInTheProject(String title, double hours, int startWeek, int endWeek) {
         try {
             project.createTask(title, hours, startWeek, endWeek, project.getProjectNumber());
         } catch (IllegalArgumentException e) {
@@ -177,6 +178,7 @@ public class EmployeeSteps {
         this.courseEndDate = LocalDate.parse(endDate);
         employee.createCourse(courseStartDate, courseEndDate);
         this.title = employee.getTitle();
+        this.course = employee.getCourse(title);
     }
 
     @Then("the course task is created")
@@ -214,17 +216,32 @@ public class EmployeeSteps {
         assertNotNull(employee.getCourseList());
     }
     
-    @When("the employee creates a task {string} using {int} hours starting in week {int} and ending in week {int}")
-    public void theEmployeeCreatesAnActivityUsingHoursStartingInWeekAndEndingInWeek(String title, int hours, int startWeek, int endWeek) {
+    @When("the employee creates a task {string} using {double} hours starting in week {int} and ending in week {int}")
+    public void theEmployeeCreatesAnActivityUsingHoursStartingInWeekAndEndingInWeek(String title, double hours, int startWeek, int endWeek) {
         employee.createTask(title, hours, startWeek, endWeek);
         this.task = project.getTaskByTitle(title);
     }
 
-    @When("the employee tries to create a task {string} using {int} hours starting in week {int} and ending in week {int}")
-    public void theEmployeeTriesToCreateATaskUsingHoursStartingInWeekAndEndingInWeek(String title, int hours, int startWeek, int endWeek) {
+    @When("the employee tries to create a task {string} using {double} hours starting in week {double} and ending in week {int}")
+    public void theEmployeeTriesToCreateATaskUsingHoursStartingInWeekAndEndingInWeek(String title, double hours, int startWeek, int endWeek) {
         employee.createTask(title, hours, startWeek, endWeek);
         this.task = project.getTaskByTitle(title);
     }
 
+    @When("the task is assigned to employee {string}")
+    public void theTaskIsAssignedToEmployee(String initials) {
+        this.employee = database.getEmployee(initials);
+        task.setAssignedEmployee(employee); 
+    }
+
+    @Then("the task string representation should be:")
+    public void theTaskStringRepresentationShouldBe(String expected) {
+        assertEquals(expected.trim(), task.toString().trim());
+    }
+
+    @Then("the course task string representation should be:")
+    public void theCourseTaskStringRepresentationShouldBe(String expected) {
+        assertEquals(expected.trim(), course.toString2().trim());
+    }
     
 }
