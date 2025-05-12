@@ -12,9 +12,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import dtu.example.Database;
-import dtu.example.Employee;
-import dtu.example.LogIn;
+import dtu.example.backend.Database;
+import dtu.example.backend.Employee;
+import dtu.example.backend.LogIn;
 
 public class LoginSteps {
     private LogIn logIn = new LogIn();

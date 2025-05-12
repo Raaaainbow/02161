@@ -1,6 +1,6 @@
 // mob programming Sophia, Caroline, Sebastian, Katarina
 
-package dtu.example;
+package dtu.example.backend;
 
 import java.util.ArrayList;
 import java.util.List;

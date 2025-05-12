@@ -11,8 +11,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import dtu.example.Database;
-import dtu.example.Project;
+import dtu.example.backend.Database;
+import dtu.example.backend.Project;
 
 public class ProjectExistsNumberTest {
     // Katarina

@@ -6,7 +6,7 @@ import io.cucumber.java.en.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import dtu.example.TimeRegistration;
+import dtu.example.backend.TimeRegistration;
 
 import static org.junit.jupiter.api.Assertions.*;
 

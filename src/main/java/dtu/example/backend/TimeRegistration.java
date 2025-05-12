@@ -1,6 +1,6 @@
 //mob programming Sebastian, Caroline, Sophia, Katarina
 
-package dtu.example;
+package dtu.example.backend;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

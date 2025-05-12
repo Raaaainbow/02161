@@ -3,6 +3,11 @@
 package dtu.example.ui;
 
 import dtu.example.*;
+import dtu.example.backend.Database;
+import dtu.example.backend.Employee;
+import dtu.example.backend.LogIn;
+import dtu.example.backend.Project;
+import dtu.example.backend.Task;
 import io.cucumber.messages.types.SourceMediaType;
 
 import java.util.Scanner;

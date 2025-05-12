@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import dtu.example.Database;
-import dtu.example.Employee;
+import dtu.example.backend.Database;
+import dtu.example.backend.Employee;
 
 public class DatabaseTest {
     // Sebastian

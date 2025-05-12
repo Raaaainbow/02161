@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dtu.example.Database;
-import dtu.example.Employee;
-import dtu.example.Project;
+import dtu.example.backend.Database;
+import dtu.example.backend.Employee;
+import dtu.example.backend.Project;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

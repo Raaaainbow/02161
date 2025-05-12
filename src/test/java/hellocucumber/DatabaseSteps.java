@@ -7,9 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
 import io.cucumber.java.en.*;
-
-import dtu.example.Database;
-import dtu.example.Employee;
+import dtu.example.backend.Database;
+import dtu.example.backend.Employee;
 
 public class DatabaseSteps {
 

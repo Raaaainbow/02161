@@ -1,5 +1,5 @@
 // mob programming Caroline, Sophia, Sebastian, Katarina
-package dtu.example;
+package dtu.example.backend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
