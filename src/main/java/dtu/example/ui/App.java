@@ -416,5 +416,7 @@ public class App {
             System.out.println("    Displays this command list");
             System.out.println("\n=========================\n");
         }
+
+        System.out.println("Unknown command '" + input + "' type 'help' to see available commands.");
     }
 }
