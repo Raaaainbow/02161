@@ -1,5 +1,3 @@
-// Sebastian
-
 package dtu.example.ui;
 
 import dtu.example.backend.*;
@@ -296,7 +294,7 @@ public class App {
                     System.out.println("Error registering vacation: " + e.getMessage());
                     return;
                 }
-
+        // Katarina
                 try {
                     if (parts[0].equals("register") && parts[1].equals("sick") && parts[2].equals("leave")) {
                         if (parts.length < 5) {
@@ -477,7 +475,7 @@ public class App {
                     System.out.println("Error assigning task: " + e.getMessage());
                     return;
                 }
-
+        // Caroline
                 try {
                     if (parts[0].equals("view") && parts[1].equals("vacation")) {
                         Employee employee = database.getEmployee(currentEmployee);
@@ -519,7 +517,7 @@ public class App {
                     System.out.println("Error viewing sick leave: " + e.getMessage());
                     return;
                 }
-
+        // Sophia
                 try {
                     if (parts[0].equals("view") && parts[1].equals("course")) {
                         Employee employee = database.getEmployee(currentEmployee);

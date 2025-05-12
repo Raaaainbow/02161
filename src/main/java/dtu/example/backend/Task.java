@@ -1,5 +1,3 @@
-// mob programming Sebastian, Sophia, Caroline, Katarina
-
 package dtu.example.backend;
 
 import java.time.LocalDate;
@@ -18,71 +16,72 @@ public class Task {
   private List<TimeRegistration> TimeRegistrations = new ArrayList<>();
   private List<Employee> assignedEmployees = new ArrayList<>();
   private Project project;
-
+  // Caroline
   public Task(String title, double hours, int startWeek, int endWeek, String projectNumber) {
     this.title = title;
     setEstimatedTime(hours);
     setStartWeek(startWeek);
     setEndWeek(endWeek);
   }
-
+  // Katarina
   public Task(String title, double hours, int startWeek, int endWeek) {
     this.title = title;
     setEstimatedTime(hours);
     setStartWeek(startWeek);
     setEndWeek(endWeek);
   }
-
+  // Sebastian
   public Task(LocalDate startDate, LocalDate endDate, String title) {
     setStartDate(startDate);
     setEndDate(endDate);
     this.title = title + startDate + " " + endDate;
   }
-
+  // Sophia
   public void setAssignedEmployee(Employee employee) {
     assignedEmployees.add(employee);
   }
-
+  // Sebastian
   public List<Employee> getAssignedEmployees() {
     return assignedEmployees;
   }
+  // Caroline
   public void setStartDate(LocalDate startDate) {
     this.startDate = startDate;
   }
-
+  // Katarina
   public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
   }
-
+  // Sebastian
   public void setStartWeek(int startWeek) {
     this.startWeek = startWeek;
 
   }
-
+  // Sophia
   public int getStartWeek() {
     return startWeek;
   }
-
+  // Caroline
   public void setEndWeek(int endWeek) {
     this.endWeek = endWeek;
   }
-
+  // Katarina
   public int getEndWeek() {
     return endWeek;
   }
-
+  // Sebastian
   public void setEstimatedTime(double hours) {
     this.estimatedHours = hours;
   }
-
+  // Sophia
   public String getTitle() {
     return title;
   }
-
+  // Caroline
   public void addTimeRegistration(TimeRegistration time) {
       TimeRegistrations.add(time);
   }
-
+  // Katarina
   public List<TimeRegistration> getTimeRegistrations() {
       return TimeRegistrations;
   }

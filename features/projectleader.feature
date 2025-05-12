@@ -1,16 +1,14 @@
-# mob programming Caroline, Sophia, Sebastian, Katarina
 
 Feature: Project Leader management
   Description: employee and project leader management
   Actor: employee
-
-
+  # Katarina
   Scenario: Promote an existing employee to project leader
     Given the database is initialised
     And the project "P-251" exists
     When an employee promotes employee "khf" to project leader in the project
     Then the employee "khf" is the project leader in the project
-    
+  # Caroline
   Scenario: Replace project leader role
     Given the database is initialised
     And employee with initials "sass" is a project leader in the project "P-251"

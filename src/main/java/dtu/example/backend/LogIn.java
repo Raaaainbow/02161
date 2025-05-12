@@ -1,10 +1,8 @@
-// mob programming Caroline, Katarina
-
 package dtu.example.backend;
 
 public class LogIn {
     private boolean loggedIn = false;
-    
+    // Katarina
     public boolean loggingIn(Employee employee, String enteredInitials) {
         if (employee == null) {
             System.out.println("Employee does not exist!");
@@ -23,7 +21,7 @@ public class LogIn {
             return false;
         }
     }
-    
+    // Caroline
     public boolean isLoggedIn() {
         return loggedIn;
     }
