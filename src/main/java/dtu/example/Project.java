@@ -114,4 +114,13 @@ public Task createTask(String title, double hours, int startWeek, int endWeek, S
 	public List<Task> getTasks() {
 		return tasks;
 	}
+
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append("Project Number: ").append(projectNumber).append("\n");
+        output.append("Title: ").append(title != null ? title : "Untitled").append("\n");
+        output.append("Project Leader: ").append(projectLead != null ? projectLead : "Not assigned").append("\n");
+        output.append("Tasks: ").append(tasks.size()).append("\n");
+        return output.toString();
+    }
 }

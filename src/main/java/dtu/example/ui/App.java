@@ -234,12 +234,10 @@ public class App {
 
         if (parts[0].equals("list") && parts[1].equals("projects")) {
             List<Project> projects = database.getProjects();
-            String str = "";
 
             for (Project project: projects) {
-                str += project.getProjectNumber() + " ";
+                System.out.println(project.toString());
             }
-            System.out.println(str);
         }
         
         if (parts[0].equals("list") && parts[1].equals("employees")) {
