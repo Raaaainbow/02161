@@ -503,8 +503,8 @@ public class App {
             System.out.println("    Creates a new project with optional name");
             System.out.println("\ncreate task TITLE HOURS STARTWEEK ENDWEEK PROJECTNUMBER");
             System.out.println("    Creates a new task for specified project");
-            System.out.println("\ncreate time registration SHIFTSTART SHIFTEND DATE");
-            System.out.println("    Creates a time registration (not yet implemented)");
+//            System.out.println("\ncreate time registration SHIFTSTART SHIFTEND DATE");
+//            System.out.println("    Creates a time registration (not yet implemented)");
             System.out.println("\nedit task TASK_TITLE");
             System.out.println("    Edits task hours, start week, or end week");
             System.out.println("\nregister vacation STARTDATE ENDDATE");
