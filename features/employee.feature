@@ -201,3 +201,10 @@ Feature: Employee
             Project Leader: Not assigned
             Tasks: 0
             """
+    Scenario: An employee wants to see their task list
+        Given the database is initialized
+        And an employee is created with initials "abcd"
+        And the employee creates a project with the title "Software_project"
+        When the employee creates their task list
+        Then the task list is shown
+        And the task list string representation should be: "Task: Coding \nDuration: Week 20 - 22 (50.0 hours)\nEmployee: Not assigned \nStatus: Active"
