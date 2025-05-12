@@ -28,7 +28,7 @@ Feature: Time Registration Management
   Scenario: Display time registration
     Given I have a time registration with initials "CJ" for 7.5 hours on "2025-02-15"
     And there are no shift times
-    Then the display should show "2025-02-15 - 7.5 hours (CJ)"
+    Then the display should show "2025-02-15 - 7,5 hours (CJ)"
 
   Scenario Outline: Round different hour values using standard rounding
     Given I am an employee with initials "SP"
