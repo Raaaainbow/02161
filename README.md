@@ -15,6 +15,7 @@ git clone https://github.com/Raaaainbow/02161
 cd 02161
 mvn package
 ```
+note: if your operating system is in a language that seperates decimals with '.' you need to change line 59 of `TimeRegistrationSteps.java`
 
 ## Usage
 To use the program simply open the '02161' folder in your terminal of choice and run the following command
