@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Task {
     private Employee assignedEmployee;
+    private Project project;
     private double estimatedHours;
     private double spentHours;
     private String title;
@@ -15,7 +16,6 @@ public class Task {
     private LocalDate endDate;
     private List < TimeRegistration > TimeRegistrations = new ArrayList < > ();
     private List < Employee > assignedEmployees = new ArrayList < > ();
-    private Project project;
     // Caroline
     public Task(String title, double hours, int startWeek, int endWeek, String projectNumber) {
         this.title = title;
