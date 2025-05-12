@@ -144,12 +144,4 @@ public class Database {
     public Employee getEmployee(String initials) {
         return employeesHash.get(initials);
     }
-
-    public List<Task> getTasksForEmployee(Employee employee) {
-        return employee.getAssignedTasks();
-    }
-    
-    public List<Task> getTasksForProject(Project project) {
-        return project.getTasks();
-    }
 }

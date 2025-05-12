@@ -34,32 +34,16 @@ public class Task {
     this.title = title + startDate + " " + endDate;
   }
 
-  public void setProject(Project project) {
-    this.project = project;
-  }
-
   public void setAssignedEmployee(Employee employee) {
     this.assignedEmployee = employee;
-  }
-
-  public Employee getAssignedEmployee() {
-    return assignedEmployee;
   }
 
   public void setStartDate(LocalDate startDate) {
     this.startDate = startDate;
   }
 
-  public LocalDate getStartDate() {
-    return startDate;
-  }
-
   public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
-  }
-
-  public LocalDate getEndDate() {
-    return endDate;
   }
 
   public void setStartWeek(int startWeek) {
