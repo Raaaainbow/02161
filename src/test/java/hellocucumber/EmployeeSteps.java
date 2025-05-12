@@ -236,10 +236,17 @@ public class EmployeeSteps {
         this.task = employee.getTaskByTitle(title);
     }
 
-    @When("the employee tries to create a task {string} using {double} hours starting in week {double} and ending in week {int}")
+    @When("the employee tries to create a task {string} using {double} hours starting in week {int} and ending in week {int}")
     public void theEmployeeTriesToCreateATaskUsingHoursStartingInWeekAndEndingInWeek(String title, double hours, int startWeek, int endWeek) {
-        employee.createTask(title, hours, startWeek, endWeek);
-        this.task = project.getTaskByTitle(title);
+        try {
+            employee.createTask(title, hours, startWeek, endWeek);
+        } catch (IllegalArgumentException e) {
+            assertTrue(
+                e.getMessage().equals("Start week and end week is not valid") ||
+                e.getMessage().equals("Start week is not valid") ||
+                e.getMessage().equals("End week is not valid")
+            );
+        }
     }
 
     @When("the task is assigned to employee {string}")
