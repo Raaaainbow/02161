@@ -4,8 +4,6 @@ package hellocucumber;
 
 import io.cucumber.java.en.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import dtu.example.backend.TimeRegistration;
 
@@ -32,16 +30,6 @@ public class TimeRegistrationSteps {
         timeRegistration = new TimeRegistration(hours, employeeInitials, workDate);
     }
 
-    @Given("I have a time registration for {double} hours")
-    public void i_have_a_time_registration_for_hours(double hours) {
-        timeRegistration = new TimeRegistration(hours, "TEST", currentDate);
-    }
-
-    @When("I delete the time registration")
-    public void i_delete_the_time_registration() {
-        timeRegistration.deleteTimeReg();
-    }
-
     @Given("I have a time registration with initials {string} for {double} hours on {string}")
     public void i_have_a_time_registration_with_initials_for_hours_on(String initials, double hours, String date) {
         LocalDate workDate = LocalDate.parse(date);
@@ -66,11 +54,6 @@ public class TimeRegistrationSteps {
     @Then("my initials should be {string}")
     public void my_initials_should_be(String expectedInitials) {
         assertTrue(timeRegistration.toString().contains(expectedInitials));
-    }
-
-    @Then("the registration should be marked as deleted")
-    public void the_registration_should_be_marked_as_deleted() {
-        assertTrue(timeRegistration.isDeleted());
     }
 
     @Then("the display should show {string}")

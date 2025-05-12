@@ -3,13 +3,9 @@
 package dtu.example.backend;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class TimeRegistration {
-    private LocalDateTime shiftStart;
-    private LocalDateTime shiftEnd;
     private LocalDate date;
-    private boolean deleted;
     private double hours;
     private String initials;
 
@@ -19,18 +15,6 @@ public class TimeRegistration {
     this.hours = roundedHours;
     this.initials = initials;
     this.date = date;
-    }
-
-    public void deleteTimeReg(){
-        deleted = true;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDate(LocalDate date){
-        this.date = date;
     }
 
     public LocalDate getDate(){
