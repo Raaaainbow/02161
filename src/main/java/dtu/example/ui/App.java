@@ -368,44 +368,77 @@ public class App {
         if (parts[0].equals("assign") && parts[1].equals("task")) {
             try {
                 String taskTitle = parts[2];
-                String oldInitials = parts[3];
-                String NewInitials = parts[4];
-
-                Employee oldEmployee = database.getEmployee(oldInitials);
-                if (oldEmployee == null) {
-                    System.out.println("Error: Employee " + oldInitials + " not found");
-                    return;
-                }
+                String employeeInitials = parts[3];
                 
-                List<Task> tasks = oldEmployee.getAssignedTasks();
-                boolean taskFound = false;
-                for (Task task: tasks) {
-                    if (task.getTitle().equals(taskTitle)) {
-                        Employee newEmployee = database.getEmployee(NewInitials);
-                        if (newEmployee == null) {
-                            System.out.println("Error: Employee " + NewInitials + " not found");
-                            return;
+                if (parts.length == 4) {
+                    Employee employee = database.getEmployee(employeeInitials);
+                    if (employee == null) {
+                        System.out.println("Error: Employee " + employeeInitials + " not found");
+                        return;
+                    }
+                    
+                    if (employee.getAssignedTasks().size() >= maxTasks) {
+                        System.out.println("Error: Employee " + employee.getInitials() + " already has " + maxTasks + " tasks assigned.");
+                        return;
+                    }
+                    
+                    // Find and assign the task
+                    boolean taskFound = false;
+                    for (Task task : database.getAllTasks()) {
+                        if (task.getTitle().equals(taskTitle)) {
+                            task.setAssignedEmployee(employee);
+                            employee.addTask(task);
+                            System.out.println("Task assigned to " + employeeInitials);
+                            taskFound = true;
+                            break;
                         }
-                        if (newEmployee.getAssignedTasks().size() >= maxTasks) {
-                           System.out.println("Error: Employee " + currentEmployee + " already has " + maxTasks +  " tasks assigned.");
-                            return;
-                        } 
-                        System.out.println("assigning new employee");
-                        task.setAssignedEmployee(newEmployee);
-                        newEmployee.addTask(task);
-                        
-                        oldEmployee.getAssignedTasks().remove(task);
-                        taskFound = true;
-                        break;
+                    }
+                    
+                    if (!taskFound) {
+                        System.out.println("Task " + taskTitle + " does not exist");
+                    }
+                    
+                } else if (parts.length == 5) {
+                    // Reassignment from one employee to another
+                    String oldInitials = parts[3];
+                    String newInitials = parts[4];
+                    
+                    Employee oldEmployee = database.getEmployee(oldInitials);
+                    if (oldEmployee == null) {
+                        System.out.println("Error: Employee " + oldInitials + " not found");
+                        return;
+                    }
+                    
+                    List<Task> tasks = oldEmployee.getAssignedTasks();
+                    boolean taskFound = false;
+                    for (Task task : tasks) {
+                        if (task.getTitle().equals(taskTitle)) {
+                            Employee newEmployee = database.getEmployee(newInitials);
+                            if (newEmployee == null) {
+                                System.out.println("Error: Employee " + newInitials + " not found");
+                                return;
+                            }
+                            if (newEmployee.getAssignedTasks().size() >= maxTasks) {
+                                System.out.println("Error: Employee " + newEmployee.getInitials() + " already has " + maxTasks + " tasks assigned.");
+                                return;
+                            }
+                            System.out.println("assigning new employee");
+                            task.setAssignedEmployee(newEmployee);
+                            newEmployee.addTask(task);
+                            
+                            oldEmployee.getAssignedTasks().remove(task);
+                            taskFound = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!taskFound) {
+                        System.out.println("Task " + taskTitle + " does not exist");
                     }
                 }
                 
-                if (!taskFound) {
-                    System.out.println("Task " + taskTitle + " does not exist");
-                }
-                
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Error: Usage: assign task TASK_TITLE OLD_EMPLOYEE_INITIALS NEW_EMPLOYEE_INITIALS");
+                System.out.println("Error: Usage: assign task TASK_TITLE EMPLOYEE_INITIALS [NEW_EMPLOYEE_INITIALS]");
             }
             return;
         }

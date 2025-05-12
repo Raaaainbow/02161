@@ -120,4 +120,12 @@ public class Database {
     public Employee getEmployee(String initials) {
         return employeesHash.get(initials);
     }
+
+    public List<Task> getAllTasks() {
+        List<Task> allTasks = new ArrayList<>();
+        for (Employee employee : employees) {
+            allTasks.addAll(employee.getAssignedTasks());
+        }
+        return allTasks;
+    }
 }
