@@ -1,5 +1,3 @@
-// Sebastian
-
 package dtu.example.ui;
 
 import dtu.example.backend.*;
@@ -254,7 +252,7 @@ public class App {
             }
             return;
         }
-
+        // Caroline
         if (parts[0].equals("register") && parts[1].equals("vacation")) {
             if (parts.length < 4) {
                 System.out.println("Error: Not enough arguments for vacation registration.");
@@ -276,7 +274,7 @@ public class App {
             }
             return;
         }
-
+        // Katarina
         if (parts[0].equals("register") && parts[1].equals("sick") && parts[2].equals("leave")) {
             if (parts.length < 4) {
                 System.out.println("Error: Not enough arguments for sick leave registration.");
@@ -298,7 +296,7 @@ public class App {
             }
             return;
         }
-
+        // Sophia
         if (parts[0].equals("register") && parts[1].equals("course")) {
             if (parts.length < 4) {
                 System.out.println("Error: Not enough arguments for course registration.");
@@ -409,7 +407,7 @@ public class App {
             }
             return;
         }
-
+        // Caroline
         if (parts[0].equals("view") && parts[1].equals("vacation")) {
             Employee employee = database.getEmployee(currentEmployee);
             List<Task> vacationList = employee.getVacationList();
@@ -426,7 +424,7 @@ public class App {
             }
             return;
         }
-
+        // Katarina
         if (parts[0].equals("view") && parts[1].equals("sick") && parts[2].equals("leave")) {
             Employee employee = database.getEmployee(currentEmployee);
             List<Task> sickLeaveList = employee.getSickLeaveList();
@@ -443,7 +441,7 @@ public class App {
             }
             return;
         }
-
+        // Sophia
         if (parts[0].equals("view") && parts[1].equals("course")) {
             Employee employee = database.getEmployee(currentEmployee);
             List<Task> courseList = employee.getCourseList();
